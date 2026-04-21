@@ -1,0 +1,525 @@
+\documentclass[a4paper,10pt]{article}
+
+%Packages
+% en haut du main.tex
+\usepackage{shellesc}
+\write18{mkdir -p build}
+\pdfoutput=1
+
+\usepackage{txfonts}
+\usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage[intoc]{nomencl}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{amsmath} % pour les équations
+
+% MISE EN PAGE
+\geometry{a4paper, top=18mm, bottom=18mm, textwidth=185mm}
+\setlength{\columnsep}{6mm} % espace entre les colonnes
+\setlength{\parindent}{0pt} % espace indentation
+
+\titleformat{\section}
+{\normalfont\bfseries} % <== style du titre
+	{\thesection.}{0.5em}{} % numéro + espacement
+\titleformat{\subsection}
+	{\normalfont\itshape} % <== style du sous-titre
+	{\thesubsection.}{0.5em}{} % numéro + espacement
+
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0pt} %retire la ligne du bas
+\fancyhf{}
+\rhead{\includegraphics[scale=0.4]{Images/hepia_simple.png}} %ajoute le logo hepia
+\rfoot{\textit{\today}} % date en bas à droite
+\cfoot{\thepage} %numéro de page
+
+\captionsetup{
+  font=footnotesize,   % taille du texte de la légende
+  labelsep=colon       % met un ":" après le numéro
+}
+
+% NOMENCLATURE
+\makenomenclature
+\nomenclature{AFM}{Microscope à Force Atomique}
+\nomenclature{$R_a$}{Rugosité moyenne arithmétique}
+\nomenclature{$R_q$}{Rugosité RMS (écart-type)}
+\nomenclature{$R_{pv}$}{Peak-to-valley (écart max--min)}
+\nomenclature{PSPD}{Photodiode sensible à la position (4 quadrants)}
+\nomenclature{LFM}{Microscopie en force latérale (friction)}
+%\nomenclature{$$}{}
+
+\begin{document} %début du document
+ % l'accolade sert à laisser la mise en page en une seule colonne
+% TITRES, AUTEURS, ORGANISATION
+%
+\begin{center}
+\vspace*{0mm}
+{\large
+Rapport de laboratoire\\
+\vspace{3mm}
+Microscopie à Force Atomique (AFM)
+}\\
+\vspace{8mm}
+% ====================================================================
+% TODO : Remplacer par tes noms et emails
+% ====================================================================
+Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guilhem.roziervi@hes-so.ch}{MT2, guilhem.roziervi@hes-so.ch}}},
+Noah Michelot\footnote{\textit{\href{mailto:noah.michelot@hes-so.ch}{MT2, noah.michelot@hes-so.ch}}},
+Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{MT2, matteo.pozzodi@hes-so.ch}}}
+
+%
+\vspace{3mm}
+\footnotesize{
+\textit{Haute école de paysagerie, d'ingénierie et d'architecture, Genève, Suisse}
+}\\
+\vspace{9mm}
+\end{center}
+%
+\rule{\linewidth}{0.4pt} % ligne horizontale
+\onehalfspacing
+\textbf{Abstract}\\
+% ====================================================================
+% TODO : Adapter l'abstract à tes propres résultats (valeurs numériques,
+% échantillons étudiés, modes utilisés). L'abstract ci-dessous est un
+% template basé sur le rapport de Proietto/Saura.
+% ====================================================================
+Ce rapport présente une étude de caractérisation de surfaces par microscope
+à force atomique (AFM) en mode contact. Trois échantillons ont été analysés :
+un wafer de silicium avec couche de SiO$_2$ (échantillon de calibration TGZ3),
+un wafer Si/Al déposé à 150\,°C, et un film mince polymère PS/PMMA (50/50)
+déposé par spin-coating. Les cartes topographiques ont été traitées avec le
+logiciel XEI afin d'extraire les indicateurs de rugosité ($R_a$, $R_q$,
+$R_{pv}$) et les dimensions caractéristiques des structures de surface.
+Les résultats montrent des rugosités allant de quelques dizaines de nanomètres
+à plusieurs micromètres selon l'échantillon.\\
+\noindent\textit{Mots-clés :} AFM, mode contact, rugosité, topographie, traitement d'image\\
+\rule{\linewidth}{0.4pt} % ligne horizontale
+
+\singlespacing
+
+% TABLE DES MATIERES
+\tableofcontents
+
+% NOMENCLATURE
+\printnomenclature
+
+\setlength{\parskip}{1pt} % espace entre deux paragraphes
+
+% ====================================================================
+% INTRODUCTION
+% ====================================================================
+\section{Introduction}
+
+L'objectif de ce travail est de caractériser la topographie de surfaces
+à l'échelle nanométrique à l'aide d'un microscope à force atomique (AFM).
+L'AFM permet d'obtenir une information tridimensionnelle de la
+surface avec une résolution latérale de l'ordre de 2\,nm et une résolution
+verticale pouvant atteindre 0,1\,nm.
+
+% ====================================================================
+% TODO : Adapter les échantillons si les tiens diffèrent de ceux-ci.
+% ====================================================================
+Trois échantillons ont été étudiés :
+\begin{itemize}
+    \item un échantillon de calibration TGZ3 (wafer Si + SiO$_2$,
+          marches de hauteur nominale connue) ;
+    \item un wafer de silicium avec couche d'aluminium déposée à 150\,°C ;
+    \item un film mince polymère PS/PMMA (50/50) déposé par spin-coating.
+\end{itemize}
+
+Ce rapport décrit le principe de l'AFM en mode contact, la procédure
+expérimentale, les résultats obtenus après traitement d'image et une
+analyse des sources d'incertitudes.
+
+
+% ====================================================================
+% THÉORIE
+% ====================================================================
+\section{Théorie}
+
+\subsection{Principe de l'AFM en mode contact}
+
+Le microscope à force atomique utilise un levier (cantilever) souple muni
+d'une pointe nanométrique pour sonder la surface d'un échantillon. Le
+levier, d'épaisseur typique $0{,}5$--$2\;\mu$m et de longueur $50$--$200\;\mu$m,
+est caractérisé par sa constante de raideur $k$ (de l'ordre de $0{,}1$--$10$\,N/m).
+
+Le faisceau d'une diode superluminescente (SLD) est focalisé sur l'extrémité
+du levier. Le faisceau réfléchi est dirigé vers une photodiode à 4 quadrants
+(PSPD). Les signaux des quadrants permettent de mesurer :
+\begin{itemize}
+    \item la déflection verticale du levier : signal $A - B = (1+2)-(3+4)$ ;
+    \item la torsion latérale (friction, LFM) : signal $C - D = (1+3)-(2+4)$.
+\end{itemize}
+
+\subsection{Mode à force constante}
+
+En mode contact à force constante, une boucle de contre-réaction (PID)
+ajuste en permanence la position $z$ du scanner piézoélectrique pour
+maintenir la déflection du levier --- et donc la force exercée sur
+l'échantillon --- constante. Le signal de commande envoyé au scanner $z$
+constitue le signal de topographie $z(x,y)$.
+
+% ====================================================================
+% TODO : Si tu veux, tu peux ajouter ici un schéma-bloc de
+% l'asservissement (figure du protocole, Figure 4). Sinon, supprime
+% le \begin{figure} ci-dessous.
+% ====================================================================
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/schema_AFM.png}
+%\caption{Schéma du système d'asservissement de l'AFM en mode contact.}
+%\label{fig:schema_afm}
+%\end{figure}
+
+\subsection{Paramètres de rugosité}
+
+La rugosité RMS (écart-type des hauteurs) est définie par :
+\begin{equation}
+    R_q = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N}(z_i - \bar{z})^2}
+    \label{eq:Rq}
+\end{equation}
+
+La rugosité moyenne arithmétique :
+\begin{equation}
+    R_a = \frac{1}{N}\sum_{i=1}^{N}|z_i - \bar{z}|
+    \label{eq:Ra}
+\end{equation}
+
+L'écart peak-to-valley :
+\begin{equation}
+    R_{pv} = z_{\max} - z_{\min}
+    \label{eq:Rpv}
+\end{equation}
+
+% ====================================================================
+% DESCRIPTION DE L'EXPÉRIENCE
+% ====================================================================
+\section{Description de l'expérience}
+
+\subsection{Instrument}
+
+L'AFM utilisé est un Park Systems NX7. Le scanner XY a une plage maximale
+de $50\;\mu$m ($100\,\%$) et le scanner $z$ une plage de $7{,}5\;\mu$m
+($70\,\%$). Le levier utilisé est un Nanoworld CONTR (mode contact).
+
+\subsection{Procédure}
+
+La procédure suivie est celle du protocole \textit{X'Press Manual} :
+\begin{enumerate}
+    \item Alignement optique : positionnement du spot laser sur l'extrémité
+          du levier, centrage sur la PSPD ($A+B > 1$\,V).
+    \item Placement de l'échantillon sur le support magnétique.
+    \item Pré-positionnement de la tête à $\sim 1$\,mm de la surface.
+    \item Configuration : mode Contact, canaux Z Height, Lateral (C-D),
+          Error Signal. Flatten = Line, Data Saving = Raw.
+    \item Approche automatique.
+    \item Vérification du Trace Quality ($> 9{,}0$).
+    \item Acquisition de l'image (256$\times$256 pixels par défaut).
+    \item Traitement d'image sous XEI : correction de pente ligne par
+          ligne (flatten, ordre 1), mesure de profils, extraction des
+          rugosités.
+\end{enumerate}
+
+% ====================================================================
+% RÉSULTATS ET ANALYSE
+% ====================================================================
+\section{Résultats et analyse}
+
+\subsection{Échantillon 1 : calibration TGZ3}
+
+% ====================================================================
+% TODO : Remplacer les images par les tiennes.
+% Mettre tes fichiers dans le dossier Images/ et adapter les noms.
+% ====================================================================
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech1_topo.png}
+%\caption{Image topographique de l'échantillon de calibration TGZ3
+%         ($10 \times 10\;\mu$m$^2$).}
+%\label{fig:ech1_topo}
+%\end{figure}
+
+L'image topographique de l'échantillon de calibration montre des marches
+périodiques gravées dans la couche de SiO$_2$. Une coupe perpendiculaire
+aux marches permet d'extraire les grandeurs suivantes :
+
+% ====================================================================
+% TODO : Remplacer les valeurs ci-dessous par tes mesures réelles.
+% Les valeurs ici proviennent du rapport Proietto/Saura.
+% ====================================================================
+\begin{itemize}
+    \item Hauteur de marche : $531{,}2$\,nm
+    \item Période (distance entre deux phases montantes) : $3{,}283\;\mu$m
+\end{itemize}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech1_profil.png}
+%\caption{Profil de hauteur le long de la coupe rouge (échantillon 1).}
+%\label{fig:ech1_profil}
+%\end{figure}
+
+Les rugosités mesurées sur chaque plan sont résumées dans le
+tableau~\ref{tab:ech1_rugo}.
+
+% ====================================================================
+% TODO : Remplacer par tes valeurs.
+% ====================================================================
+\begin{table}[H]
+\centering
+\caption{Rugosité de l'échantillon de calibration TGZ3.}
+\label{tab:ech1_rugo}
+\begin{tabular}{lcc}
+\toprule
+ & Plan inférieur & Plan supérieur \\
+\midrule
+$R_a$ / nm & 28{,}3 & 33{,}0 \\
+$R_q$ / nm & 33{,}5 & 39{,}9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ====================================================================
+% TODO : Commenter la cohérence avec la valeur nominale de la TGZ3
+% (hauteur de marche nominale = 518 nm ± 5 nm selon le fabricant MikroMasch).
+% Si ta valeur mesurée diffère, discuter l'écart.
+% ====================================================================
+
+\subsection{Échantillon 2 : Si/Al déposé à 150\,°C}
+
+% ====================================================================
+% TODO : Remplacer les images et les valeurs.
+% ATTENTION : dans le rapport Proietto/Saura, les rugosités sont en mV
+% et non en nm, ce qui est probablement une erreur de calibration ou
+% d'unité dans XEI. Vérifier dans tes mesures que les unités sont
+% bien en nm ou µm, PAS en mV.
+% ====================================================================
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech2_topo.png}
+%\caption{Image topographique de l'échantillon Si/Al
+%         ($5 \times 5\;\mu$m$^2$).}
+%\label{fig:ech2_topo}
+%\end{figure}
+
+L'image topographique révèle une surface granulaire avec des îlots
+d'oxyde en surépaisseur. Les zones claires correspondent aux sommets
+des grains, les zones sombres aux creux entre les grains.
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech2_profil.png}
+%\caption{Profil de hauteur le long de la coupe (échantillon 2).}
+%\label{fig:ech2_profil}
+%\end{figure}
+
+% ====================================================================
+% TODO : Remplacer ces valeurs. Vérifier les UNITÉS (nm, pas mV !).
+% ====================================================================
+Les paramètres de rugosité pour une zone de $5 \times 5\;\mu$m$^2$ :
+\begin{itemize}
+    \item $R_a = $ \textbf{[À COMPLÉTER]} nm
+    \item $R_q = $ \textbf{[À COMPLÉTER]} nm
+    \item $R_{pv} = $ \textbf{[À COMPLÉTER]} nm
+\end{itemize}
+
+% ====================================================================
+% TODO : Si tu as fait des mesures de taille de grain, les ajouter ici.
+% ====================================================================
+
+
+\subsection{Échantillon 3 : film PS/PMMA}
+
+% ====================================================================
+% TODO : Adapter le mode de mesure utilisé. Dans le rapport Proietto,
+% c'est un mode "force constante" avec indentation pixel par pixel
+% (probablement PinPoint ou Force Volume). Vérifier quel mode tu as
+% utilisé et adapter le texte.
+% ====================================================================
+
+Pour cet échantillon polymère, un mode d'acquisition par indentation
+ponctuelle a été utilisé : la pointe s'arrête à chaque pixel, pénètre
+la surface, puis avance au point suivant. Cela permet d'obtenir
+simultanément la topographie et une carte d'adhésion.
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech3_topo.png}
+%\caption{Image topographique du film PS/PMMA
+%         ($30 \times 30\;\mu$m$^2$).}
+%\label{fig:ech3_topo}
+%\end{figure}
+
+L'image topographique met en évidence une craquelure traversant la zone
+observée, ainsi que des amas de polystyrène en surface (zones blanchâtres).
+
+% ====================================================================
+% TODO : Remplacer par tes valeurs mesurées.
+% ====================================================================
+
+\begin{table}[H]
+\centering
+\caption{Rugosité du film PS/PMMA ($30 \times 30\;\mu$m$^2$).}
+\label{tab:ech3_rugo}
+\begin{tabular}{lccc}
+\toprule
+Zone & $R_a$ / $\mu$m & $R_q$ / $\mu$m & $R_{pv}$ / $\mu$m \\
+\midrule
+Sans craquelure & 0{,}203 & 0{,}267 & 1{,}729 \\
+Avec craquelure & 0{,}563 & 0{,}657 & 2{,}399 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La craquelure augmente significativement les paramètres de rugosité :
+$R_q$ passe de $0{,}267$ à $0{,}657\;\mu$m (facteur $\times 2{,}5$) et
+$R_{pv}$ de $1{,}729$ à $2{,}399\;\mu$m. L'écart de force d'adhésion
+entre les domaines PS et PMMA est d'environ 100\,nN, mettant en évidence
+le contraste chimique entre les deux polymères.
+
+% ====================================================================
+% TODO : Si tu as une image de la carte d'adhésion, l'ajouter ici.
+% ====================================================================
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{Images/ech3_adhesion.png}
+%\caption{Carte d'adhésion du film PS/PMMA.}
+%\label{fig:ech3_adhesion}
+%\end{figure}
+
+
+% ====================================================================
+% DISCUSSION / SOURCES D'INCERTITUDE
+% ====================================================================
+\section{Discussion}
+
+% ====================================================================
+% TODO : Adapter cette section à tes observations réelles.
+% ====================================================================
+
+Plusieurs sources d'incertitude influencent les mesures :
+\begin{itemize}
+    \item \textbf{Rayon de courbure de la pointe :} une pointe émoussée
+          élargit les structures latéralement (convolution pointe--surface)
+          et sous-estime la profondeur des creux étroits.
+    \item \textbf{Vitesse de balayage et gain :} un gain trop faible
+          empêche l'asservissement de suivre fidèlement les structures
+          raides ; un gain trop élevé provoque des oscillations du
+          scanner $z$.
+    \item \textbf{Traitement d'image :} l'ordre du polynôme choisi pour
+          le flatten ligne par ligne peut artificiellement supprimer des
+          structures réelles (ordre trop élevé) ou laisser des artefacts
+          (ordre trop bas).
+    \item \textbf{Dérive thermique :} sur des acquisitions longues
+          (images haute résolution), la dérive piézoélectrique peut
+          affecter la reproductibilité des mesures.
+\end{itemize}
+
+% ====================================================================
+% TODO : Discuter la comparaison avec la valeur nominale de la TGZ3.
+% Par exemple : "La hauteur de marche mesurée (531 nm) diffère de
+% la valeur nominale (518 nm) de 2,5 %, ce qui pourrait s'expliquer
+% par..."
+% ====================================================================
+
+
+% ====================================================================
+% CONCLUSION
+% ====================================================================
+\section{Conclusion}
+
+% ====================================================================
+% TODO : Rédiger ta propre conclusion en résumant tes résultats
+% principaux (valeurs numériques) et ce que tu en retires.
+% ====================================================================
+
+Ce laboratoire a permis de se familiariser avec l'utilisation de l'AFM
+en mode contact et le traitement d'images sous XEI. Les mesures sur
+l'échantillon de calibration TGZ3 ont validé le bon étalonnage du
+scanner ($h_{\text{marche}} = 531$\,nm). L'échantillon Si/Al présente
+une morphologie granulaire avec des îlots d'oxyde en surface. Enfin,
+le film PS/PMMA montre un contraste de propriétés mécaniques entre les
+deux phases polymères, exploitable via la carte d'adhésion.
+
+L'AFM se confirme comme un outil métrologique puissant, offrant une
+information 3D calibrée à l'échelle nanométrique et la capacité de
+mesurer simultanément plusieurs propriétés physiques de la surface.
+
+
+% ====================================================================
+% ANNEXE
+% ====================================================================
+\appendix
+
+\section{Récapitulatif des paramètres d'acquisition}
+
+% ====================================================================
+% TODO : Remplir ce tableau avec tes paramètres réels.
+% ====================================================================
+\begin{table}[H]
+\centering
+\caption{Paramètres d'acquisition pour chaque échantillon.}
+\label{tab:params}
+\begin{tabular}{lccc}
+\toprule
+Paramètre & Éch. 1 & Éch. 2 & Éch. 3 \\
+\midrule
+Mode & Contact & Contact & Force constante \\
+Taille de scan / $\mu$m$^2$ & $10 \times 10$ & $5 \times 5$ & $30 \times 30$ \\
+Pixels & $256 \times 256$ & $256 \times 256$ & $256 \times 256$ \\
+Scan rate / Hz & 1{,}0 & 1{,}0 & -- \\
+Gain & 1 & 1 & -- \\
+Flatten (XEI) & Ligne, ordre 1 & Ligne, ordre 1 & Ligne, ordre 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{Figures et Tables}
+
+% ====================================================================
+% TODO : Décommenter et ajouter ici les figures supplémentaires
+% (vues 3D, profils de coupe, etc.) que tu n'as pas placées dans
+% le corps du texte.
+% ====================================================================
+
+% Exemple :
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\linewidth]{Images/ech1_3D.png}
+%\caption{Vue 3D de l'échantillon de calibration TGZ3.}
+%\label{fig:ech1_3D}
+%\end{figure}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\linewidth]{Images/ech2_3D.png}
+%\caption{Vue 3D de l'échantillon Si/Al.}
+%\label{fig:ech2_3D}
+%\end{figure}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\linewidth]{Images/ech3_3D.png}
+%\caption{Vue 3D du film PS/PMMA.}
+%\label{fig:ech3_3D}
+%\end{figure}
+
+\listoffigures
+\listoftables
+
+
+\end{document}

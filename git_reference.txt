@@ -1,0 +1,101 @@
+================================================================================
+  GIT COMMAND REFERENCE
+================================================================================
+
+--------------------------------------------------------------------------------
+  INIT & CONFIG
+--------------------------------------------------------------------------------
+git init                                 Initialise repo in current folder
+git init <folder>                        Create new repo in <folder>
+git config --global user.name "x"        Set global username
+git config --global user.email "x"       Set global email
+git config --list                        Show all config values
+git config --global core.editor "code"   Set VS Code as default editor
+
+Note: run config once after install. --global applies to all repos on the machine.
+
+--------------------------------------------------------------------------------
+  CONNECT TO GITHUB
+--------------------------------------------------------------------------------
+git remote add origin <url>              Link local repo to remote
+git remote -v                            Show configured remotes
+git remote remove origin                 Remove remote link
+git remote set-url origin <url>          Change remote URL
+
+<url> = HTTPS or SSH URL from GitHub (green "Code" button on the repo page).
+First push: git push -u origin main  (sets upstream, needed once per branch).
+
+--------------------------------------------------------------------------------
+  STAGE & COMMIT
+--------------------------------------------------------------------------------
+git status                               Show modified / staged files
+git add <file>                           Stage one file
+git add .                                Stage all changes
+git add -p                               Interactively stage chunks (patch mode)
+git commit -m "message"                  Commit with inline message
+git commit --amend                       Edit last commit (message or content)
+git restore --staged <file>              Unstage a file (keep changes)
+git restore <file>                       Discard working-tree changes
+
+--------------------------------------------------------------------------------
+  PUSH & PULL
+--------------------------------------------------------------------------------
+git push                                 Push current branch to remote
+git push -u origin <branch>              Push & set upstream (first time)
+git push --force-with-lease              Force-push safely (fails if remote advanced)
+git pull                                 Fetch + merge remote into current branch
+git pull --rebase                        Fetch + rebase (cleaner history)
+git fetch                                Download remote changes, don't merge
+
+--------------------------------------------------------------------------------
+  CLONE
+--------------------------------------------------------------------------------
+git clone <url>                          Clone into new folder (repo name)
+git clone <url> <folder>                 Clone into specific folder name
+git clone --depth 1 <url>               Shallow clone (latest commit only)
+
+Note: clone sets up remote "origin" automatically — no need for git remote add.
+
+--------------------------------------------------------------------------------
+  BRANCHES
+--------------------------------------------------------------------------------
+git branch                               List local branches
+git branch <name>                        Create branch (stay on current)
+git switch <name>                        Switch to branch
+git switch -c <name>                     Create + switch in one step
+git merge <branch>                       Merge branch into current
+git branch -d <name>                     Delete branch (safe, merged only)
+git branch -D <name>                     Delete branch (force)
+
+--------------------------------------------------------------------------------
+  LOG & DIFF
+--------------------------------------------------------------------------------
+git log --oneline --graph                Compact visual commit graph
+git diff                                 Unstaged changes
+git diff --staged                        Staged changes (vs last commit)
+git stash                                Temporarily shelve changes
+git stash pop                            Restore most recent stash
+
+--------------------------------------------------------------------------------
+  TYPICAL FIRST-TIME WORKFLOW
+--------------------------------------------------------------------------------
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/user/repo.git
+git push -u origin main
+
+After that, daily loop:
+  git add .  →  git commit -m "..."  →  git push
+
+--------------------------------------------------------------------------------
+  TIPS
+--------------------------------------------------------------------------------
+- git pull --rebase  is cleaner than plain git pull (avoids merge commits).
+- --force-with-lease  is always safer than --force when force-pushing.
+- git switch  is the modern replacement for git checkout (Git 2.23+).
+- SSH remote URL format:  git@github.com:user/repo.git
+  (requires SSH key generated and added to GitHub once).
+- Add a .gitignore to exclude files (node_modules/, .env, *.pyc, etc.)
+  GitHub has templates for every language/framework.
+================================================================================

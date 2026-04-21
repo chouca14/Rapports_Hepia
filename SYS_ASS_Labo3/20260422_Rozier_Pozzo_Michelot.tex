@@ -1,0 +1,506 @@
+\documentclass[a4paper,11pt]{article}
+
+% ======================
+% Encoding and language
+% ======================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+% ======================
+% Layout and graphics
+% ======================
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{booktabs}   % \toprule \midrule \bottomrule
+\usepackage{textcomp}   % \textdegree hors mode math
+
+% ======================
+% Page geometry
+% ======================
+\geometry{
+    a4paper,
+    top=25mm,
+    bottom=20mm,
+    textwidth=185mm
+}
+
+% Fix fancyhdr headheight warning
+\setlength{\headheight}{21pt}
+\addtolength{\topmargin}{-9pt}
+
+\setlength{\parindent}{5pt}
+\setlength{\parskip}{0pt}
+
+% ======================
+% Section formatting
+% ======================
+\titleformat{\section}
+{\normalfont\bfseries}
+{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+{\normalfont\itshape}
+{\thesubsection.}{0.5em}{}
+
+% ======================
+% Header / footer
+% ======================
+\pagestyle{fancy}
+\fancyhf{}
+
+\rhead{\includegraphics[scale=0.4]{images/hepia_simple.png}}
+\rfoot{\textit{\today}}
+\cfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ======================
+% Caption style
+% ======================
+\captionsetup{
+    font=footnotesize,
+    labelsep=colon
+}
+
+% ======================
+% Document
+% ======================
+\begin{document}
+
+\begin{center}
+\rule{\linewidth}{0.4pt}
+{\large
+Rapport de laboratoire\\
+\vspace{2mm}
+Analyse graphique pour les systèmes asservis
+}
+
+\vspace{8mm}
+
+Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guilhem.roziervi@hes-so.ch}{MT2, guilhem.roziervi@hes-so.ch}}},
+Noah Michelot\footnote{\textit{\href{mailto:noah.michelot@hes-so.ch}{MT2, noah.michelot@hes-so.ch}}},
+Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{MT2, matteo.pozzodi@hes-so.ch}}}
+
+\vspace{3mm}
+
+\footnotesize{
+\textit{Haute école de paysage, d'ingénierie et d'architecture, Genève, Suisse}
+}
+\rule{\linewidth}{0.4pt}
+\vspace{9mm}
+
+\end{center}
+
+\tableofcontents
+\setlength{\parskip}{10pt}
+
+\pagebreak
+
+% =================================================
+\section{Introduction}
+
+Ce laboratoire a pour objectif de nous familiariser avec le comportement dynamique d'une installation
+réelle et d'établir le lien entre des mesures expérimentales et une représentation mathématique par
+fonction de transfert. Le banc de test utilisé est le système SIRAu, composé d'un motoréducteur à
+courant continu instrumenté d'une génératrice tachymétrique et piloté par un contrôleur Maxon.
+
+Dans un premier exercice, nous identifions graphiquement la fonction de transfert du système à partir
+d'une réponse indicielle mesurée, en exploitant les propriétés caractéristiques d'un système du premier
+ordre. Dans un second exercice, nous décomposons le système en ses trois blocs constitutifs (électronique
+de puissance, moteur, capteur de mesure) afin de construire la fonction de transfert complète $G_s(s)$.
+Nous appliquons ensuite un régulateur PI permettant de ramener la boucle ouverte à un système fondamental
+du second ordre, et nous analysons sa stabilité ainsi que ses performances à l'aide des représentations
+graphiques usuelles : diagramme de Bode et réponse indicielle. Enfin, nous utilisons le
+\textit{Control System Designer} de MATLAB pour ajuster le gain du régulateur et comparer
+les résultats obtenus au tableau des paramètres de réglage de l'annexe (\ref{fig:6A}).
+
+% =================================================
+\section{Exercice 1 -- Étude du système du premier ordre}
+
+\subsection{Question A : Équation du système}
+
+Le système est caractérisé par une fonction du premier ordre.
+Sa fonction de transfert est donnée par :
+\begin{equation}
+G(s) = \frac{K_s}{1 + sT}
+\end{equation}
+avec :
+\begin{itemize}
+\item $K_s$ : le gain statique,
+\item $T$ : la constante de temps.
+\end{itemize}
+
+Cette forme est caractéristique d'un système du premier ordre : la sortie converge exponentiellement
+vers sa valeur finale sans oscillation. La réponse indicielle atteint exactement $63.2\,\%$ de sa
+valeur finale au temps $t = T$, ce qui permet d'identifier graphiquement la constante de temps.
+
+% =================================================
+\subsection{Question B : Représentation graphique réponse moteur DC}
+
+Voici la représentation graphique de notre système qui correspond à la réponse d'un moteur à courant
+continu.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/1.B.jpg}
+\caption{Réponse indicielle du moteur DC chargée depuis les données du banc SIRAu}
+\end{figure}
+
+% =================================================
+\subsection{Question C : Lecture des caractéristiques}
+
+Nous allons lire les caractéristiques nous permettant de trouver la fonction de transfert du système
+donnée à la question~A.
+\begin{itemize}
+\item $K_s$ : le gain statique vaut \textbf{90} et correspond à la valeur finale de la vitesse
+      angulaire du moteur (plateau atteint en régime permanent).
+\item $T$ : la constante de temps est calculée en prenant le temps nécessaire pour atteindre
+      $63.2\,\%$ de la valeur finale, soit une vitesse angulaire de
+      $0.632 \times 90 \approx 56.9\,\mathrm{rad/s}$. En lisant le temps correspondant sur le
+      graphe et en soustrayant le décalage initial de $0.1\,\mathrm{s}$, on obtient
+      $T \approx 9\,\mathrm{ms}$.
+\end{itemize}
+
+La fonction de transfert estimée est donc :
+\begin{equation}
+\hat{G}(s) = \frac{90}{1 + 9 \times 10^{-3}\,s}
+\end{equation}
+
+% =================================================
+\subsection{Question D : Vérification de la fonction de transfert}
+
+Le graphe~(\ref{1D}) nous montre que la fonction de transfert que nous avons déterminée grâce aux
+différents coefficients correspond bien à la mesure expérimentale. Les deux courbes se superposent
+correctement, ce qui valide le modèle du premier ordre identifié.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/1.D.jpg}
+\caption{Superposition de la réponse mesurée (bleu) et de la réponse du modèle estimé (rouge)}
+\label{1D}
+\end{figure}
+
+% =================================================
+\section{Exercice 2 -- Système SIRAu}
+
+Dans cet exercice, nous avons extrait de la datasheet du moteur les différentes fonctions de transfert
+du système SIRAu :
+\begin{itemize}
+\item $G_{\mathrm{mot}}(s) = \dfrac{4.53 \times 10^{3}}{1 + 8 \times 10^{-3}s}$
+\item $G_{\mathrm{elec}}(s) = \dfrac{20.8 \times 10^{-3}}{1 + 1.5 \times 10^{-4}s}$
+\item $G_{\mathrm{mes}}(s) = 10.7 \times 10^{-3}$
+\end{itemize}
+\vspace{2mm}
+avec $G_{\mathrm{mot}}(s)$ la fonction de transfert du moteur,
+$G_{\mathrm{elec}}(s)$ la fonction de transfert de l'électronique de puissance
+et $G_{\mathrm{mes}}(s)$ la fonction de transfert du capteur de mesure.
+
+% =================================================
+\subsection{Question A : Vérification des fonctions de transfert}
+
+Le graphe ci-dessous~(\ref{fig:2A}) montre la réponse du système SIRAu à une entrée de type échelon.
+La multiplication des fonctions de transfert du système correspond bien à celle trouvée à
+l'exercice~1 à un facteur près. La seule composante qui diffère est le gain statique qui augmente
+légèrement, en raison de la constante de temps de $G_{\mathrm{elec}}(s)$
+($1.5 \times 10^{-4}\,\mathrm{s}$) qui est non nulle mais négligeable devant celle de
+$G_{\mathrm{mot}}(s)$ ($8 \times 10^{-3}\,\mathrm{s}$). Cette différence explique pourquoi les deux
+courbes sont proches mais pas identiques.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/2.A.jpg}
+\caption{Comparaison entre le modèle du 1\textsuperscript{er} ordre identifié et le produit
+         $G_{\mathrm{elec}}(s) \cdot G_{\mathrm{mot}}(s)$}
+\label{fig:2A}
+\end{figure}
+
+% =================================================
+\subsection{Question B : Fonction de transfert complète du système SIRAu}
+
+Sur la figure ci-dessous~(\ref{fig:2B}), nous pouvons voir la zone transitoire du système, ce qui
+nous permettra d'en extraire les coefficients plus facilement.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/2.B.jpg}
+\caption{Zoom sur la zone transitoire de la réponse indicielle de $G_s(s)$}
+\label{fig:2B}
+\end{figure}
+
+La fonction de transfert complète inclut également le capteur de mesure :
+
+\begin{equation}
+G_s(s) = G_{\mathrm{mot}}(s)\cdot G_{\mathrm{elec}}(s)\cdot G_{\mathrm{mes}}(s)
+\end{equation}
+
+Soit :
+
+\begin{equation}
+G_s(s) =
+\frac{4.53 \times 10^{3}}{1 + 8 \times 10^{-3}s}
+\cdot
+\frac{20.8 \times 10^{-3}}{1 + 1.5 \times 10^{-4}s}
+\cdot
+(10.7 \times 10^{-3})
+\end{equation}
+
+Le gain statique total vaut :
+\begin{equation}
+K_s = 4.53 \times 10^{3} \cdot 20.8 \times 10^{-3} \cdot 10.7 \times 10^{-3} \approx 1.01
+\end{equation}
+
+Donc :
+\begin{equation}
+\boxed{G_s(s) \approx \frac{1.01}{(1 + 8 \times 10^{-3}s)(1 + 1.5 \times 10^{-4}s)}}
+\end{equation}
+
+% =================================================
+\subsection{Question C : Définition de la fonction de transfert dans MATLAB}
+
+Le code MATLAB utilisé est le suivant :
+
+\begin{verbatim}
+s = tf('s');
+
+Gmot  = 4.53e3  / (1 + 8e-3*s);
+Gelec = 20.8e-3 / (1 + 1.5e-4*s);
+Gmes  = 10.7e-3;
+
+Gs = Gmot * Gelec * Gmes;
+\end{verbatim}
+
+% =================================================
+\subsection{Question D : Passage à un système du second ordre}
+
+Le régulateur PI est donné par :
+\begin{equation}
+G_R(s) = k_R \cdot \frac{1 + sT_n}{s}
+\end{equation}
+
+La boucle ouverte vaut :
+\begin{equation}
+G_0(s) = G_R(s)\cdot G_s(s)
+\end{equation}
+
+En remplaçant $G_s(s)$ :
+\begin{equation}
+G_0(s) =
+k_R \cdot \frac{1 + sT_n}{s}
+\cdot
+\frac{K_s}{(1 + 8 \times 10^{-3}s)(1 + 1.5 \times 10^{-4}s)}
+\end{equation}
+
+Si on choisit :
+\begin{equation}
+T_n = 8 \times 10^{-3}
+\end{equation}
+
+Alors le terme $(1 + sT_n)$ compense exactement le pôle $(1 + 8 \times 10^{-3}s)$ (compensation
+pôle-zéro). Le pôle dominant du moteur, qui est le plus lent, est ainsi annulé, ce qui simplifie
+considérablement la dynamique du système :
+
+\begin{equation}
+G_0(s) =
+k_R \cdot \frac{K_s}{s\,(1 + 1.5 \times 10^{-4}s)}
+\end{equation}
+
+On obtient donc un système d'ordre~2 en boucle ouverte.
+
+La fonction de transfert en boucle fermée est :
+\begin{equation}
+G_{cf}(s) = \frac{G_0(s)}{1 + G_0(s)}
+\end{equation}
+
+Après mise sous forme canonique, on obtient :
+\begin{equation}
+G_{cf}(s) = \frac{K_{cf}}{a s^2 + b s + c}
+\end{equation}
+
+ce qui correspond bien à un système fondamental du second ordre, dont les paramètres (amortissement
+$\delta$ et pulsation propre $\omega_0$) permettront d'analyser le comportement dynamique en boucle
+fermée.
+
+% =================================================
+\subsection{Question E : Diagramme de Bode}
+
+Voici le diagramme de Bode de la boucle ouverte $G_0(s)$ pour $k_R = 3306$ :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/2.E.1.jpg}
+\caption{Diagramme de Bode de $G_0(s)$ avec $k_R = 3306$}
+\label{fig:2E1}
+\end{figure}
+
+On observe que la phase tend asymptotiquement vers $-90^{\circ}$ aux basses fréquences (contribution de
+l'intégrateur du régulateur PI) et s'approche de $-180^{\circ}$ aux très hautes fréquences sans jamais
+l'atteindre, en raison de la structure du second ordre. Cela implique que la marge de phase est
+toujours positive, quel que soit le gain, confirmant la stabilité inconditionnelle du système.
+
+Les diagrammes de Nyquist et d'Evans n'ont pas pu être tracés lors de la séance de laboratoire par
+manque de temps.
+
+% =================================================
+\subsection{Question G : Control System Designer}
+
+Nous avons importé $G_s(s)$ dans le \textit{Control System Designer} de MATLAB via
+\textit{Edit Architecture}, en affectant $G_s$ au bloc $G$ de l'architecture standard avec le
+régulateur PI en bloc $C$.
+
+% =================================================
+\subsection{Question H : Comparaison des résultats avec Control System Designer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/2.L.1.jpg}
+\caption{Vue d'ensemble du \textit{Control System Designer} pour $k_R$ donnant $19.5\,\%$ de dépassement}
+\label{fig:2L1}
+\end{figure}
+
+Nous pouvons constater que les résultats obtenus avec le \textit{Control System Designer}
+(graphe~\ref{fig:2L1}) sont très similaires à ceux obtenus directement sur MATLAB
+(graphe~\ref{fig:2E1}), ce qui confirme la validité de notre approche.
+
+% =================================================
+\subsection{Questions I, J, K : Ajout des caractéristiques sur les graphes}
+
+Nous avons affiché les marges de stabilité sur le diagramme de Bode (question~I), le critère de
+dépassement de $5\,\%$ sur le lieu des racines (question~J), ainsi que le \textit{peak response},
+le \textit{settling time} à $5\,\%$ et le \textit{rise time} de 0 à $100\,\%$ sur la réponse
+indicielle (question~K). Ces éléments sont visibles sur la figure~\ref{fig:2L1} ainsi que sur les
+captures de la question~L présentées ci-dessous.
+
+% =================================================
+\subsection{Question L : Ajustement du gain du régulateur}
+
+Le gain $k_R$ a été ajusté dans le \textit{Control System Designer} afin de retrouver les trois
+configurations du tableau (\ref{fig:6A}) : dépassements de $4.18\,\%$, $10.2\,\%$ et $19.5\,\%$.
+Une capture correspondante est présentée ci-dessous et les deux autres se trouvent en annexe.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/2.L.1.jpg}
+\caption{\textit{Control System Designer} -- cas $D_3 = 19.5\,\%$
+         (P.M.\,: $48.6^{\circ}$, $\omega_c = 5.87 \times 10^3\,\mathrm{rad/s}$,
+         temps au pic $= 0.484\,\mathrm{ms}$)}
+\label{fig:2L1b}
+\end{figure}
+
+\subsubsection*{Analyse des résultats et comparaison avec le tableau de l'annexe~(\ref{fig:6A})}
+
+Le tableau ci-dessous résume les valeurs mesurées sur les graphes et les compare aux valeurs
+théoriques de l'annexe~(\ref{fig:6A}).
+
+\begin{table}[H]
+\centering
+\caption{Comparaison des valeurs mesurées avec le tableau de l'annexe~(\ref{fig:6A})}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Paramètre} & \textbf{Cas~1} & \textbf{Cas~2} & \textbf{Cas~3} & \textbf{Source} \\
+\midrule
+Dépassement $D_1$ (\%)         & 4.18 & 10.2 & 19.5 & Mesuré (CSD)  \\
+Dépassement $D_1$ (\%)         & 4.3  & 10.0 & 16.3 & Tableau~(\ref{fig:6A})   \\
+\midrule
+Marge de phase $\varphi_m$ ($^{\circ}$) & 65.7 & 58.3 & 48.6 & Mesuré (CSD) \\
+Marge de phase $\varphi_m$ ($^{\circ}$) & 65.5 & 58.6 & 51.8 & Tableau~(\ref{fig:6A})  \\
+\midrule
+$\omega_c$ ($10^3\,\mathrm{rad/s}$) & 3.01  & 4.11  & 5.87  & Mesuré (CSD) \\
+Temps au pic $t_p$ (ms)            & 0.953 & 0.691 & 0.484 & Mesuré (CSD) \\
+Déviation de pic                   & 1.04  & 1.10  & 1.19  & Mesuré (CSD) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\pagebreak
+
+\textbf{Lecture des graphes -- interprétation :}
+
+Chaque capture du \textit{Control System Designer} regroupe trois représentations complémentaires :
+le diagramme de Bode (à gauche), le lieu des racines (en haut à droite) et la réponse indicielle
+(en bas à droite).
+
+\textbf{Diagramme de Bode (gauche) :}
+Le point orange correspond à la fréquence de coupure en gain $\omega_c$, pour laquelle le module
+est égal à $0\,\mathrm{dB}$. La marge de phase est évaluée à cette fréquence et représente l'écart
+à $-180^{\circ}$. Lorsque le gain $k_R$ augmente, on observe un déplacement de $\omega_c$ vers des
+fréquences plus élevées (de $3.01$ à $5.87 \times 10^3\,\mathrm{rad/s}$), accompagné d'une diminution
+de la marge de phase (de $65.7^{\circ}$ à $48.6^{\circ}$). Cela traduit une réduction de la robustesse
+vis-à-vis de l'instabilité.
+
+\textbf{Lieu des racines (haut droite) :}
+Les pôles en boucle fermée (points mauves) se déplacent vers des parties imaginaires plus élevées
+lorsque le gain augmente. Ils restent néanmoins dans le demi-plan gauche ($\mathrm{Re}(s) < 0$),
+ce qui garantit la stabilité du système pour toutes les configurations étudiées. L'angle entre
+le vecteur reliant l'origine au pôle et l'axe réel négatif est lié au coefficient d'amortissement
+$\delta$ : un angle plus important correspond à un amortissement plus faible, donc à un dépassement
+plus marqué.
+
+\textbf{Réponse indicielle (bas droite) :}
+Les résultats mettent en évidence le compromis classique entre rapidité et amortissement. Une
+augmentation du gain permet de réduire le temps de réponse (temps au pic passant de $0.953$ à
+$0.484\,\mathrm{ms}$), mais entraîne une augmentation du dépassement (de $4.18\,\%$ à $19.5\,\%$).
+Dans tous les cas, la sortie converge vers une valeur finale normalisée égale à 1.
+
+\textbf{Comparaison avec le tableau \ref{fig:6A} :}
+Les marges de phase mesurées ($65.7^{\circ}$, $58.3^{\circ}$, $48.6^{\circ}$) sont cohérentes avec
+les valeurs théoriques ($65.5^{\circ}$, $58.6^{\circ}$, $51.8^{\circ}$), avec des écarts inférieurs
+à $3^{\circ}$. Ces différences proviennent du fait que le modèle théorique considère un système du
+second ordre idéal, tandis que le système réel inclut une dynamique supplémentaire liée à
+$G_{\mathrm{elec}}(s)$, caractérisée par une constante de temps non nulle
+($\tau_{\mathrm{elec}} = 1.5 \times 10^{-4}\,\mathrm{s}$).
+Les dépassements observés ($4.18\,\%$, $10.2\,\%$, $19.5\,\%$) s'écartent également légèrement des
+valeurs théoriques ($4.3\,\%$, $10.0\,\%$, $16.3\,\%$) pour la même raison.
+
+% =================================================
+\section{Conclusion}
+
+Ce laboratoire met en évidence la cohérence entre la modélisation théorique et le comportement
+mesuré d'un système réel. L'identification réalisée dans l'exercice~1 montre qu'un modèle du premier
+ordre permet de représenter de manière satisfaisante la dynamique du motoréducteur SIRAu dans la
+plage de fonctionnement étudiée.
+
+Dans l'exercice~2, la construction de la fonction de transfert globale à partir de sous-systèmes
+issus de la datasheet illustre une approche modulaire pertinente. L'introduction d'un régulateur PI
+avec $T_n = 8 \times 10^{-3}$ permet d'obtenir un comportement équivalent à un système du second
+ordre, facilitant l'analyse et le réglage.
+
+L'étude des différentes valeurs de gain met clairement en évidence le compromis entre rapidité et
+amortissement : une augmentation du gain améliore la vitesse de réponse mais dégrade le dépassement.
+Les résultats expérimentaux restent globalement en accord avec les prédictions théoriques, les écarts
+observés étant attribuables aux simplifications du modèle et aux dynamiques résiduelles du système.
+
+Enfin, les différents outils d'analyse (Bode, lieu des racines, réponse indicielle) apportent des
+informations complémentaires et cohérentes, permettant de valider à la fois la stabilité et les
+performances du système asservi.
+
+
+\section{Annexes}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/2.L.2.jpg}
+\caption{\textit{Control System Designer} -- cas $D_1 = 4.18\,\%$}
+\label{fig:2L2b}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/2.L.3.jpg}
+\caption{\textit{Control System Designer} -- cas $D_2 = 10.2\,\%$}
+\label{fig:2L3b}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/Annexe_6A.png}
+\caption{Tableau de référence théorique}
+\label{fig:6A}
+\end{figure}
+
+\end{document}
