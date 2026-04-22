@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  21 APR 2026 16:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  22 APR 2026 08:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/miste/Rapports/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex
-(c:/Users/miste/Rapports/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex
+**c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex
+(c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -332,53 +332,32 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box54
 \@float@everytoks=\toks30
 \@floatcapt=\box55
-) (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen187
-\lightrulewidth=\dimen188
-\cmidrulewidth=\dimen189
-\belowrulesep=\dimen190
-\belowbottomsep=\dimen191
-\aboverulesep=\dimen192
-\abovetopsep=\dimen193
-\cmidrulesep=\dimen194
-\cmidrulekern=\dimen195
-\defaultaddspace=\dimen196
-\@cmidla=\count300
-\@cmidlb=\count301
-\@aboverulesep=\dimen197
-\@belowrulesep=\dimen198
-\@thisruleclass=\count302
-\@lastruleclass=\count303
-\@thisrulewidth=\dimen199
-) (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
-Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count304
+\l__color_backend_stack_int=\count300
 \l__pdf_internal_box=\box56
-) (c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
+) (c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
 \openout1 = `20260422_Rozier_Pozzo_Michelot.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Info: Redefining \degres on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Info: Redefining \degres on input line 70.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -396,8 +375,8 @@ LaTeX Info: Redefining \degres on input line 76.
 * \textheight=717.00946pt
 * \oddsidemargin=-36.70404pt
 * \evensidemargin=-36.70404pt
-* \topmargin=-47.1381pt
-* \headheight=21.0pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=11.0pt
 * \footskip=30.0pt
@@ -416,16 +395,16 @@ LaTeX Info: Redefining \degres on input line 76.
 
 (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count305
-\scratchdimen=\dimen256
+\scratchcounter=\count301
+\scratchdimen=\dimen187
 \scratchbox=\box57
-\nofMPsegments=\count306
-\nofMParguments=\count307
+\nofMPsegments=\count302
+\nofMParguments=\count303
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count308
-\MPscratchDim=\dimen257
-\MPnumerator=\count309
-\makeMPintoPDFobject=\count310
+\MPscratchCnt=\count304
+\MPscratchDim=\dimen188
+\MPnumerator=\count305
+\makeMPintoPDFobject=\count306
 \everyMPtoPDFconversion=\toks32
 ) (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -433,153 +412,503 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 76.
- (c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.out) (c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.out)
+Package hyperref Info: Link coloring OFF on input line 70.
 \@outlinefile=\write3
 \openout3 = `20260422_Rozier_Pozzo_Michelot.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
- (c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.toc)
+
+No file 20260422_Rozier_Pozzo_Michelot.toc.
 \tf@toc=\write4
 \openout4 = `20260422_Rozier_Pozzo_Michelot.toc'.
 
-<images/hepia_simple.png, id=99, 253.94875pt x 42.1575pt>
+<images/hepia_simple.png, id=9, 253.94875pt x 42.1575pt>
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 106.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 100.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [1
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[1
 
 {C:/Users/miste/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./images/hepia_simple.png>]
-<images/1.B.jpg, id=118, 978.65625pt x 486.01575pt>
-File: images/1.B.jpg Graphic file (type jpg)
-<use images/1.B.jpg>
-Package pdftex.def Info: images/1.B.jpg  used on input line 152.
-(pdftex.def)             Requested size: 473.73515pt x 235.26497pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 155.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [2]
-<images/1.D.jpg, id=129, 988.8945pt x 490.83376pt>
-File: images/1.D.jpg Graphic file (type jpg)
-<use images/1.D.jpg>
-Package pdftex.def Info: images/1.D.jpg  used on input line 185.
-(pdftex.def)             Requested size: 473.73515pt x 235.13316pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 189.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [3 <./images/1.B.jpg>]
-<images/2.A.jpg, id=142, 958.17975pt x 487.8225pt>
-File: images/2.A.jpg Graphic file (type jpg)
-<use images/2.A.jpg>
-Package pdftex.def Info: images/2.A.jpg  used on input line 218.
-(pdftex.def)             Requested size: 473.73515pt x 241.1863pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 223.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [4 <./images/1.D.jpg>]
-<images/2.B.jpg, id=149, 1049.72176pt x 484.81125pt>
-File: images/2.B.jpg Graphic file (type jpg)
-<use images/2.B.jpg>
-Package pdftex.def Info: images/2.B.jpg  used on input line 232.
-(pdftex.def)             Requested size: 368.46156pt x 170.16731pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 257.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [5 <./images/2.A.jpg> <./images/2.B.jpg>]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 269.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 150.
  (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
+<images/1A_step.png, id=27, 744.53156pt x 470.50781pt>
+File: images/1A_step.png Graphic file (type png)
+<use images/1A_step.png>
+Package pdftex.def Info: images/1A_step.png  used on input line 171.
+(pdftex.def)             Requested size: 368.46156pt x 232.85541pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 324.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 174.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [6]
-<images/2.E.1.jpg, id=176, 974.4405pt x 483.0045pt>
-File: images/2.E.1.jpg Graphic file (type jpg)
-<use images/2.E.1.jpg>
-Package pdftex.def Info: images/2.E.1.jpg  used on input line 337.
-(pdftex.def)             Requested size: 473.73515pt x 234.81702pt.
-<images/2.L.1.jpg, id=177, 844.95676pt x 500.46976pt>
-File: images/2.L.1.jpg Graphic file (type jpg)
-<use images/2.L.1.jpg>
-Package pdftex.def Info: images/2.L.1.jpg  used on input line 362.
-(pdftex.def)             Requested size: 526.37598pt x 311.77716pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[2]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 189.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 189.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 189.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 191.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 191.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 201.
+
+Missing character: There is no ° in font cmr10!
+Missing character: There is no é in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 203.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 203.
+
+Missing character: There is no ° in font cmr10!
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 204.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[3 <./images/1A_step.png>]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: File `images/1C_bode.png' not found on input line 219.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:219: Package pdftex.def Error: File `images/1C_bode.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.219 ...[width=0.7\textwidth]{images/1C_bode.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
+
+Missing character: There is no ° in font cmr9!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
+
+Missing character: There is no ° in font cmr9!
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 230.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[4]
+
+LaTeX Warning: Command \' invalid in math mode on input line 232.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: Command \' invalid in math mode on input line 235.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: Command \' invalid in math mode on input line 245.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: Command \' invalid in math mode on input line 248.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: Command \' invalid in math mode on input line 257.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: File `images/1E_comparaison.png' not found on input line 262.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:262: Package pdftex.def Error: File `images/1E_comparaison.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.262 ....75\textwidth]{images/1E_comparaison.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 263.
+
+Missing character: There is no é in font cmr6!
+
+LaTeX Warning: Command \' invalid in math mode on input line 263.
+
+Missing character: There is no é in font cmr6!
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 265.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[5]
+
+LaTeX Warning: Command \' invalid in math mode on input line 266.
+
+Missing character: There is no é in font cmr8!
+
+LaTeX Warning: File `images/1F_perturbation.png' not found on input line 275.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:275: Package pdftex.def Error: File `images/1F_perturbation.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.275 ...75\textwidth]{images/1F_perturbation.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 278.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[6]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cdot' on input line 288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 288.
+
+
+LaTeX Warning: File `images/1G_bode_G0.png' not found on input line 294.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:294: Package pdftex.def Error: File `images/1G_bode_G0.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.294 ...th=0.75\textwidth]{images/1G_bode_G0.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 297.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[7]
+
+LaTeX Warning: Command \' invalid in math mode on input line 301.
+
+Missing character: There is no é in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 302.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 302.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \' invalid in math mode on input line 313.
+
+Missing character: There is no é in font cmr10!
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 316.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[8]
+
+LaTeX Warning: File `images/1I_PI_perturbation.png' not found on input line 336.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:336: Package pdftex.def Error: File `images/1I_PI_perturbation.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.336 ...textwidth]{images/1I_PI_perturbation.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 341.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[9]
+
+LaTeX Warning: File `images/1J_PID_comparaison.png' not found on input line 363.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:363: Package pdftex.def Error: File `images/1J_PID_comparaison.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.363 ...textwidth]{images/1J_PID_comparaison.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
 Package pdftex.def Info: images/hepia_simple.png  used on input line 366.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [7 <./images/2.E.1.jpg>]
-File: images/2.L.1.jpg Graphic file (type jpg)
-<use images/2.L.1.jpg>
-Package pdftex.def Info: images/2.L.1.jpg  used on input line 389.
-(pdftex.def)             Requested size: 526.37598pt x 311.77716pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[10]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 370.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 370.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 370.
+
+
+LaTeX Warning: File `images/1K_bode_PID.png' not found on input line 376.
+
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:376: Package pdftex.def Error: File `images/1K_bode_PID.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.376 ...h=0.75\textwidth]{images/1K_bode_PID.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 379.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[11]
+
+LaTeX Warning: Command \' invalid in math mode on input line 383.
+
+Missing character: There is no é in font cmr10!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
+
+Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \' invalid in math mode on input line 388.
+
+Missing character: There is no é in font cmr10!
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
 Package pdftex.def Info: images/hepia_simple.png  used on input line 395.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [8 <./images/2.L.1.jpg>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[12]
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 422.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 397.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [9]
-<images/2.L.2.jpg, id=208, 832.3095pt x 499.8675pt>
-File: images/2.L.2.jpg Graphic file (type jpg)
-<use images/2.L.2.jpg>
-Package pdftex.def Info: images/2.L.2.jpg  used on input line 487.
-(pdftex.def)             Requested size: 526.37598pt x 316.1462pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 491.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [10]
-<images/2.L.3.jpg, id=213, 823.27576pt x 501.072pt>
-File: images/2.L.3.jpg Graphic file (type jpg)
-<use images/2.L.3.jpg>
-Package pdftex.def Info: images/2.L.3.jpg  used on input line 494.
-(pdftex.def)             Requested size: 526.37598pt x 320.37152pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 498.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [11 <./images/2.L.2.jpg>]
-<images/Annexe_6A.png, id=219, 1200.73593pt x 371.13657pt>
-File: images/Annexe_6A.png Graphic file (type png)
-<use images/Annexe_6A.png>
-Package pdftex.def Info: images/Annexe_6A.png  used on input line 501.
-(pdftex.def)             Requested size: 526.37598pt x 162.7003pt.
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 506.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
- [12 <./images/2.L.3.jpg> <./images/Annexe_6A.png>] (c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[13] (c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-Package rerunfilecheck Info: File `20260422_Rozier_Pozzo_Michelot.out' has not changed.
-(rerunfilecheck)             Checksum: 08CEC9261890B850152028EA5A8E8358;5079.
+
+
+Package rerunfilecheck Warning: File `20260422_Rozier_Pozzo_Michelot.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `20260422_Rozier_Pozzo_Michelot.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  2E68BD8B0E6A75B2C1603DFB66127A33;4409.
  ) 
 Here is how much of TeX's memory you used:
- 13906 strings out of 474486
- 229317 string characters out of 5743755
- 1941542 words of memory out of 5000000
- 35960 multiletter control sequences out of 15000+600000
- 570497 words of font info for 64 fonts, out of 8000000 for 9000
+ 13916 strings out of 474486
+ 232454 string characters out of 5743755
+ 1936542 words of memory out of 5000000
+ 35987 multiletter control sequences out of 15000+600000
+ 571175 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,79p,531b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfcc0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0600.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0800.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on c:\Users\miste\Rapports\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.pdf (12 pages, 1603597 bytes).
+ 75i,17n,79p,718b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfcc0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0800.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.pdf (13 pages, 412520 bytes).
 PDF statistics:
- 332 PDF objects out of 1000 (max. 8388607)
- 58 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 228 PDF objects out of 1000 (max. 8388607)
+ 52 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

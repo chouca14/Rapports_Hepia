@@ -18,8 +18,6 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{float}
-\usepackage{booktabs}   % \toprule \midrule \bottomrule
-\usepackage{textcomp}   % \textdegree hors mode math
 
 % ======================
 % Page geometry
@@ -30,10 +28,6 @@
     bottom=20mm,
     textwidth=185mm
 }
-
-% Fix fancyhdr headheight warning
-\setlength{\headheight}{21pt}
-\addtolength{\topmargin}{-9pt}
 
 \setlength{\parindent}{5pt}
 \setlength{\parskip}{0pt}
@@ -80,7 +74,7 @@
 {\large
 Rapport de laboratoire\\
 \vspace{2mm}
-Analyse graphique pour les systèmes asservis
+Dimensionnement et comparaison de régulateurs
 }
 
 \vspace{8mm}
@@ -92,7 +86,7 @@ Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{M
 \vspace{3mm}
 
 \footnotesize{
-\textit{Haute école de paysage, d'ingénierie et d'architecture, Genève, Suisse}
+\textit{Haute école de paysagerie, d'ingénierie et d'architecture, Genève, Suisse}
 }
 \rule{\linewidth}{0.4pt}
 \vspace{9mm}
@@ -107,400 +101,297 @@ Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{M
 % =================================================
 \section{Introduction}
 
-Ce laboratoire a pour objectif de nous familiariser avec le comportement dynamique d'une installation
-réelle et d'établir le lien entre des mesures expérimentales et une représentation mathématique par
-fonction de transfert. Le banc de test utilisé est le système SIRAu, composé d'un motoréducteur à
-courant continu instrumenté d'une génératrice tachymétrique et piloté par un contrôleur Maxon.
+Ce laboratoire porte sur le dimensionnement et 
+la comparaison de régulateurs pour des systèmes 
+asservis. L'objectif est de comprendre comment un 
+régulateur modifie la dynamique d'un système, 
+d'appréhender le rôle des termes intégrateur et 
+dérivateur, et d'analyser les performances obtenues 
+à l'aide des diagrammes de Bode.
 
-Dans un premier exercice, nous identifions graphiquement la fonction de transfert du système à partir
-d'une réponse indicielle mesurée, en exploitant les propriétés caractéristiques d'un système du premier
-ordre. Dans un second exercice, nous décomposons le système en ses trois blocs constitutifs (électronique
-de puissance, moteur, capteur de mesure) afin de construire la fonction de transfert complète $G_s(s)$.
-Nous appliquons ensuite un régulateur PI permettant de ramener la boucle ouverte à un système fondamental
-du second ordre, et nous analysons sa stabilité ainsi que ses performances à l'aide des représentations
-graphiques usuelles : diagramme de Bode et réponse indicielle. Enfin, nous utilisons le
-\textit{Control System Designer} de MATLAB pour ajuster le gain du régulateur et comparer
-les résultats obtenus au tableau des paramètres de réglage de l'annexe (\ref{fig:6A}).
+L'étude porte sur un système représentatif d'un 
+entraînement électrique rotatif dont on contrôle 
+la vitesse angulaire. La démarche suivie comprend 
+la modélisation du système sous MATLAB et Simulink, 
+le dimensionnement d'un régulateur proportionnel par 
+la méthode de Bode, puis l'ajout de termes intégrateur et 
+dérivateur.
 
 % =================================================
-\section{Exercice 1 -- Étude du système du premier ordre}
+\section{Exercice 1 -- Système d'entraînement électrique rotatif}
 
-\subsection{Question A : Équation du système}
+Le système étudié est décrit par la fonction de transfert :
 
-Le système est caractérisé par une fonction du premier ordre.
-Sa fonction de transfert est donnée par :
 \begin{equation}
-G(s) = \frac{K_s}{1 + sT}
+G_s(s) = \frac{K_{s1} \cdot K_{s2}}{(1 + s \cdot T_1)(1 + s \cdot T_2)(1 + s \cdot T_3)}
 \end{equation}
-avec :
+
+avec les paramètres :
+
 \begin{itemize}
-\item $K_s$ : le gain statique,
-\item $T$ : la constante de temps.
+\item $K_{s1} = 2 \cdot 10^{-3}\ \mathrm{N \cdot m / V}$
+\item $K_{s2} = 2.5 \cdot 10^{4}\ \mathrm{rad \cdot s^{-1} / (N \cdot m)}$
+\item $T_1 = 0.0005\ \mathrm{s}$
+\item $T_2 = 0.01\ \mathrm{s}$
+\item $T_3 = 0.1\ \mathrm{s}$
 \end{itemize}
 
-Cette forme est caractéristique d'un système du premier ordre : la sortie converge exponentiellement
-vers sa valeur finale sans oscillation. La réponse indicielle atteint exactement $63.2\,\%$ de sa
-valeur finale au temps $t = T$, ce qui permet d'identifier graphiquement la constante de temps.
-
-% =================================================
-\subsection{Question B : Représentation graphique réponse moteur DC}
-
-Voici la représentation graphique de notre système qui correspond à la réponse d'un moteur à courant
-continu.
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{images/1.B.jpg}
-\caption{Réponse indicielle du moteur DC chargée depuis les données du banc SIRAu}
-\end{figure}
-
-% =================================================
-\subsection{Question C : Lecture des caractéristiques}
-
-Nous allons lire les caractéristiques nous permettant de trouver la fonction de transfert du système
-donnée à la question~A.
-\begin{itemize}
-\item $K_s$ : le gain statique vaut \textbf{90} et correspond à la valeur finale de la vitesse
-      angulaire du moteur (plateau atteint en régime permanent).
-\item $T$ : la constante de temps est calculée en prenant le temps nécessaire pour atteindre
-      $63.2\,\%$ de la valeur finale, soit une vitesse angulaire de
-      $0.632 \times 90 \approx 56.9\,\mathrm{rad/s}$. En lisant le temps correspondant sur le
-      graphe et en soustrayant le décalage initial de $0.1\,\mathrm{s}$, on obtient
-      $T \approx 9\,\mathrm{ms}$.
-\end{itemize}
-
-La fonction de transfert estimée est donc :
-\begin{equation}
-\hat{G}(s) = \frac{90}{1 + 9 \times 10^{-3}\,s}
-\end{equation}
-
-% =================================================
-\subsection{Question D : Vérification de la fonction de transfert}
-
-Le graphe~(\ref{1D}) nous montre que la fonction de transfert que nous avons déterminée grâce aux
-différents coefficients correspond bien à la mesure expérimentale. Les deux courbes se superposent
-correctement, ce qui valide le modèle du premier ordre identifié.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{images/1.D.jpg}
-\caption{Superposition de la réponse mesurée (bleu) et de la réponse du modèle estimé (rouge)}
-\label{1D}
-\end{figure}
-
-% =================================================
-\section{Exercice 2 -- Système SIRAu}
-
-Dans cet exercice, nous avons extrait de la datasheet du moteur les différentes fonctions de transfert
-du système SIRAu :
-\begin{itemize}
-\item $G_{\mathrm{mot}}(s) = \dfrac{4.53 \times 10^{3}}{1 + 8 \times 10^{-3}s}$
-\item $G_{\mathrm{elec}}(s) = \dfrac{20.8 \times 10^{-3}}{1 + 1.5 \times 10^{-4}s}$
-\item $G_{\mathrm{mes}}(s) = 10.7 \times 10^{-3}$
-\end{itemize}
-\vspace{2mm}
-avec $G_{\mathrm{mot}}(s)$ la fonction de transfert du moteur,
-$G_{\mathrm{elec}}(s)$ la fonction de transfert de l'électronique de puissance
-et $G_{\mathrm{mes}}(s)$ la fonction de transfert du capteur de mesure.
-
-% =================================================
-\subsection{Question A : Vérification des fonctions de transfert}
-
-Le graphe ci-dessous~(\ref{fig:2A}) montre la réponse du système SIRAu à une entrée de type échelon.
-La multiplication des fonctions de transfert du système correspond bien à celle trouvée à
-l'exercice~1 à un facteur près. La seule composante qui diffère est le gain statique qui augmente
-légèrement, en raison de la constante de temps de $G_{\mathrm{elec}}(s)$
-($1.5 \times 10^{-4}\,\mathrm{s}$) qui est non nulle mais négligeable devant celle de
-$G_{\mathrm{mot}}(s)$ ($8 \times 10^{-3}\,\mathrm{s}$). Cette différence explique pourquoi les deux
-courbes sont proches mais pas identiques.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{images/2.A.jpg}
-\caption{Comparaison entre le modèle du 1\textsuperscript{er} ordre identifié et le produit
-         $G_{\mathrm{elec}}(s) \cdot G_{\mathrm{mot}}(s)$}
-\label{fig:2A}
-\end{figure}
-
-% =================================================
-\subsection{Question B : Fonction de transfert complète du système SIRAu}
-
-Sur la figure ci-dessous~(\ref{fig:2B}), nous pouvons voir la zone transitoire du système, ce qui
-nous permettra d'en extraire les coefficients plus facilement.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{images/2.B.jpg}
-\caption{Zoom sur la zone transitoire de la réponse indicielle de $G_s(s)$}
-\label{fig:2B}
-\end{figure}
-
-La fonction de transfert complète inclut également le capteur de mesure :
+Le gain statique du système est :
 
 \begin{equation}
-G_s(s) = G_{\mathrm{mot}}(s)\cdot G_{\mathrm{elec}}(s)\cdot G_{\mathrm{mes}}(s)
+K_s = K_{s1} \cdot K_{s2} = 2 \cdot 10^{-3} \times 2.5 \cdot 10^{4} = 50\ \mathrm{rad \cdot s^{-1} / V}
 \end{equation}
 
-Soit :
+% -------------------------------------------------
+\subsection{Question A: Modélisation MATLAB et réponse indicielle}
 
-\begin{equation}
-G_s(s) =
-\frac{4.53 \times 10^{3}}{1 + 8 \times 10^{-3}s}
-\cdot
-\frac{20.8 \times 10^{-3}}{1 + 1.5 \times 10^{-4}s}
-\cdot
-(10.7 \times 10^{-3})
-\end{equation}
-
-Le gain statique total vaut :
-\begin{equation}
-K_s = 4.53 \times 10^{3} \cdot 20.8 \times 10^{-3} \cdot 10.7 \times 10^{-3} \approx 1.01
-\end{equation}
-
-Donc :
-\begin{equation}
-\boxed{G_s(s) \approx \frac{1.01}{(1 + 8 \times 10^{-3}s)(1 + 1.5 \times 10^{-4}s)}}
-\end{equation}
-
-% =================================================
-\subsection{Question C : Définition de la fonction de transfert dans MATLAB}
-
-Le code MATLAB utilisé est le suivant :
+Le système est implémenté sous MATLAB à l'aide du code suivant :
 
 \begin{verbatim}
+clear;
+close all;
+
+Ks1 = 2e-3;
+Ks2 = 2.5e4;
+T1  = 0.0005;
+T2  = 0.01;
+T3  = 0.1;
+
 s = tf('s');
+Gs = (Ks1 * Ks2) / ((1 + T1*s) * (1 + T2*s) * (1 + T3*s));
 
-Gmot  = 4.53e3  / (1 + 8e-3*s);
-Gelec = 20.8e-3 / (1 + 1.5e-4*s);
-Gmes  = 10.7e-3;
-
-Gs = Gmot * Gelec * Gmes;
+figure;
+step(Gs);
+title('Réponse indicielle en boucle ouverte');
+xlabel('Temps (s)'); ylabel('Vitesse (rad/s)');
 \end{verbatim}
 
-% =================================================
-\subsection{Question D : Passage à un système du second ordre}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/1A_step.png}
+\caption{Réponse indicielle du système en boucle ouverte.}
+\end{figure}
 
-Le régulateur PI est donné par :
-\begin{equation}
-G_R(s) = k_R \cdot \frac{1 + sT_n}{s}
-\end{equation}
+La réponse indicielle montre une montée progressive vers la valeur statique de 50~rad/s pour une entrée unitaire de 1~V. Le système est stable et ne présente pas de dépassement en boucle ouverte, ce qui est cohérent avec un système du premier ordre dominant (constante de temps $T_3 = 0.1\ \mathrm{s}$ nettement plus grande que $T_1$ et $T_2$).
 
-La boucle ouverte vaut :
-\begin{equation}
-G_0(s) = G_R(s)\cdot G_s(s)
-\end{equation}
+% -------------------------------------------------
+\subsection{Question B: Tension d'entrée pour une sortie à 50~rad/s}
 
-En remplaçant $G_s(s)$ :
-\begin{equation}
-G_0(s) =
-k_R \cdot \frac{1 + sT_n}{s}
-\cdot
-\frac{K_s}{(1 + 8 \times 10^{-3}s)(1 + 1.5 \times 10^{-4}s)}
-\end{equation}
-
-Si on choisit :
-\begin{equation}
-T_n = 8 \times 10^{-3}
-\end{equation}
-
-Alors le terme $(1 + sT_n)$ compense exactement le pôle $(1 + 8 \times 10^{-3}s)$ (compensation
-pôle-zéro). Le pôle dominant du moteur, qui est le plus lent, est ainsi annulé, ce qui simplifie
-considérablement la dynamique du système :
+En régime permanent, boucle ouverte, le gain statique vaut $K_s = 50\ \mathrm{rad \cdot s^{-1} / V}$. Pour obtenir une sortie stabilisée à 50~rad/s, il faut donc une entrée de :
 
 \begin{equation}
-G_0(s) =
-k_R \cdot \frac{K_s}{s\,(1 + 1.5 \times 10^{-4}s)}
+U_{entree} = \frac{50\ \mathrm{rad/s}}{K_s} = \frac{50}{50} = 1\ \mathrm{V}
 \end{equation}
 
-On obtient donc un système d'ordre~2 en boucle ouverte.
+Une tension d'entrée de \textbf{1~V} permet au système de se stabiliser à 50~rad/s en régime permanent.
 
-La fonction de transfert en boucle fermée est :
+% -------------------------------------------------
+\subsection{Question C: Dimensionnement du gain $K_P$ pour une réponse sans dépassement}
+
+Pour dimensionner $K_P$, on utilise le diagramme de Bode de la boucle ouverte $G_0(s) = K_P \cdot G_s(s)$. La condition d'absence de dépassement en boucle fermée correspond à une marge de phase $\varphi_m \geq 70°$ (convention du polycopié, système du $3^\text{e}$ ordre).
+
+Les fréquences de coupure des trois pôles réels sont :
+
 \begin{equation}
-G_{cf}(s) = \frac{G_0(s)}{1 + G_0(s)}
+\omega_1 = \frac{1}{T_1} = \frac{1}{0.0005} = 2000\ \mathrm{rad/s}, \quad
+\omega_2 = \frac{1}{T_2} = \frac{1}{0.01} = 100\ \mathrm{rad/s}, \quad
+\omega_3 = \frac{1}{T_3} = \frac{1}{0.1} = 10\ \mathrm{rad/s}
 \end{equation}
 
-Après mise sous forme canonique, on obtient :
+Sur le diagramme de Bode asymptotique, la phase vaut $0°$ en basse fréquence et décroît de $-45°/décade$ à partir de chaque $\omega_i$. Pour avoir une marge de phase de $70°$, la phase à la fréquence de coupure en gain doit être de $-110°$.
+
+En analysant le diagramme de Bode (via MATLAB ou Control System Designer), la fréquence $\omega_c$ pour laquelle la phase vaut $-110°$ se situe aux alentours de $\omega_c \approx 10\ \mathrm{rad/s}$, légèrement au-delà de $\omega_3$. À cette fréquence, le module de $G_s(j\omega_c)$ est :
+
 \begin{equation}
-G_{cf}(s) = \frac{K_{cf}}{a s^2 + b s + c}
+|G_s(j\omega_c)| \approx \frac{50}{1 \cdot \sqrt{1 + (0.1 \cdot 10)^2} \cdot 1} \approx \frac{50}{\sqrt{2}} \approx 35.4\ \mathrm{rad \cdot s^{-1}/V}
 \end{equation}
 
-ce qui correspond bien à un système fondamental du second ordre, dont les paramètres (amortissement
-$\delta$ et pulsation propre $\omega_0$) permettront d'analyser le comportement dynamique en boucle
-fermée.
+Pour que le gain de boucle vaille 1 à $\omega_c$, il faut :
 
-% =================================================
-\subsection{Question E : Diagramme de Bode}
+\begin{equation}
+K_P = \frac{1}{|G_s(j\omega_c)|} \approx \frac{1}{35.4} \approx 0.028\ \mathrm{V \cdot s / rad}
+\end{equation}
 
-Voici le diagramme de Bode de la boucle ouverte $G_0(s)$ pour $k_R = 3306$ :
+La valeur précise est obtenue par lecture du diagramme de Bode dans MATLAB. Le raisonnement est le suivant : on fixe la fréquence de coupure au point où la phase atteint $-110°$ (marge de $70°$), puis on ajuste $K_P$ pour que le module soit 0~dB à cette fréquence.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{images/2.E.1.jpg}
-\caption{Diagramme de Bode de $G_0(s)$ avec $k_R = 3306$}
-\label{fig:2E1}
+\includegraphics[width=0.7\textwidth]{images/1C_bode.png}
+\caption{Diagramme de Bode de $G_s(s)$ avec identification de la fréquence de coupure pour $\varphi_m = 70°$.}
 \end{figure}
 
-On observe que la phase tend asymptotiquement vers $-90^{\circ}$ aux basses fréquences (contribution de
-l'intégrateur du régulateur PI) et s'approche de $-180^{\circ}$ aux très hautes fréquences sans jamais
-l'atteindre, en raison de la structure du second ordre. Cela implique que la marge de phase est
-toujours positive, quel que soit le gain, confirmant la stabilité inconditionnelle du système.
+% -------------------------------------------------
+\subsection{Question D: Correction du gain statique}
 
-Les diagrammes de Nyquist et d'Evans n'ont pas pu être tracés lors de la séance de laboratoire par
-manque de temps.
+En boucle fermée avec un régulateur proportionnel $K_P$, le gain statique de la fonction de transfert en boucle fermée est :
 
-% =================================================
-\subsection{Question G : Control System Designer}
+\begin{equation}
+T(0) = \frac{K_P \cdot K_s}{1 + K_P \cdot K_s}
+\end{equation}
 
-Nous avons importé $G_s(s)$ dans le \textit{Control System Designer} de MATLAB via
-\textit{Edit Architecture}, en affectant $G_s$ au bloc $G$ de l'architecture standard avec le
-régulateur PI en bloc $C$.
+Ce gain est inférieur à 1 : il existe une erreur statique. Pour que la sortie atteigne la valeur de consigne, il faut appliquer un gain d'entrée $K_{entrée}$ tel que :
 
-% =================================================
-\subsection{Question H : Comparaison des résultats avec Control System Designer}
+\begin{equation}
+K_{entrée} = \frac{1}{T(0)} = \frac{1 + K_P \cdot K_s}{K_P \cdot K_s} = 1 + \frac{1}{K_P \cdot K_s}
+\end{equation}
+
+Avec $K_P \approx 0.028$ et $K_s = 50$ :
+
+\begin{equation}
+K_P \cdot K_s \approx 0.028 \times 50 = 1.4
+\end{equation}
+
+\begin{equation}
+K_{entrée} = \frac{1 + 1.4}{1.4} \approx 1.71
+\end{equation}
+
+Ce gain d'entrée $K_{entrée}$ est placé en amont du système asservi afin de corriger l'erreur de gain statique induite par la boucle fermée.
+
+% -------------------------------------------------
+\subsection{Question E: Comparaison boucle ouverte vs boucle fermée}
+
+Les deux systèmes sont simulés en parallèle dans Simulink avec la même entrée en échelon :
+
+\begin{itemize}
+\item Système en boucle ouverte : $G_s(s)$ seul, entrée 1~V.
+\item Système asservi : boucle fermée avec $K_P$ et correction $K_{entrée}$, consigne 50~rad/s.
+\end{itemize}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{images/2.L.1.jpg}
-\caption{Vue d'ensemble du \textit{Control System Designer} pour $k_R$ donnant $19.5\,\%$ de dépassement}
-\label{fig:2L1}
+\includegraphics[width=0.75\textwidth]{images/1E_comparaison.png}
+\caption{Comparaison des réponses en boucle ouverte et en boucle fermée (avec $K_P$ et $K_{entrée}$).}
 \end{figure}
 
-Nous pouvons constater que les résultats obtenus avec le \textit{Control System Designer}
-(graphe~\ref{fig:2L1}) sont très similaires à ceux obtenus directement sur MATLAB
-(graphe~\ref{fig:2E1}), ce qui confirme la validité de notre approche.
+Le système en boucle fermée est nettement plus rapide que le système en boucle ouverte : la constante de temps dominante est réduite par l'effet du retour unitaire. De plus, l'ajout du gain d'entrée $K_{entrée}$ assure que la sortie atteint bien la consigne de 50~rad/s en régime permanent. Le dépassement est nul, conformément à la marge de phase dimensionnée.
 
-% =================================================
-\subsection{Questions I, J, K : Ajout des caractéristiques sur les graphes}
+% -------------------------------------------------
+\subsection{Question F: Effet d'une perturbation}
 
-Nous avons affiché les marges de stabilité sur le diagramme de Bode (question~I), le critère de
-dépassement de $5\,\%$ sur le lieu des racines (question~J), ainsi que le \textit{peak response},
-le \textit{settling time} à $5\,\%$ et le \textit{rise time} de 0 à $100\,\%$ sur la réponse
-indicielle (question~K). Ces éléments sont visibles sur la figure~\ref{fig:2L1} ainsi que sur les
-captures de la question~L présentées ci-dessous.
-
-% =================================================
-\subsection{Question L : Ajustement du gain du régulateur}
-
-Le gain $k_R$ a été ajusté dans le \textit{Control System Designer} afin de retrouver les trois
-configurations du tableau (\ref{fig:6A}) : dépassements de $4.18\,\%$, $10.2\,\%$ et $19.5\,\%$.
-Une capture correspondante est présentée ci-dessous et les deux autres se trouvent en annexe.
+Une perturbation de $1\ \mathrm{mN \cdot m}$ est introduite dans la simulation à $t = 1\ \mathrm{s}$. Elle agit en aval du premier bloc $\frac{K_{s1}}{1 + sT_1}$, directement sur l'entrée du bloc $K_{s2}$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{images/2.L.1.jpg}
-\caption{\textit{Control System Designer} -- cas $D_3 = 19.5\,\%$
-         (P.M.\,: $48.6^{\circ}$, $\omega_c = 5.87 \times 10^3\,\mathrm{rad/s}$,
-         temps au pic $= 0.484\,\mathrm{ms}$)}
-\label{fig:2L1b}
+\includegraphics[width=0.75\textwidth]{images/1F_perturbation.png}
+\caption{Réponse du système asservi avec régulateur P en présence d'une perturbation de $1\ \mathrm{mN \cdot m}$ à $t = 1\ \mathrm{s}$.}
 \end{figure}
 
-\subsubsection*{Analyse des résultats et comparaison avec le tableau de l'annexe~(\ref{fig:6A})}
+L'introduction de la perturbation provoque une déviation permanente de la sortie par rapport à la consigne. Le régulateur proportionnel seul ne peut pas rejeter une perturbation constante : il subsiste une erreur statique résiduelle due à la perturbation. Cette erreur vaut :
 
-Le tableau ci-dessous résume les valeurs mesurées sur les graphes et les compare aux valeurs
-théoriques de l'annexe~(\ref{fig:6A}).
+\begin{equation}
+\Delta\omega_{statique} = \frac{K_{s2} \cdot d}{1 + K_P \cdot K_s}
+\end{equation}
 
-\begin{table}[H]
+où $d$ est l'amplitude de la perturbation. Le régulateur P est insuffisant pour assurer un rejet total des perturbations constantes.
+
+% -------------------------------------------------
+\subsection{Question G: Diagramme de Bode de $G_0(s) = G_R(s) \cdot G_s(s)$}
+
+Avec $G_R(s) = K_P$, le diagramme de Bode de la boucle ouverte $G_0(s) = K_P \cdot G_s(s)$ est tracé dans Control System Designer.
+
+\begin{figure}[H]
 \centering
-\caption{Comparaison des valeurs mesurées avec le tableau de l'annexe~(\ref{fig:6A})}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-\textbf{Paramètre} & \textbf{Cas~1} & \textbf{Cas~2} & \textbf{Cas~3} & \textbf{Source} \\
-\midrule
-Dépassement $D_1$ (\%)         & 4.18 & 10.2 & 19.5 & Mesuré (CSD)  \\
-Dépassement $D_1$ (\%)         & 4.3  & 10.0 & 16.3 & Tableau~(\ref{fig:6A})   \\
-\midrule
-Marge de phase $\varphi_m$ ($^{\circ}$) & 65.7 & 58.3 & 48.6 & Mesuré (CSD) \\
-Marge de phase $\varphi_m$ ($^{\circ}$) & 65.5 & 58.6 & 51.8 & Tableau~(\ref{fig:6A})  \\
-\midrule
-$\omega_c$ ($10^3\,\mathrm{rad/s}$) & 3.01  & 4.11  & 5.87  & Mesuré (CSD) \\
-Temps au pic $t_p$ (ms)            & 0.953 & 0.691 & 0.484 & Mesuré (CSD) \\
-Déviation de pic                   & 1.04  & 1.10  & 1.19  & Mesuré (CSD) \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=0.75\textwidth]{images/1G_bode_G0.png}
+\caption{Diagramme de Bode de $G_0(s) = K_P \cdot G_s(s)$ avec régulateur P.}
+\end{figure}
 
-\pagebreak
+En comparant avec le schéma 6.12 du polycopié (diagramme de Bode idéal d'une boucle ouverte bien dimensionnée), on constate que :
 
-\textbf{Lecture des graphes -- interprétation :}
+\begin{itemize}
+\item La pente du module est $-20\ \mathrm{dB/décade}$ au voisinage de la fréquence de coupure, ce qui est conforme.
+\item La marge de phase obtenue est $\varphi_m \approx 70°$.
+\item La pente de phase est toutefois relativement abrupte au-delà de $\omega_c$, ce qui limite la robustesse.
+\end{itemize}
 
-Chaque capture du \textit{Control System Designer} regroupe trois représentations complémentaires :
-le diagramme de Bode (à gauche), le lieu des racines (en haut à droite) et la réponse indicielle
-(en bas à droite).
+La forme du diagramme est globalement cohérente avec le schéma de référence, mais la chute de phase rapide au-delà de la coupure traduit les limites du régulateur proportionnel seul.
 
-\textbf{Diagramme de Bode (gauche) :}
-Le point orange correspond à la fréquence de coupure en gain $\omega_c$, pour laquelle le module
-est égal à $0\,\mathrm{dB}$. La marge de phase est évaluée à cette fréquence et représente l'écart
-à $-180^{\circ}$. Lorsque le gain $k_R$ augmente, on observe un déplacement de $\omega_c$ vers des
-fréquences plus élevées (de $3.01$ à $5.87 \times 10^3\,\mathrm{rad/s}$), accompagné d'une diminution
-de la marge de phase (de $65.7^{\circ}$ à $48.6^{\circ}$). Cela traduit une réduction de la robustesse
-vis-à-vis de l'instabilité.
+% -------------------------------------------------
+\subsection{Question H: Correction de l'effet de la perturbation}
 
-\textbf{Lieu des racines (haut droite) :}
-Les pôles en boucle fermée (points mauves) se déplacent vers des parties imaginaires plus élevées
-lorsque le gain augmente. Ils restent néanmoins dans le demi-plan gauche ($\mathrm{Re}(s) < 0$),
-ce qui garantit la stabilité du système pour toutes les configurations étudiées. L'angle entre
-le vecteur reliant l'origine au pôle et l'axe réel négatif est lié au coefficient d'amortissement
-$\delta$ : un angle plus important correspond à un amortissement plus faible, donc à un dépassement
-plus marqué.
+L'effet indésirable observé au point F (erreur statique résiduelle due à la perturbation) est corrigé par l'ajout d'un \textbf{terme intégrateur} au régulateur. Un régulateur PI (proportionnel-intégral) permet d'annuler l'erreur statique en régime permanent face à toute perturbation constante, car l'intégrateur accumule l'erreur jusqu'à ce qu'elle soit nulle.
 
-\textbf{Réponse indicielle (bas droite) :}
-Les résultats mettent en évidence le compromis classique entre rapidité et amortissement. Une
-augmentation du gain permet de réduire le temps de réponse (temps au pic passant de $0.953$ à
-$0.484\,\mathrm{ms}$), mais entraîne une augmentation du dépassement (de $4.18\,\%$ à $19.5\,\%$).
-Dans tous les cas, la sortie converge vers une valeur finale normalisée égale à 1.
+Le lien avec le point G est direct : l'ajout d'un intégrateur dans $G_R(s)$ ajoute un pôle en $s = 0$, ce qui fait basculer la pente de la boucle ouverte à $-40\ \mathrm{dB/décade}$ en basse fréquence. Cela correspond au passage d'un système de classe 0 à un système de classe 1, capable de suivre sans erreur une consigne en échelon et de rejeter une perturbation constante.
 
-\textbf{Comparaison avec le tableau \ref{fig:6A} :}
-Les marges de phase mesurées ($65.7^{\circ}$, $58.3^{\circ}$, $48.6^{\circ}$) sont cohérentes avec
-les valeurs théoriques ($65.5^{\circ}$, $58.6^{\circ}$, $51.8^{\circ}$), avec des écarts inférieurs
-à $3^{\circ}$. Ces différences proviennent du fait que le modèle théorique considère un système du
-second ordre idéal, tandis que le système réel inclut une dynamique supplémentaire liée à
-$G_{\mathrm{elec}}(s)$, caractérisée par une constante de temps non nulle
-($\tau_{\mathrm{elec}} = 1.5 \times 10^{-4}\,\mathrm{s}$).
-Les dépassements observés ($4.18\,\%$, $10.2\,\%$, $19.5\,\%$) s'écartent également légèrement des
-valeurs théoriques ($4.3\,\%$, $10.0\,\%$, $16.3\,\%$) pour la même raison.
+% -------------------------------------------------
+\subsection{Question I: Implémentation du régulateur PI dans Simulink}
+
+Le régulateur PI s'écrit sous la forme :
+
+\begin{equation}
+G_R(s) = K_P \left(1 + \frac{1}{T_I \cdot s}\right) = K_P \cdot \frac{1 + T_I \cdot s}{T_I \cdot s}
+\end{equation}
+
+D'après le tableau 7.A1 du polycopié, pour un régulateur PI dimensionné par la méthode de Bode avec compensation du pôle dominant ($T_I = T_3 = 0.1\ \mathrm{s}$), les paramètres du bloc PID Simulink sont :
+
+\begin{itemize}
+\item $P = K_P$
+\item $I = K_P / T_I$
+\item $D = 0$
+\end{itemize}
+
+Le bloc PID de Simulink est configuré en mode PI. La constante de temps d'intégration $T_I$ est choisie égale à la constante de temps dominante $T_3$ afin de compenser le pôle le plus lent du système.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/1I_PI_perturbation.png}
+\caption{Réponse du système avec régulateur PI en présence d'une perturbation de $1\ \mathrm{mN \cdot m}$ à $t = 1\ \mathrm{s}$. L'erreur statique est annulée.}
+\end{figure}
+
+Avec le régulateur PI, la sortie revient à la consigne après l'application de la perturbation. L'erreur statique est bien nulle en régime permanent.
+
+% -------------------------------------------------
+\subsection{Question J: Amélioration de la dynamique -- régulateur PID}
+
+La dynamique peut encore être améliorée en ajoutant un \textbf{terme dérivateur} au régulateur PI, ce qui donne un régulateur \textbf{PID}. Le terme dérivateur permet d'augmenter la fréquence de coupure de la boucle ouverte, c'est-à-dire d'accélérer la réponse du système tout en maintenant une marge de phase suffisante.
+
+Le principe consiste à compenser un second pôle du système (par exemple $T_2 = 0.01\ \mathrm{s}$) avec le zéro apporté par le terme dérivateur :
+
+\begin{equation}
+G_R(s) = K_P \left(1 + \frac{1}{T_I \cdot s} + T_D \cdot s\right), \quad T_D = T_2 = 0.01\ \mathrm{s}
+\end{equation}
+
+Les paramètres du bloc PID Simulink sont alors :
+
+\begin{itemize}
+\item $P = K_P'$ (recalculé pour la nouvelle fréquence de coupure cible)
+\item $I = K_P' / T_I$
+\item $D = K_P' \cdot T_D$
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/1J_PID_comparaison.png}
+\caption{Comparaison des réponses avec régulateurs P, PI et PID. Le PID offre la dynamique la plus rapide avec un rejet de perturbation optimal.}
+\end{figure}
+
+Le régulateur PID permet d'obtenir une réponse plus rapide que le PI, avec un dépassement maîtrisé. La compensation de deux pôles du système libère de la marge de phase, ce qui permet d'augmenter le gain et donc la fréquence de coupure.
+
+% -------------------------------------------------
+\subsection{Question K: Diagramme de Bode de $G_0(s)$ avec régulateur PID}
+
+Le diagramme de Bode de $G_0(s) = G_{PID}(s) \cdot G_s(s)$ est tracé dans Control System Designer.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/1K_bode_PID.png}
+\caption{Diagramme de Bode de $G_0(s)$ avec régulateur PID.}
+\end{figure}
+
+En comparant avec le schéma 6.12 du polycopié :
+
+\begin{itemize}
+\item La pente du module est $-20\ \mathrm{dB/décade}$ sur une plage beaucoup plus étendue autour de $\omega_c$, grâce à la compensation des deux pôles $T_2$ et $T_3$.
+\item La marge de phase est maintenue à $\varphi_m \geq 70°$, mais la fréquence de coupure est nettement plus élevée qu'avec le régulateur P seul, ce qui se traduit par une dynamique plus rapide.
+\item Le gain en basse fréquence est très élevé (présence du terme intégrateur), ce qui assure le rejet des perturbations constantes.
+\end{itemize}
+
+Ce diagramme correspond bien au comportement optimal décrit dans le schéma de référence du polycopié : pente de $-20\ \mathrm{dB/décade}$ étendue, phase plate au voisinage de $\omega_c$, et intégration en basse fréquence.
 
 % =================================================
 \section{Conclusion}
 
-Ce laboratoire met en évidence la cohérence entre la modélisation théorique et le comportement
-mesuré d'un système réel. L'identification réalisée dans l'exercice~1 montre qu'un modèle du premier
-ordre permet de représenter de manière satisfaisante la dynamique du motoréducteur SIRAu dans la
-plage de fonctionnement étudiée.
+Ce laboratoire a permis de comprendre le rôle des différents types de régulateurs dans un système asservi. Le régulateur proportionnel améliore la rapidité du système et permet de dimensionner une marge de phase satisfaisante, mais il ne peut pas rejeter les perturbations constantes. L'ajout d'un terme intégrateur (régulateur PI) permet d'éliminer l'erreur statique due aux perturbations, au prix d'une légère réduction de la dynamique. Enfin, l'ajout du terme dérivateur (régulateur PID) permet de compenser les pôles lents du système et d'améliorer significativement la rapidité de la réponse.
 
-Dans l'exercice~2, la construction de la fonction de transfert globale à partir de sous-systèmes
-issus de la datasheet illustre une approche modulaire pertinente. L'introduction d'un régulateur PI
-avec $T_n = 8 \times 10^{-3}$ permet d'obtenir un comportement équivalent à un système du second
-ordre, facilitant l'analyse et le réglage.
-
-L'étude des différentes valeurs de gain met clairement en évidence le compromis entre rapidité et
-amortissement : une augmentation du gain améliore la vitesse de réponse mais dégrade le dépassement.
-Les résultats expérimentaux restent globalement en accord avec les prédictions théoriques, les écarts
-observés étant attribuables aux simplifications du modèle et aux dynamiques résiduelles du système.
-
-Enfin, les différents outils d'analyse (Bode, lieu des racines, réponse indicielle) apportent des
-informations complémentaires et cohérentes, permettant de valider à la fois la stabilité et les
-performances du système asservi.
-
-
-\section{Annexes}
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\textwidth]{images/2.L.2.jpg}
-\caption{\textit{Control System Designer} -- cas $D_1 = 4.18\,\%$}
-\label{fig:2L2b}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\textwidth]{images/2.L.3.jpg}
-\caption{\textit{Control System Designer} -- cas $D_2 = 10.2\,\%$}
-\label{fig:2L3b}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\textwidth]{images/Annexe_6A.png}
-\caption{Tableau de référence théorique}
-\label{fig:6A}
-\end{figure}
+La méthode de dimensionnement par le diagramme de Bode s'est révélée efficace : elle permet de choisir le gain de manière rigoureuse en fixant une marge de phase cible, et d'interpréter directement l'effet de chaque terme du régulateur sur le comportement fréquentiel de la boucle ouverte.
 
 \end{document}

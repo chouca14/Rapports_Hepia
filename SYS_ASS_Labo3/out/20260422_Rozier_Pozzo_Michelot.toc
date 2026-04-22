@@ -1,19 +1,15 @@
 \babel@toc {french}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {section}{\numberline {2}Exercice 1 -- Étude du système du premier ordre}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Question A : Équation du système}{2}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Question B : Représentation graphique réponse moteur DC}{2}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Question C : Lecture des caractéristiques}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Question D : Vérification de la fonction de transfert}{3}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Exercice 2 -- Système SIRAu}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Question A : Vérification des fonctions de transfert}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Question B : Fonction de transfert complète du système SIRAu}{5}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Question C : Définition de la fonction de transfert dans MATLAB}{6}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Question D : Passage à un système du second ordre}{6}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Question E : Diagramme de Bode}{7}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Question G : Control System Designer}{7}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Question H : Comparaison des résultats avec Control System Designer}{8}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Questions I, J, K : Ajout des caractéristiques sur les graphes}{8}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Question L : Ajustement du gain du régulateur}{8}{subsection.3.9}%
-\contentsline {section}{\numberline {4}Conclusion}{10}{section.4}%
-\contentsline {section}{\numberline {5}Annexes}{11}{section.5}%
+\contentsline {section}{\numberline {2}Exercice 1 -- Système d'entraînement électrique rotatif}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Question A: Modélisation MATLAB et réponse indicielle}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Question B: Tension d'entrée pour une sortie à 50~rad/s}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Question C: Dimensionnement du gain $K_P$ pour une réponse sans dépassement}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Question D: Correction du gain statique}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Question E: Comparaison boucle ouverte vs boucle fermée}{5}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Question F: Effet d'une perturbation}{6}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Question G: Diagramme de Bode de $G_0(s) = G_R(s) \cdot G_s(s)$}{7}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Question H: Correction de l'effet de la perturbation}{8}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Question I: Implémentation du régulateur PI dans Simulink}{9}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Question J: Amélioration de la dynamique -- régulateur PID}{10}{subsection.2.10}%
+\contentsline {subsection}{\numberline {2.11}Question K: Diagramme de Bode de $G_0(s)$ avec régulateur PID}{11}{subsection.2.11}%
+\contentsline {section}{\numberline {3}Conclusion}{12}{section.3}%
