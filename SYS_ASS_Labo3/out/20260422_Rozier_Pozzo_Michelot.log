@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  22 APR 2026 08:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  22 APR 2026 11:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -463,65 +463,87 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [2]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 189.
+(hyperref)                removing `math shift' on input line 197.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 189.
+(hyperref)                removing `subscript' on input line 197.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 189.
+(hyperref)                removing `math shift' on input line 197.
+
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:203: Missing $ inserted.
+<inserted text> 
+                $
+l.203 le rapport w_
+                   c / w_1 doit Ãªtre suppÃ©rieur Ã  4.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 191.
+LaTeX Warning: Command \^ invalid in math mode on input line 203.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 191.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+LaTeX Warning: Command \' invalid in math mode on input line 203.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+LaTeX Warning: Command \` invalid in math mode on input line 203.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
+LaTeX Warning: Command \' invalid in math mode on input line 204.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 201.
+LaTeX Warning: Command \` invalid in math mode on input line 205.
 
-Missing character: There is no ° in font cmr10!
+
+LaTeX Warning: Command \^ invalid in math mode on input line 206.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 207.
+
+Missing character: There is no ê in font cmr10!
 Missing character: There is no é in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 201.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 203.
+Missing character: There is no à in font cmr10!
+Missing character: There is no é in font cmr10!
+Missing character: There is no à in font cmr10!
+Missing character: There is no ê in font cmr10!
+Missing character: There is no é in font cmr10!
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:208: Missing $ inserted.
+<inserted text> 
+                $
+l.208 Cela nous donne un gain de $K_
+                                    P \approx 0.0555$. donnÃ©e directement p...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 203.
+Overfull \hbox (1010.64973pt too wide) in paragraph at lines 202--209
+[]\T1/cmr/m/n/10.95 D'après l'an-nexe 6.A, pour un dé-pas-se-ment nul, le rap-port w$[]\OML/cmm/m/it/10.95 =w[]doittresupprieur\OT1/cmr/m/n/10.95 4\OML/cmm/m/it/10.95 :Onregardelafrquencedecoupurew[]surlediagrammedebaudequiicicorresponda\OT1/cmr/m/n/10.95 100\OML/cmm/m/it/10.95 :ilnousfautdoncunw[]\OT1/cmr/m/n/10.95 25\OML/cmm/m/it/10.95 rad=squivatreobtenueenbougeantlacourbed[]amplitudejusqu[]aavoirunefrquencedecoupurede\OT1/cmr/m/n/10.95 25\OML/cmm/m/it/10.95 rad=s:Celanousdonneungainde$\T1/cmr/m/n/10.95 K$[] \OMS/cmsy/m/n/10.95 ^^Y
+ []
 
-Missing character: There is no ° in font cmr10!
+<images/1C_bode.jpg, id=44, 825.68475pt x 506.49225pt>
+File: images/1C_bode.jpg Graphic file (type jpg)
+<use images/1C_bode.jpg>
+Package pdftex.def Info: images/1C_bode.jpg  used on input line 213.
+(pdftex.def)             Requested size: 526.37598pt x 322.90965pt.
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 214.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 214.
+
+Missing character: There is no ° in font cmr9!
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 214.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 214.
+
+Missing character: There is no ° in font cmr9!
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 204.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 216.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -532,51 +554,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [3 <./images/1A_step.png>]
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+LaTeX Warning: Command \' invalid in math mode on input line 222.
 
+Missing character: There is no é in font cmr8!
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+LaTeX Warning: Command \' invalid in math mode on input line 225.
 
-Missing character: There is no ° in font cmr10!
+Missing character: There is no é in font cmr8!
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+LaTeX Warning: Command \' invalid in math mode on input line 228.
 
+Missing character: There is no é in font cmr8!
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 215.
+LaTeX Warning: Command \' invalid in math mode on input line 237.
 
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: File `images/1C_bode.png' not found on input line 219.
-
-
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:219: Package pdftex.def Error: File `images/1C_bode.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.219 ...[width=0.7\textwidth]{images/1C_bode.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
-
-Missing character: There is no ° in font cmr9!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 220.
-
-Missing character: There is no ° in font cmr9!
+Missing character: There is no é in font cmr8!
+<images/1E_sys.jpg, id=57, 1156.32pt x 650.43pt>
+File: images/1E_sys.jpg Graphic file (type jpg)
+<use images/1E_sys.jpg>
+Package pdftex.def Info: images/1E_sys.jpg  used on input line 242.
+(pdftex.def)             Requested size: 394.78198pt x 222.05635pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 230.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 245.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -585,84 +585,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
-[4]
-
-LaTeX Warning: Command \' invalid in math mode on input line 232.
-
-Missing character: There is no é in font cmr8!
-
-LaTeX Warning: Command \' invalid in math mode on input line 235.
-
-Missing character: There is no é in font cmr8!
-
-LaTeX Warning: Command \' invalid in math mode on input line 245.
-
-Missing character: There is no é in font cmr8!
-
-LaTeX Warning: Command \' invalid in math mode on input line 248.
-
-Missing character: There is no é in font cmr8!
-
-LaTeX Warning: Command \' invalid in math mode on input line 257.
-
-Missing character: There is no é in font cmr8!
-
-LaTeX Warning: File `images/1E_comparaison.png' not found on input line 262.
+[4 <./images/1C_bode.jpg>]
+<images/1E_graph.png, id=69, 570.933pt x 496.254pt>
+File: images/1E_graph.png Graphic file (type png)
+<use images/1E_graph.png>
+Package pdftex.def Info: images/1E_graph.png  used on input line 248.
+(pdftex.def)             Requested size: 394.78198pt x 343.1577pt.
 
 
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:262: Package pdftex.def Error: File `images/1E_comparaison.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.262 ....75\textwidth]{images/1E_comparaison.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 263.
+LaTeX Warning: Command \' invalid in math mode on input line 249.
 
 Missing character: There is no é in font cmr6!
 
-LaTeX Warning: Command \' invalid in math mode on input line 263.
+LaTeX Warning: Command \' invalid in math mode on input line 249.
 
 Missing character: There is no é in font cmr6!
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 265.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 20.94272pt, for example:
-(fancyhdr)                \setlength{\headheight}{20.94272pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
-
-[5]
-
-LaTeX Warning: Command \' invalid in math mode on input line 266.
+LaTeX Warning: Command \' invalid in math mode on input line 254.
 
 Missing character: There is no é in font cmr8!
-
-LaTeX Warning: File `images/1F_perturbation.png' not found on input line 275.
-
-
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:275: Package pdftex.def Error: File `images/1F_perturbation.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.275 ...75\textwidth]{images/1F_perturbation.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<images/1F_sys.jpg, id=70, 1156.32pt x 650.43pt>
+File: images/1F_sys.jpg Graphic file (type jpg)
+<use images/1F_sys.jpg>
+Package pdftex.def Info: images/1F_sys.jpg  used on input line 266.
+(pdftex.def)             Requested size: 394.78198pt x 222.05635pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 278.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 268.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -671,49 +620,45 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
-[6]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 288.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 288.
+[5 <./images/1E_sys.jpg> <./images/1E_graph.png (PNG copy)>]
+<images/1F_graph.png, id=77, 1060.9236pt x 575.2692pt>
+File: images/1F_graph.png Graphic file (type png)
+<use images/1F_graph.png>
+Package pdftex.def Info: images/1F_graph.png  used on input line 273.
+(pdftex.def)             Requested size: 394.78198pt x 214.06639pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 288.
+(hyperref)                removing `math shift' on input line 279.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cdot' on input line 288.
+(hyperref)                removing `subscript' on input line 279.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 288.
+(hyperref)                removing `subscript' on input line 279.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 288.
+(hyperref)                removing `\cdot' on input line 279.
 
 
-LaTeX Warning: File `images/1G_bode_G0.png' not found on input line 294.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 279.
 
 
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:294: Package pdftex.def Error: File `images/1G_bode_G0.png' not found: using draft setting.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 279.
 
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.294 ...th=0.75\textwidth]{images/1G_bode_G0.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<images/1G_Bode.jpg, id=78, 1156.32pt x 650.43pt>
+File: images/1G_Bode.jpg Graphic file (type jpg)
+<use images/1G_Bode.jpg>
+Package pdftex.def Info: images/1G_Bode.jpg  used on input line 285.
+(pdftex.def)             Requested size: 394.78198pt x 222.05635pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 297.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 287.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -722,25 +667,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
-[7]
+[6 <./images/1F_sys.jpg> <./images/1F_graph.png (PNG copy)>]
+<images/1H_Bode.jpg, id=88, 1156.32pt x 650.43pt>
+File: images/1H_Bode.jpg Graphic file (type jpg)
+<use images/1H_Bode.jpg>
+Package pdftex.def Info: images/1H_Bode.jpg  used on input line 298.
+(pdftex.def)             Requested size: 394.78198pt x 222.05635pt.
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 301.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
-LaTeX Warning: Command \' invalid in math mode on input line 301.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[7 <./images/1G_Bode.jpg>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 302.
 
 Missing character: There is no é in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 302.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 302.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \' invalid in math mode on input line 313.
-
-Missing character: There is no é in font cmr10!
+<images/1I_graph.png, id=97, 1060.9236pt x 576.7146pt>
+File: images/1I_graph.png Graphic file (type png)
+<use images/1I_graph.png>
+Package pdftex.def Info: images/1I_graph.png  used on input line 318.
+(pdftex.def)             Requested size: 394.78198pt x 214.60425pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 316.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 323.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -749,25 +706,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
-[8]
+[8 <./images/1H_Bode.jpg> <./images/1I_graph.png (PNG copy)>]
 
-LaTeX Warning: File `images/1I_PI_perturbation.png' not found on input line 336.
+LaTeX Warning: File `images/1J_PID_comparaison.png' not found on input line 338.
 
 
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:336: Package pdftex.def Error: File `images/1I_PI_perturbation.png' not found: using draft setting.
+c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:338: Package pdftex.def Error: File `images/1J_PID_comparaison.png' not found: using draft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.336 ...textwidth]{images/1I_PI_perturbation.png}
+l.338 ...textwidth]{images/1J_PID_comparaison.png}
                                                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 345.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 345.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 345.
+
+<images/1K2_bode.jpg, id=106, 1156.32pt x 650.43pt>
+File: images/1K2_bode.jpg Graphic file (type jpg)
+<use images/1K2_bode.jpg>
+Package pdftex.def Info: images/1K2_bode.jpg  used on input line 351.
+(pdftex.def)             Requested size: 394.78198pt x 222.05635pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 341.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 353.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -777,102 +751,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
 [9]
-
-LaTeX Warning: File `images/1J_PID_comparaison.png' not found on input line 363.
-
-
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:363: Package pdftex.def Error: File `images/1J_PID_comparaison.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.363 ...textwidth]{images/1J_PID_comparaison.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<images/schema_6.12.png, id=114, 814.54312pt x 606.76688pt>
+File: images/schema_6.12.png Graphic file (type png)
+<use images/schema_6.12.png>
+Package pdftex.def Info: images/schema_6.12.png  used on input line 367.
+(pdftex.def)             Requested size: 394.78198pt x 294.0779pt.
 File: images/hepia_simple.png Graphic file (type png)
 <use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 366.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 20.94272pt, for example:
-(fancyhdr)                \setlength{\headheight}{20.94272pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
-
-[10]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 370.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 370.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 370.
-
-
-LaTeX Warning: File `images/1K_bode_PID.png' not found on input line 376.
-
-
-c:/Users/miste/Rapports_Hepia/SYS_ASS_Labo3/20260422_Rozier_Pozzo_Michelot.tex:376: Package pdftex.def Error: File `images/1K_bode_PID.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.376 ...h=0.75\textwidth]{images/1K_bode_PID.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 379.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 20.94272pt, for example:
-(fancyhdr)                \setlength{\headheight}{20.94272pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
-
-[11]
-
-LaTeX Warning: Command \' invalid in math mode on input line 383.
-
-Missing character: There is no é in font cmr10!
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
-
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 384.
-
-Missing character: There is no ° in font cmr10!
-
-LaTeX Warning: Command \' invalid in math mode on input line 388.
-
-Missing character: There is no é in font cmr10!
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 395.
-(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 20.94272pt, for example:
-(fancyhdr)                \setlength{\headheight}{20.94272pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
-
-[12]
-File: images/hepia_simple.png Graphic file (type png)
-<use images/hepia_simple.png>
-Package pdftex.def Info: images/hepia_simple.png  used on input line 397.
+Package pdftex.def Info: images/hepia_simple.png  used on input line 370.
 (pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
 
 
@@ -882,7 +768,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
 
-[13] (c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
+[10 <./images/1K2_bode.jpg>]
+File: images/hepia_simple.png Graphic file (type png)
+<use images/hepia_simple.png>
+Package pdftex.def Info: images/hepia_simple.png  used on input line 371.
+(pdftex.def)             Requested size: 101.5777pt x 16.86269pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 20.94272pt, for example:
+(fancyhdr)                \setlength{\headheight}{20.94272pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-8.94272pt}.
+
+[11 <./images/schema_6.12.png>] (c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -898,17 +797,17 @@ Package rerunfilecheck Info: Checksums for `20260422_Rozier_Pozzo_Michelot.out':
 (rerunfilecheck)             After:  2E68BD8B0E6A75B2C1603DFB66127A33;4409.
  ) 
 Here is how much of TeX's memory you used:
- 13916 strings out of 474486
- 232454 string characters out of 5743755
+ 13801 strings out of 474486
+ 228146 string characters out of 5743755
  1936542 words of memory out of 5000000
- 35987 multiletter control sequences out of 15000+600000
- 571175 words of font info for 66 fonts, out of 8000000 for 9000
+ 35876 multiletter control sequences out of 15000+600000
+ 570834 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,79p,718b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfcc0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0800.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.pdf (13 pages, 412520 bytes).
+ 75i,16n,79p,718b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfcc0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0800.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti0900.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfti1095.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.pdf (11 pages, 1821259 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 224 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

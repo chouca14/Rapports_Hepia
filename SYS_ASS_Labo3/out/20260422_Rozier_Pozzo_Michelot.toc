@@ -5,11 +5,11 @@
 \contentsline {subsection}{\numberline {2.2}Question B: Tension d'entrée pour une sortie à 50~rad/s}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Question C: Dimensionnement du gain $K_P$ pour une réponse sans dépassement}{3}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Question D: Correction du gain statique}{4}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Question E: Comparaison boucle ouverte vs boucle fermée}{5}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.5}Question E: Comparaison boucle ouverte vs boucle fermée}{4}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Question F: Effet d'une perturbation}{6}{subsection.2.6}%
 \contentsline {subsection}{\numberline {2.7}Question G: Diagramme de Bode de $G_0(s) = G_R(s) \cdot G_s(s)$}{7}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Question H: Correction de l'effet de la perturbation}{8}{subsection.2.8}%
-\contentsline {subsection}{\numberline {2.9}Question I: Implémentation du régulateur PI dans Simulink}{9}{subsection.2.9}%
-\contentsline {subsection}{\numberline {2.10}Question J: Amélioration de la dynamique -- régulateur PID}{10}{subsection.2.10}%
-\contentsline {subsection}{\numberline {2.11}Question K: Diagramme de Bode de $G_0(s)$ avec régulateur PID}{11}{subsection.2.11}%
-\contentsline {section}{\numberline {3}Conclusion}{12}{section.3}%
+\contentsline {subsection}{\numberline {2.8}Question H: Correction de l'effet de la perturbation}{7}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Question I: Implémentation du régulateur PI dans Simulink}{8}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Question J: Amélioration de la dynamique -- régulateur PID}{9}{subsection.2.10}%
+\contentsline {subsection}{\numberline {2.11}Question K: Diagramme de Bode de $G_0(s)$ avec régulateur PID}{10}{subsection.2.11}%
+\contentsline {section}{\numberline {3}Conclusion}{10}{section.3}%
