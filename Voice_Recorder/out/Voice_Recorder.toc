@@ -1,0 +1,14 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}Contexte et objectif du projet}{1}{section.1}%
+\contentsline {section}{\numberline {2}Capteur utilisé}{1}{section.2}%
+\contentsline {section}{\numberline {3}Fonctionnalités principales}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Enregistrement audio}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Transcription audio vers texte}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Résumé automatique}{2}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Export et affichage du fichier Markdown}{2}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Historique des enregistrements}{2}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Bouton copier-coller}{2}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Fonctionnalités non abordées en cours}{2}{section.4}%
+\contentsline {section}{\numberline {5}Compatibilité et déploiement}{2}{section.5}%
+\contentsline {section}{\numberline {6}Répartition des tâches}{2}{section.6}%
+\contentsline {section}{\numberline {7}Références}{3}{section.7}%
