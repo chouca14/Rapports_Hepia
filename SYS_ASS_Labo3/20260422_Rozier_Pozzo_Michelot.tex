@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,5pt]{article}
 
 % ======================
 % Encoding and language
@@ -93,10 +93,8 @@ Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{M
 
 \end{center}
 
-\tableofcontents
 \setlength{\parskip}{10pt}
 
-\pagebreak
 
 % =================================================
 \section{Introduction}
@@ -141,7 +139,7 @@ Le gain statique du système est :
 \begin{equation}
 K_s = K_{s1} \cdot K_{s2} = 2 \cdot 10^{-3} \times 2.5 \cdot 10^{4} = 50\ \mathrm{rad \cdot s^{-1} / V}
 \end{equation}
-
+\pagebreak
 % -------------------------------------------------
 \subsection{Question A: Modélisation MATLAB et réponse indicielle}
 
@@ -168,7 +166,7 @@ xlabel('Temps (s)'); ylabel('Vitesse (rad/s)');
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{images/1A_step.png}%%%%%%%%%1A depuis MATLAB, 1A2 depuis simulink
+\includegraphics[width=0.9\textwidth]{images/1A_step.png}%%%%%%%%%1A depuis MATLAB, 1A2 depuis simulink
 \caption{Réponse indicielle du système en boucle ouverte.}
 \end{figure}
 
@@ -196,36 +194,45 @@ Une tension d'entrée de \textbf{1~V} permet au système de se stabiliser à 50~
 % -------------------------------------------------
 \subsection{Question C: Dimensionnement du gain $K_P$ pour une réponse sans dépassement}
 
-Pour dimensionner $K_P$, on utilise le diagramme de Bode grâce à control system designer
- en boucle fermée $G_{cf}(s) = K_P \cdot G_s(s)$. 
+D'après l'annexe 6.A, un dépassement nul, $D_1 = 0$, requiert 
+une marge de phase
+$\varphi_m \geq 76.3°$. Sur le diagramme de Bode de $G_s(s)$, 
+on identifie la fréquence
+de coupure grâce au point jaune sur le graphe, soit 
+$\omega_c \approx 25$~rad/s.
 
-D'après l'annexe 6.A, pour un dépassement nul,
-le rapport w_c / w_1 doit être suppérieur à 4.
-On regarde la fréquence de coupure w_c sur le diagramme de 
-baude qui ici correspond a 100. il nous faut donc un w_1 à 25 
-rad/s qui va être obtenue en bougeant la courbe d'amplitude 
-jusqu'a avoir une fréquence de coupure de 25 rad/s.
-Cela nous donne un gain de $K_P \approx 0.0555$. donnée directement par le bloc C du control system designer.
+Dans Control System Designer, on déplace la courbe de gain vers le bas jusqu'à ce qu'elle
+coupe l'axe 0~dB exactement à $\omega_c = 25$~rad/s. Cela revient à appliquer un gain
+proportionnel :
 
+\begin{equation}
+K_P = 0.0555
+\end{equation}
+
+La marge de phase résultante est $\varphi_m \approx 97°$, ce qui satisfait la condition
+sans dépassement.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{images/1C_bode.jpg}
-\caption{Diagramme de Bode de $G_s(s)$ avec identification de la fréquence de coupure pour $\varphi_m = 70°$.}
+\caption{Diagramme de Bode de $G_s(s)$ avec identification de la fréquence de coupure pour $\varphi_m \geq 76.3°$.}
+\label{fig:1C}
 \end{figure}
 
 % -------------------------------------------------
 \subsection{Question D: Correction du gain statique}
 
-on peut voir grâce à la step responde du control system designer que le gain statique de la boucle fermée est égal à 0.737.
+on peut voir grâce à la step response du control system designer que le gain statique de la boucle fermée est égal à 0.737 (valeur finale du graphe d'en bas a droite).
 
-Ce gain est inférieur à 1 : il existe une erreur statique. Pour que la sortie atteigne la valeur de consigne, il faut appliquer un gain d'entrée $K_{entrée}$ tel que :
+Ce gain est inférieur à 1 : il existe une erreur statique. Pour que la sortie atteigne la valeur de consigne, il faut appliquer un gain d'entrée de correction $K_{entrée}$ tel que :
 
 \begin{equation}
 K_{entrée} = 1/ output\_gain = 1/0.737 \approx 1.36
 \end{equation}
 
-Ce gain d'entrée $K_{entrée}$ est placé en amont du système asservi afin de corriger l'erreur de gain statique induite par la boucle fermée.
+Ce gain d'entrée $K_{entrée}$ est placé en amont du système (représenté sur la figure \ref{fig:1E_graph}) 
+asservi afin de corriger l'erreur de gain statique induite par 
+la boucle fermée.
 
 % -------------------------------------------------
 \subsection{Question E: Comparaison boucle ouverte vs boucle fermée}
@@ -240,6 +247,7 @@ Les deux systèmes sont simulés en parallèle dans Simulink avec la même entr�
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{images/1E_sys.jpg}
+\label{fig:1E_graph}
 \caption{Schéma Simulink comparant les systèmes en boucle ouverte et en boucle fermée.}
 \end{figure}
 
@@ -259,7 +267,7 @@ dimensionnée.
 % -------------------------------------------------
 \subsection{Question F: Effet d'une perturbation}
 
-Une perturbation de $1\ \mathrm{mN \cdot m}$ est introduite dans la simulation à $t = 1\ \mathrm{s}$. Elle agit en aval du premier bloc $\frac{K_{s1}}{1 + sT_1}$, directement sur l'entrée du bloc $K_{s2}$.
+Une perturbation de $1\ \mathrm{mN \cdot m}$ est introduite dans la simulation (bloc mis en évidense en jaune) à $t = 1\ \mathrm{s}$. Elle agit en aval du premier bloc $\frac{K_{s1}}{1 + sT_1}$, directement sur l'entrée du bloc $K_{s2}$.
 
 \begin{figure}[H]
 \centering
@@ -267,11 +275,15 @@ Une perturbation de $1\ \mathrm{mN \cdot m}$ est introduite dans la simulation �
 \caption{Réponse du système asservi avec régulateur P en présence d'une perturbation de $1\ \mathrm{mN \cdot m}$ à $t = 1\ \mathrm{s}$.}
 \end{figure}
 
-L'introduction de la perturbation provoque une déviation permanente de la sortie par rapport à la consigne. Le régulateur proportionnel seul ne peut pas rejeter une perturbation constante : il subsiste une erreur statique résiduelle due à la perturbation. Cette erreur vaut :
+L'introduction de la perturbation provoque une déviation permanente de la sortie par rapport à la consigne. Le régulateur proportionnel seul ne peut pas rejeter une perturbation constante : il subsiste une erreur statique résiduelle due à la perturbation. En régime permanent, l'erreur induite par une perturbation $d = 1\ \mathrm{mN \cdot m}$ injectée en aval de $K_{s1}/(1+sT_1)$ vaut :
+
+\begin{equation}
+e_\infty = \frac{K_{s2} \cdot d}{1 + K_P \cdot K_s} = \frac{2.5 \times 10^{4} \times 10^{-3}}{1 + 0.0555 \times 50} = \frac{25}{3.775} \approx 6.6\ \mathrm{rad/s}
+\end{equation}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{images/1F_graph.png}
-\caption{réponse}
+\caption{Réponse du système asservi avec régulateur P en présence de la perturbation à $t = 1\ \mathrm{s}$ : déviation permanente de $\approx 6.6\ \mathrm{rad/s}$.}
 \end{figure}
 Le régulateur P est insuffisant pour assurer un rejet total des perturbations constantes.
 
@@ -286,17 +298,27 @@ Avec $G_R(s) = K_P$, le diagramme de Bode de la boucle ouverte $G_0(s) = K_P \cd
 \caption{Diagramme de Bode de $G_0(s) = K_P \cdot G_s(s)$ avec régulateur P.}
 \end{figure}
 
-En comparant avec le schéma 6.12 du polycopié (diagramme de Bode idéal d'une boucle ouverte bien dimensionnée), on constate que la pente du diagramme de baude en amplitude commence a -1 et non pas à 0. pour commencer directement à -1 nous allons ajouter un intégrateur.
-
-% -------------------------------------------------
-\subsection{Question H: Correction de l'effet de la perturbation}
-
-L'effet indésirable observé au point F (erreur statique résiduelle due à la perturbation) est corrigé par l'ajout d'un \textbf{terme intégrateur} au régulateur. Un régulateur PI (proportionnel-intégral) permet d'annuler l'erreur statique en régime permanent face à toute perturbation constante, car l'intégrateur accumule l'erreur jusqu'à ce qu'elle soit nulle.
+En comparant avec le schéma 6.12 ci dessous (\ref{fig:6.12}), on constate que le diagramme de $G_0(s) = K_P \cdot G_s(s)$ ne correspond pas au profil idéal : la pente en basse fréquence est de $0\ \mathrm{dB/décade}$ (régulateur P pur, sans intégrateur), alors que le schéma 6.12 préconise une pente de $-20\ \mathrm{dB/décade}$ dès les basses fréquences afin d'assurer un gain infini en continu et donc un rejet parfait des perturbations constantes. C'est précisément la cause de l'erreur statique observée au point F.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{images/1H_Bode.jpg}
-\caption{diagramme PI}
+\includegraphics[width=0.75\textwidth]{images/schema_6.12.png}
+\label{fig:6.12}
+\caption{Schéma 6.12 : Profil idéal du diagramme de Bode pour un rejet parfait des perturbations constantes.}
+\end{figure}
+% -------------------------------------------------
+\subsection{Question H: Correction de l'effet de la perturbation}
+
+L'effet indésirable observé au point F (erreur statique résiduelle due à 
+la perturbation) est corrigé par l'ajout d'un \textbf{terme intégrateur} 
+au régulateur, ce qui correspond exactement à avoir dès le départ une pente de -20dB/décade comme préconisé au point G. Un régulateur PI (proportionnel-intégral) permet d'annuler 
+l'erreur statique en régime permanent face à toute perturbation constante, 
+car l'intégrateur accumule l'erreur jusqu'à ce qu'elle soit nulle.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/1H2_Bode.jpg}
+\caption{Diagramme de Bode de $G_0(s) = K_P \cdot G_s(s)$ avec régulateur PI.}
 \end{figure}
 
 Le lien avec le point G est direct : l'ajout d'un intégrateur dans $G_R(s)$ ajoute un pôle en $s = 0$, ce qui fait basculer la pente de la boucle ouverte à $-40\ \mathrm{dB/décade}$ en basse fréquence.
@@ -310,32 +332,44 @@ Le régulateur PI s'écrit sous la forme :
 G_R(s) = K_P \cdot \frac{1 + T_n \cdot s}{T_i \cdot s}
 \end{equation}
 
-la valeur de l'intégrateur I est donnée par l'ajout d'un intégrateur sur le diagramme de baude sur control system designer.
+Le zéro du régulateur est placé sur le pôle dominant du système : 
+$T_n = T_3 = 0.1\ \mathrm{s}$, ce qui compense le pôle le plus lent et 
+permet de conserver une marge de phase satisfaisante malgré l'ajout de 
+l'intégrateur. La constante d'intégration $T_i$ est déterminée via Control 
+System Designer en ajustant le pôle intégrateur pour maintenir 
+$\varphi_m \approx 75°$.\\
+Dans system constrol designer, le block C nous donne directement 
+$G_R(s)$ = 0.0515(s+10)/s ce qui en forme canonique correspond à :\\
+blablabla\\
+on peut donc en extraire Kp, Tn et Ti :\\
+blablabla\\
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{images/1I_graph.png}
-\caption{a}
+\includegraphics[width=1\textwidth]{images/1I_graph.png}
+\caption{Comparaison des réponses avec régulateurs P et PI. Le PI annule l'erreur statique après perturbation.}
 \end{figure}
 
-Avec le régulateur PI, la sortie revient à la consigne après l'application de la perturbation. L'erreur statique est bien nulle en régime permanent.
+Avec le régulateur PI (courbe rouge), la sortie revient à la consigne après l'application de la perturbation. L'erreur statique est bien nulle en régime permanent.
 
 % -------------------------------------------------
 \subsection{Question J: Amélioration de la dynamique -- régulateur PID}
 
 La dynamique peut encore être améliorée en ajoutant un \textbf{terme dérivateur} au régulateur PI, ce qui donne un régulateur \textbf{PID}. Le terme dérivateur permet d'augmenter la fréquence de coupure de la boucle ouverte, c'est-à-dire d'accélérer la réponse du système tout en maintenant une marge de phase suffisante.
 
-Le principe consiste à compenser un second pôle du système (par exemple $T_2 = 0.01\ \mathrm{s}$) avec le zéro apporté par le terme dérivateur :
+Le principe consiste à compenser un second pôle du système avec le zéro apporté par le terme dérivateur. On pose $T_n = T_3 = 0.1\ \mathrm{s}$ (compensation du pôle lent, déjà utilisé pour le PI) et $T_v = T_2 = 0.01\ \mathrm{s}$ (compensation du second pôle). La fonction de transfert du régulateur PID devient :
 
 \begin{equation}
-G_R(s) = K_P * \frac{(1+sTn)(1+sTv)}{s*Ti}
+G_R(s) = K_P \cdot \frac{(1 + s T_n)(1 + s T_v)}{s \cdot T_i}
 \end{equation}
+
+La compensation de $T_2$ libère de la marge de phase supplémentaire, ce qui permet d'augmenter $K_P$ et donc la fréquence de coupure de la boucle ouverte.
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{images/1J_PID_comparaison.png}
+\includegraphics[width=0.75\textwidth]{images/1J_simulink.jpg}
 \caption{Comparaison des réponses avec régulateurs P, PI et PID. Le PID offre la dynamique la plus rapide avec un rejet de perturbation optimal.}
 \end{figure}
 
@@ -348,24 +382,59 @@ Le diagramme de Bode de $G_0(s) = G_{PID}(s) \cdot G_s(s)$ est tracé dans Contr
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{images/1K2_bode.jpg}
+\includegraphics[width=1\textwidth]{images/1K3_bode.jpg}
 \caption{Diagramme de Bode de $G_0(s)$ avec régulateur PID.}
 \end{figure}
 
+La fonction de transfert donnée par Control System Designer est :\\
+$G_R(s) = 0.0102(s+10)(s+100)/s$\\
+ce qui sous la forme cannonique correspond à :\\
+blablabla\\
+
+
 En comparant avec le schéma 6.12 du polycopié :
+
+Avec le régulateur PID, la boucle ouverte $G_0(s)$ présente désormais un 
+profil proche de l'idéal : pente de $-20\ \mathrm{dB/décade}$ en basse 
+fréquence (grâce à l'intégrateur), passage à 0~dB avec une pente réduite
+ autour de $\omega_c$ (grâce aux deux zéros qui compensent $T_2$ et $T_3$). 
+ La marge de phase 
+ $\varphi_m \approx 76.3°$ est bien identifiable au passage à 0~dB, 
+ conformément au schéma 6.12. La fréquence de coupure est significativement 
+ plus élevée qu'avec le régulateur P ou PI, ce qui se traduit par une 
+ réponse temporelle plus rapide.
 
 % =================================================
 \section{Conclusion}
 
-Ce laboratoire a permis de comprendre le rôle des différents types de régulateurs dans un système asservi. Le régulateur proportionnel améliore la rapidité du système et permet de dimensionner une marge de phase satisfaisante, mais il ne peut pas rejeter les perturbations constantes. L'ajout d'un terme intégrateur (régulateur PI) permet d'éliminer l'erreur statique due aux perturbations, au prix d'une légère réduction de la dynamique. Enfin, l'ajout du terme dérivateur (régulateur PID) permet de compenser les pôles lents du système et d'améliorer significativement la rapidité de la réponse.
+Ce laboratoire a permis de comprendre le rôle des différents types de 
+régulateurs dans un système asservi. Le régulateur proportionnel améliore 
+la rapidité du système et permet de dimensionner une marge de phase 
+satisfaisante, mais il ne peut pas rejeter les perturbations constantes. 
+L'ajout d'un terme intégrateur (régulateur PI) permet d'éliminer 
+l'erreur statique due aux perturbations. 
+Enfin, l'ajout du terme dérivateur (régulateur PID) permet 
+de compenser les pôles lents du système et d'améliorer significativement la 
+rapidité de la réponse.
 
-La méthode de dimensionnement par le diagramme de Bode s'est révélée efficace : elle permet de choisir le gain de manière rigoureuse en fixant une marge de phase cible, et d'interpréter directement l'effet de chaque terme du régulateur sur le comportement fréquentiel de la boucle ouverte.
+La méthode de dimensionnement par le diagramme de Bode s'est révélée 
+efficace : elle permet de choisir le gain de manière rigoureuse en 
+fixant une marge de phase cible, et d'interpréter directement l'effet de 
+chaque terme du régulateur sur le comportement fréquentiel de la boucle 
+ouverte.
 
 \section*{Annexes}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{images/schema_6.12.png}
 \caption{Schéma de référence du polycopié 6.12.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/Annexe_6A.png}
+\label{fig:6.12}
+\caption{Annexe 6.A : Relation entre dépassement et marge de phase.}
 \end{figure}
 
 \end{document}
