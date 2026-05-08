@@ -205,7 +205,6 @@ INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
-INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0500.tfm
 INPUT .\images\1E_sys.jpg
 INPUT .\images\1E_sys.jpg
 INPUT .\images\1E_sys.jpg
@@ -304,14 +303,14 @@ INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
-INPUT .\images\schema_6.12.png
-INPUT .\images\schema_6.12.png
-INPUT .\images\schema_6.12.png
-INPUT .\images\schema_6.12.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
 INPUT .\images\hepia_simple.png
+INPUT .\images\schema_6.12.png
+INPUT .\images\schema_6.12.png
+INPUT .\images\schema_6.12.png
+INPUT .\images\schema_6.12.png
 INPUT .\images\Annexe_6A.png
 INPUT .\images\Annexe_6A.png
 INPUT .\images\Annexe_6A.png
@@ -328,8 +327,6 @@ INPUT c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Mich
 INPUT c:\Users\miste\Rapports_Hepia\SYS_ASS_Labo3\out\20260422_Rozier_Pozzo_Michelot.out
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
-INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
-INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
@@ -338,8 +335,6 @@ INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
-INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
-INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT C:\Users\miste\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
