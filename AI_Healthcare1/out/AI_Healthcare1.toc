@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Data}{1}{section.2}%
+\contentsline {section}{\numberline {3}Data Preparation and Methods}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Type correction}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Missing data}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Recoding and reshaping}{2}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Merging}{2}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Imputation}{2}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Correlation structure}{2}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}ATTENTION: PSA diagnostic performance}{3}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}ATTENTION: Principal Component Analysis}{3}{subsection.3.8}%
+\contentsline {section}{\numberline {4}Results}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Patient characteristics}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Missing data and correlation}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Merged dataset}{3}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}PSA at fixed cutoffs}{3}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}ROC analysis and optimal cutoff}{3}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Principal Component Analysis}{4}{subsection.4.6}%
+\contentsline {section}{\numberline {5}Conclusion}{4}{section.5}%
+\contentsline {section}{\numberline {6}annexe}{5}{section.6}%

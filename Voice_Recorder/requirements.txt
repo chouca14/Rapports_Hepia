@@ -1,0 +1,43 @@
+﻿# ============================================================
+#  requirements.txt — Voice Recorder AMC 2026
+#  Guilhem Rorier Vilardell — MT2 HEPIA
+#
+#  Versions figées depuis l'environnement .venv313 (Python 3.13)
+#
+#  Installation :
+#    pip install kivy[base] --extra-index-url https://kivy.org/downloads/simple/
+#    pip install -r requirements.txt
+#
+#  Note : kivy doit être installé en premier via l'index Kivy.
+#  Note Buildozer : dépendances Android déclarées dans buildozer.spec.
+# ============================================================
+
+# ── UI ───────────────────────────────────────────────────────
+kivy==2.3.1
+kivymd==1.2.0
+
+# ── Capteurs / périphériques ─────────────────────────────────
+plyer==2.1.0
+
+# ── Audio Windows ────────────────────────────────────────────
+sounddevice==0.4.7
+scipy==1.17.1
+numpy==2.4.4
+
+# ── Transcription ────────────────────────────────────────────
+SpeechRecognition==3.10.4
+
+# ── Résumé LLM ───────────────────────────────────────────────
+requests==2.33.1
+certifi==2026.4.22
+
+# ── Presse-papier ────────────────────────────────────────────
+pyperclip==1.9.0
+
+# ── Variables d'environnement ────────────────────────────────
+python-dotenv==1.0.1
+
+# ── Tests ────────────────────────────────────────────────────
+pytest==8.2.2
+
+reportlab==4.5.0

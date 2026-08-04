@@ -1,0 +1,84 @@
+<MainScreen>:
+
+    # Fond sombre
+    canvas.before:
+        Color:
+            rgba: 0.12, 0.12, 0.18, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "16dp"
+
+        # Titre
+        Label:
+            text: "Voice Recorder - Guilhem Rozier Vilardell"
+            font_size: "24sp"
+            bold: True
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: "48dp"
+
+        # Statut courant ("Prêt", "Parlez maintenant...", etc.)
+        Label:
+            id: label_status
+            text: "Prêt"
+            font_size: "16sp"
+            color: 0.6, 0.6, 0.6, 1
+            size_hint_y: None
+            height: "30dp"
+
+        # Bouton démarrer l'enregistrement
+        Button:
+            id: btn_start
+            text: "Start Recording"
+            font_size: "20sp"
+            size_hint_y: None
+            height: "70dp"
+            background_color: 0.2, 0.7, 0.3, 1
+            on_press: root.start_recording()
+
+        # Zone de transcription (scrollable)
+        # size_hint_y: 1 → prend tout l'espace disponible
+        ScrollView:
+            size_hint_y: 1
+            Label:
+                id: label_transcription
+                text: "La transcription apparaîtra ici..."
+                font_size: "18sp"
+                color: 0.9, 0.9, 0.9, 1
+                halign: "left"
+                valign: "top"
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding: "8dp", "8dp"
+
+        # Bouton résumer (désactivé tant qu'il n'y a pas de transcription)
+        Button:
+            id: btn_summarize
+            text: "Résumer"
+            font_size: "20sp"
+            size_hint_y: None
+            height: "70dp"
+            background_color: 0.2, 0.4, 0.9, 1
+            disabled: True
+            on_press: root.summarize()
+
+        # Zone résumé (scrollable)
+        ScrollView:
+            size_hint_y: 1
+            Label:
+                id: label_summary
+                text: "Le résumé apparaîtra ici..."
+                font_size: "18sp"
+                color: 0.75, 0.95, 0.75, 1
+                halign: "left"
+                valign: "top"
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding: "8dp", "8dp"

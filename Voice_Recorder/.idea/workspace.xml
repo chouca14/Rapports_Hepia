@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2fee5eec-41c7-41e8-b807-af96b9977a3b" name="Changes" comment="Ajout présentation sur Git">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;project_20986_bot_5e461a3fadae3e423b64b462cb4d7970&quot;,
+      &quot;fullname&quot;: &quot;PyCharm-AMC&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitedu.hesge.ch/amc/amc26/amc_discussions_rozier.git&quot;,
+    &quot;second&quot;: &quot;81ae8e1e-3e8f-48dd-813e-5e057aed48de&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="3DWjK3AR2alo2eTJDpoW1qfgsCc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.buildozer_automation_AMC2026_etu_v16.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/miste/Rapports_Hepia/Voice_Recorder&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miste\Rapports_Hepia\Voice_Recorder" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-7bb8055f9097-cbfc7b97e6b2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.28238.29" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2fee5eec-41c7-41e8-b807-af96b9977a3b" name="Changes" comment="" />
+      <created>1778404654716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778404654716</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Remise à zero du projet pour simplification">
+      <option name="closed" value="true" />
+      <created>1779371382078</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779371382078</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Remise à zero du projet pour simplification">
+      <option name="closed" value="true" />
+      <created>1779371868489</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779371868489</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Ecriture du README.md">
+      <option name="closed" value="true" />
+      <created>1779372463647</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779372463647</updated>
+    </task>
+    <task id="LOCAL-00004" summary="MAJ Journal de bord">
+      <option name="closed" value="true" />
+      <created>1779375685866</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779375685866</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Ajout sources README.md">
+      <option name="closed" value="true" />
+      <created>1779379506881</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779379506881</updated>
+    </task>
+    <task id="LOCAL-00006" summary="version 1 avec action start recording -&gt; enregistre audio -&gt; stop recording -&gt; affiche la transcription">
+      <option name="closed" value="true" />
+      <created>1779380248319</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1779380248319</updated>
+    </task>
+    <task id="LOCAL-00007" summary="MAJ journal de bord du jour et version enregistrement + retranscription avec 2 boutons fonctionnelle">
+      <option name="closed" value="true" />
+      <created>1779381142847</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1779381142847</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ajout du bouton résumer et de l'affichage du texte. création de la fonction résumé mais encore non fonctionelle, problèmes de connexion à l'API via dotenv">
+      <option name="closed" value="true" />
+      <created>1779717222060</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1779717222060</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ajout screen JOURNAL.md">
+      <option name="closed" value="true" />
+      <created>1779717450178</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779717450178</updated>
+    </task>
+    <task id="LOCAL-00010" summary="clé api fonctionnelle -&gt; changement du bloc de lecture de la clé">
+      <option name="closed" value="true" />
+      <created>1780330679742</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1780330679742</updated>
+    </task>
+    <task id="LOCAL-00011" summary="version android finale fonctionelle">
+      <option name="closed" value="true" />
+      <created>1781533287142</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1781533287142</updated>
+    </task>
+    <task id="LOCAL-00012" summary="rendu final Voice Recorder">
+      <option name="closed" value="true" />
+      <created>1781599179183</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1781599179183</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Ajout présentation sur Git">
+      <option name="closed" value="true" />
+      <created>1781604591593</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1781604591593</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Remise à zero du projet pour simplification" />
+    <MESSAGE value="Ecriture du README.md" />
+    <MESSAGE value="MAJ Journal de bord" />
+    <MESSAGE value="Ajout sources README.md" />
+    <MESSAGE value="version 1 avec action start recording -&gt; enregistre audio -&gt; stop recording -&gt; affiche la transcription" />
+    <MESSAGE value="MAJ journal de bord du jour et version enregistrement + retranscription avec 2 boutons fonctionnelle" />
+    <MESSAGE value="ajout du bouton résumer et de l'affichage du texte. création de la fonction résumé mais encore non fonctionelle, problèmes de connexion à l'API via dotenv" />
+    <MESSAGE value="ajout screen JOURNAL.md" />
+    <MESSAGE value="clé api fonctionnelle -&gt; changement du bloc de lecture de la clé" />
+    <MESSAGE value="version android finale fonctionelle" />
+    <MESSAGE value="rendu final Voice Recorder" />
+    <MESSAGE value="Ajout présentation sur Git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout présentation sur Git" />
+  </component>
+</project>

@@ -6,6 +6,7 @@
 \write18{mkdir -p build}
 \pdfoutput=1
 
+\usepackage{amsmath} % chargé avant txfonts (évite le clash \iint)
 \usepackage{txfonts}
 \usepackage{titlesec}
 \usepackage[utf8]{inputenc}
@@ -21,7 +22,8 @@
 \usepackage{setspace}
 \usepackage{caption}
 \usepackage{booktabs}
-\usepackage{amsmath} % pour les équations
+\renewcommand{\thefigure}{\Roman{figure}}
+\renewcommand{\thetable}{\Roman{table}}
 
 % MISE EN PAGE
 \geometry{a4paper, top=18mm, bottom=18mm, textwidth=185mm}
@@ -39,7 +41,7 @@
 \renewcommand{\footrulewidth}{0pt} %retire la ligne du bas
 \fancyhf{}
 \rhead{\includegraphics[scale=0.4]{Images/hepia_simple.png}} %ajoute le logo hepia
-\rfoot{\textit{\today}} % date en bas à droite
+\rfoot{\textit{10 juin 2026}} % date en bas à droite
 \cfoot{\thepage} %numéro de page
 
 \captionsetup{
@@ -50,17 +52,20 @@
 % NOMENCLATURE
 \makenomenclature
 \nomenclature{AFM}{Microscope à Force Atomique}
-\nomenclature{$R_a$}{Rugosité moyenne arithmétique}
-\nomenclature{$R_q$}{Rugosité RMS (écart-type)}
-\nomenclature{$R_{pv}$}{Peak-to-valley (écart max--min)}
-\nomenclature{PSPD}{Photodiode sensible à la position (4 quadrants)}
 \nomenclature{LFM}{Microscopie en force latérale (friction)}
-%\nomenclature{$$}{}
+\nomenclature{PSPD}{Photodiode sensible à la position (4 quadrants)}
+\nomenclature{HOPG}{Graphite pyrolytique hautement orienté}
+\nomenclature{$R_a$}{Rugosité moyenne arithmétique}
+\nomenclature{$R_q$}{Rugosité RMS (écart-type des hauteurs)}
+\nomenclature{$R_{pv}$}{Peak-to-valley (écart max--min)}
+\nomenclature{$R_z$}{Hauteur moyenne pic-vallée}
+\nomenclature{$R_{sk}$}{Asymétrie (skewness) de la distribution des hauteurs}
+\nomenclature{$R_{ku}$}{Aplatissement (kurtosis) de la distribution des hauteurs}
+\nomenclature{$p$}{Pas (période) du réseau de calibration}
 
 \begin{document} %début du document
- % l'accolade sert à laisser la mise en page en une seule colonne
+
 % TITRES, AUTEURS, ORGANISATION
-%
 \begin{center}
 \vspace*{0mm}
 {\large
@@ -69,17 +74,13 @@ Rapport de laboratoire\\
 Microscopie à Force Atomique (AFM)
 }\\
 \vspace{8mm}
-% ====================================================================
-% TODO : Remplacer par tes noms et emails
-% ====================================================================
 Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guilhem.roziervi@hes-so.ch}{MT2, guilhem.roziervi@hes-so.ch}}},
 Noah Michelot\footnote{\textit{\href{mailto:noah.michelot@hes-so.ch}{MT2, noah.michelot@hes-so.ch}}},
 Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{MT2, matteo.pozzodi@hes-so.ch}}}
-
 %
-\vspace{3mm}
+\vspace{3mm}\\
 \footnotesize{
-\textit{Haute école de paysagerie, d'ingénierie et d'architecture, Genève, Suisse}
+\textit{Haute école du paysage, d'ingénierie et d'architecture (hepia), Genève, Suisse}
 }\\
 \vspace{9mm}
 \end{center}
@@ -87,21 +88,16 @@ Mattéo Pozzo Di Borgo\footnote{\textit{\href{mailto:matteo.pozzodi@hes-so.ch}{M
 \rule{\linewidth}{0.4pt} % ligne horizontale
 \onehalfspacing
 \textbf{Abstract}\\
-% ====================================================================
-% TODO : Adapter l'abstract à tes propres résultats (valeurs numériques,
-% échantillons étudiés, modes utilisés). L'abstract ci-dessous est un
-% template basé sur le rapport de Proietto/Saura.
-% ====================================================================
-Ce rapport présente une étude de caractérisation de surfaces par microscope
-à force atomique (AFM) en mode contact. Trois échantillons ont été analysés :
-un wafer de silicium avec couche de SiO$_2$ (échantillon de calibration TGZ3),
-un wafer Si/Al déposé à 150\,°C, et un film mince polymère PS/PMMA (50/50)
-déposé par spin-coating. Les cartes topographiques ont été traitées avec le
-logiciel XEI afin d'extraire les indicateurs de rugosité ($R_a$, $R_q$,
-$R_{pv}$) et les dimensions caractéristiques des structures de surface.
-Les résultats montrent des rugosités allant de quelques dizaines de nanomètres
-à plusieurs micromètres selon l'échantillon.\\
-\noindent\textit{Mots-clés :} AFM, mode contact, rugosité, topographie, traitement d'image\\
+% ==== Abstract court : ce qu'on a fait / pourquoi / ce qu'on a obtenu / conclusion ====
+Trois échantillons --- un réseau de calibration, un film mince d'or et du graphite ---
+ont été caractérisés par microscopie à force atomique (AFM) en mode contact, afin de
+mesurer leur topographie de surface et d'en extraire les paramètres de rugosité. Le
+réseau a confirmé l'étalonnage latéral du scanner (pas mesuré $\approx 1{,}1\;\mu$m
+pour un pas nominal de $1\;\mu$m). Le film d'or présente une structure granulaire fine
+(grains $\approx 58$\,nm, $R_q\approx1{,}0$\,nm) et le graphite des terrasses
+atomiquement planes ($R_q\approx2{,}3$\,nm). L'AFM se confirme ainsi comme un outil
+métrologique tridimensionnel fiable à l'échelle nanométrique.\\
+\noindent\textit{Mots-clés :} AFM, mode contact, rugosité, topographie, réseau de calibration\\
 \rule{\linewidth}{0.4pt} % ligne horizontale
 
 \singlespacing
@@ -113,33 +109,25 @@ Les résultats montrent des rugosités allant de quelques dizaines de nanomètre
 \printnomenclature
 
 \setlength{\parskip}{1pt} % espace entre deux paragraphes
-
+\pagebreak
 % ====================================================================
 % INTRODUCTION
 % ====================================================================
 \section{Introduction}
 
-L'objectif de ce travail est de caractériser la topographie de surfaces
-à l'échelle nanométrique à l'aide d'un microscope à force atomique (AFM).
-L'AFM permet d'obtenir une information tridimensionnelle de la
-surface avec une résolution latérale de l'ordre de 2\,nm et une résolution
-verticale pouvant atteindre 0,1\,nm.
+L'objectif de ce travail est de caractériser la topographie de surfaces à
+l'échelle nanométrique à l'aide d'un microscope à force atomique (AFM). L'AFM fournit une information tridimensionnelle de la surface avec une résolution latérale de l'ordre de $2$\,nm et une résolution verticale pouvant atteindre $0{,}1$\,nm, soit bien au-delà de la limite de diffraction d'un microscope optique ($\sim 300$\,nm).
 
-% ====================================================================
-% TODO : Adapter les échantillons si les tiens diffèrent de ceux-ci.
-% ====================================================================
-Trois échantillons ont été étudiés :
+Trois échantillons ont été étudiés, tous \textbf{en mode contact} :
 \begin{itemize}
-    \item un échantillon de calibration TGZ3 (wafer Si + SiO$_2$,
-          marches de hauteur nominale connue) ;
-    \item un wafer de silicium avec couche d'aluminium déposée à 150\,°C ;
-    \item un film mince polymère PS/PMMA (50/50) déposé par spin-coating.
+    \item un \textbf{réseau de calibration} (pas nominal $1\;\mu$m), utilisé pour
+          vérifier l'étalonnage latéral et vertical du scanner avant toute mesure ;
+    \item un \textbf{film mince d'or} (matériau mou, structure granulaire) ;
+    \item du \textbf{graphite}, matériau
+          lamellaire présentant des étages atomiques.
 \end{itemize}
 
-Ce rapport décrit le principe de l'AFM en mode contact, la procédure
-expérimentale, les résultats obtenus après traitement d'image et une
-analyse des sources d'incertitudes.
-
+Ce rapport décrit le principe de l'AFM en mode contact (topographie et friction), la procédure expérimentale, les résultats obtenus après traitement d'image sous XEI, puis une discussion des sources d'incertitude et des limites de la mesure.
 
 % ====================================================================
 % THÉORIE
@@ -148,58 +136,69 @@ analyse des sources d'incertitudes.
 
 \subsection{Principe de l'AFM en mode contact}
 
-Le microscope à force atomique utilise un levier (cantilever) souple muni
-d'une pointe nanométrique pour sonder la surface d'un échantillon. Le
-levier, d'épaisseur typique $0{,}5$--$2\;\mu$m et de longueur $50$--$200\;\mu$m,
-est caractérisé par sa constante de raideur $k$ (de l'ordre de $0{,}1$--$10$\,N/m).
+Le microscope à force atomique utilise un levier souple
+muni d'une pointe nanométrique pour sonder la surface. Le levier, d'épaisseur typique $0{,}5$--$2\;\mu$m et de longueur $50$--$200\;\mu$m, est caractérisé par sa constante de raideur $k$ (de l'ordre de $0{,}1$--$10$\,N/m, soit $0{,}1$--$10$\,nN/nm).
 
-Le faisceau d'une diode superluminescente (SLD) est focalisé sur l'extrémité
-du levier. Le faisceau réfléchi est dirigé vers une photodiode à 4 quadrants
-(PSPD). Les signaux des quadrants permettent de mesurer :
+Le faisceau d'une diode est focalisé sur l'extrémité du levier ; le faisceau réfléchi est dirigé vers une photodiode à 4 quadrants. La combinaison des quadrants fournit deux signaux indépendants :
 \begin{itemize}
-    \item la déflection verticale du levier : signal $A - B = (1+2)-(3+4)$ ;
-    \item la torsion latérale (friction, LFM) : signal $C - D = (1+3)-(2+4)$.
+    \item la \textbf{déflexion verticale} du levier : $A-B = (1+2)-(3+4)$, qui
+          donne la topographie ;
+    \item la \textbf{torsion latérale} du levier : $C-D = (1+3)-(2+4)$, qui donne
+          le signal de friction (LFM).
 \end{itemize}
 
 \subsection{Mode à force constante}
 
-En mode contact à force constante, une boucle de contre-réaction (PID)
-ajuste en permanence la position $z$ du scanner piézoélectrique pour
-maintenir la déflection du levier --- et donc la force exercée sur
-l'échantillon --- constante. Le signal de commande envoyé au scanner $z$
-constitue le signal de topographie $z(x,y)$.
+En mode contact à force constante, une boucle d'asservissement (PID) ajuste en permanence la position $z$ du scanner piézoélectrique pour maintenir la déflexion du levier --- et donc la force exercée sur l'échantillon --- constante. La tension de commande envoyée au scanner $z$ constitue le signal de topographie $z(x,y)$, calibré en nm. Ce mode est préféré au mode à hauteur constante, qui risque de casser la pointe dès que les variations de surface deviennent importantes.
 
-% ====================================================================
-% TODO : Si tu veux, tu peux ajouter ici un schéma-bloc de
-% l'asservissement (figure du protocole, Figure 4). Sinon, supprime
-% le \begin{figure} ci-dessous.
-% ====================================================================
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/schema_AFM.png}
-%\caption{Schéma du système d'asservissement de l'AFM en mode contact.}
-%\label{fig:schema_afm}
-%\end{figure}
+\subsection{Signal de friction (LFM)}
+\label{sec:lfm}
+
+Le canal \textit{Lateral C--D} mesure la torsion du levier, proportionnelle à la
+force de friction entre la pointe et la surface. Contrairement à la topographie,
+cette force \textbf{change de signe avec la direction de balayage} : un même
+défaut apparaît clair à l'aller et sombre au retour. Comparer les images aller et retour permet donc d'isoler la contribution de friction de celle de la
+topographie. Le signal LFM est exprimé en mV (ou V) et exploité de manière \emph{qualitative}.
 
 \subsection{Paramètres de rugosité}
 
-La rugosité RMS (écart-type des hauteurs) est définie par :
-\begin{equation}
-    R_q = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N}(z_i - \bar{z})^2}
-    \label{eq:Rq}
-\end{equation}
+Les paramètres de rugosité sont extraits à partir de la carte de hauteur $z(x,y)$
+après correction de plan (Flatten). Tous s'appuient sur l'écart de chaque pixel par
+rapport à la hauteur moyenne de la région d'intérêt.
 
-La rugosité moyenne arithmétique :
-\begin{equation}
-    R_a = \frac{1}{N}\sum_{i=1}^{N}|z_i - \bar{z}|
-    \label{eq:Ra}
-\end{equation}
+\textbf{$R_a$ --- rugosité moyenne arithmétique.}
+Valeur moyenne des écarts absolus de hauteur par rapport au plan moyen. C'est le
+paramètre le plus courant : il donne une mesure simple et robuste de l'amplitude
+globale de la rugosité. Il est peu sensible aux pics ou creux isolés.
 
-L'écart peak-to-valley :
-\begin{equation}
-    R_{pv} = z_{\max} - z_{\min}
-    \label{eq:Rpv}
-\end{equation}
+\textbf{$R_q$ --- rugosité RMS.}
+Écart-type des hauteurs par rapport au plan moyen. Calculé comme la racine carrée
+de la moyenne des carrés des écarts, il est toujours légèrement supérieur à $R_a$ et
+pénalise davantage les valeurs extrêmes. C'est le paramètre le plus utilisé en métrologie AFM.
+
+\textbf{$R_{pv}$ --- peak-to-valley.}
+Différence entre la hauteur maximale et la hauteur minimale de la région d'intérêt.
+Il quantifie l'amplitude totale de la surface. Très sensible aux défauts ponctuels
+(débris, contamination) : un seul pixel aberrant peut le faire exploser.
+
+\textbf{$R_z$ --- hauteur moyenne pic-vallée.}
+Moyenne des hauteurs pic-vallée mesurées sur plusieurs sous-zones de l'image.
+Moins sensible aux valeurs extrêmes isolées que $R_{pv}$, il donne une estimation
+plus représentative de la corrugation typique de la surface.
+
+\textbf{$R_{sk}$ --- asymétrie (skewness).}
+Mesure la dissymétrie de la distribution des hauteurs autour de la valeur moyenne.
+Un $R_{sk}$ positif indique que la surface comporte davantage de pics au-dessus du
+plan moyen (pics isolés, contamination) ; un $R_{sk}$ négatif révèle plutôt des
+creux ou rayures. Une surface parfaitement symétrique donne $R_{sk}=0$.
+
+\textbf{$R_{ku}$ --- aplatissement (kurtosis).}
+Décrit l'étalement de la distribution des hauteurs : une valeur proche de 3
+correspond à une distribution gaussienne typique d'une surface aléatoire. Un
+$R_{ku}>3$ indique une distribution piquée avec des valeurs extrêmes fréquentes
+(surface à pics ou creux rares mais intenses) ; un $R_{ku}<3$ correspond à une
+distribution aplatie (surface plus homogène).
+
 
 % ====================================================================
 % DESCRIPTION DE L'EXPÉRIENCE
@@ -208,26 +207,24 @@ L'écart peak-to-valley :
 
 \subsection{Instrument}
 
-L'AFM utilisé est un Park Systems NX7. Le scanner XY a une plage maximale
-de $50\;\mu$m ($100\,\%$) et le scanner $z$ une plage de $7{,}5\;\mu$m
-($70\,\%$). Le levier utilisé est un Nanoworld CONTR (mode contact).
+L'AFM utilisé est un \textbf{Park Systems NX7}. Le scanner XY a une plage maximale
+de $50\;\mu$m et le scanner $z$ une plage de $7{,}5\;\mu$m. Le levier est un
+\textbf{Nanoworld CONTR} (mode contact). Les signaux acquis sont \textit{Z~Height}
+(topographie), \textit{Lateral C--D} (friction, LFM) et \textit{Error signal}.
 
 \subsection{Procédure}
 
-La procédure suivie est celle du protocole \textit{X'Press Manual} :
+La procédure suit le protocole \textit{X'Press Manual} :
 \begin{enumerate}
-    \item Alignement optique : positionnement du spot laser sur l'extrémité
-          du levier, centrage sur la PSPD ($A+B > 1$\,V).
-    \item Placement de l'échantillon sur le support magnétique.
-    \item Pré-positionnement de la tête à $\sim 1$\,mm de la surface.
-    \item Configuration : mode Contact, canaux Z Height, Lateral (C-D),
-          Error Signal. Flatten = Line, Data Saving = Raw.
-    \item Approche automatique.
-    \item Vérification du Trace Quality ($> 9{,}0$).
-    \item Acquisition de l'image (256$\times$256 pixels par défaut).
-    \item Traitement d'image sous XEI : correction de pente ligne par
-          ligne (flatten, ordre 1), mesure de profils, extraction des
-          rugosités.
+    \item placer l'échantillon dans la machine.
+    \item Pré-positionnement de la tête à $\sim 1$\,mm de la surface, puis approche
+          automatique.
+    \item Configuration : mode Contact ; \textit{Flatten = Line}, \textit{Data
+          Saving = Raw} ; scan rate $1$\,Hz ; gain $z$ $=1$.
+    \item Acquisition de l'image ($256\times256$ pixels).
+    \item Traitement sous XEI : correction de pente ligne par ligne
+          (\textit{flatten}, ordre 5), mesures de profils et extraction des
+          rugosités sur la région d'intérêt.
 \end{enumerate}
 
 % ====================================================================
@@ -235,229 +232,333 @@ La procédure suivie est celle du protocole \textit{X'Press Manual} :
 % ====================================================================
 \section{Résultats et analyse}
 
-\subsection{Échantillon 1 : calibration TGZ3}
+Les images sont présentées dans le texte ci-dessous ; des versions agrandies sont
+regroupées en annexe~\ref{ann:images}.
 
-% ====================================================================
-% TODO : Remplacer les images par les tiennes.
-% Mettre tes fichiers dans le dossier Images/ et adapter les noms.
-% ====================================================================
+% --------------------------------------------------------------------
+% ÉCH. 1 : RÉSEAU DE CALIBRATION
+% --------------------------------------------------------------------
+\subsection{Réseau de calibration (vérification de l'étalonnage)}
+\label{sec:grating}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech1_topo.png}
-%\caption{Image topographique de l'échantillon de calibration TGZ3
-%         ($10 \times 10\;\mu$m$^2$).}
-%\label{fig:ech1_topo}
-%\end{figure}
+Ce premier échantillon est un réseau périodique de pas nominal théorique de $1\;\mu$m. Son rôle
+est de \textbf{vérifier l'étalonnage du scanner} en X, Y et Z : si le pas mesuré
+coïncide avec $1\;\mu$m, le microscope est correctement calibré et les mesures
+ultérieures sont fiables. La topographie (figure~\ref{fig:grating_topo}) laisse
+apparaître le réseau périodique de grains, quelques débris en surépaisseur (grains
+blancs à fond plat) et des lignes de joints.
 
-L'image topographique de l'échantillon de calibration montre des marches
-périodiques gravées dans la couche de SiO$_2$. Une coupe perpendiculaire
-aux marches permet d'extraire les grandeurs suivantes :
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Images/grating_topo.png}
+\caption{Réseau de calibration --- topographie ($25\times25\;\mu$m$^2$).}
+\label{fig:grating_topo}
+\end{figure}
 
-% ====================================================================
-% TODO : Remplacer les valeurs ci-dessous par tes mesures réelles.
-% Les valeurs ici proviennent du rapport Proietto/Saura.
-% ====================================================================
-\begin{itemize}
-    \item Hauteur de marche : $531{,}2$\,nm
-    \item Période (distance entre deux phases montantes) : $3{,}283\;\mu$m
-\end{itemize}
+\paragraph{Mesure du pas.}
+Deux profils orthogonaux ont été tracés sur la zone périodique (axe X en rouge, axe Y
+en vert sur la figure~\ref{fig:grating_topo}). Le pas a été estimé par deux méthodes
+complémentaires : (i) une mesure manuelle sur les profils (graphe du dessus des
+figures~\ref{fig:grating_x} et~\ref{fig:grating_y}), en divisant la distance totale par
+le nombre de grains ; (ii) la transformée de Fourier de chaque profil (graphe du
+dessous), dont le pic fondamental donne directement le pas (tableau~\ref{tab:grating_pas}).
+Les valeurs obtenues sont de l'ordre de $1{,}1\;\mu$m pour un pas nominal de
+$1\;\mu$m, soit une erreur d'environ $10\,\%$. Une telle erreur est trop élevée
+pour un microscope AFM correctement exploité et ne permet donc pas de conclure à
+un étalonnage satisfaisant sur la base de cette seule mesure.
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech1_profil.png}
-%\caption{Profil de hauteur le long de la coupe rouge (échantillon 1).}
-%\label{fig:ech1_profil}
-%\end{figure}
+Cette différence provient probablement davantage de la méthode de mesure que d'un
+défaut réel du microscope. Les profils ont été tracés sur un nombre limité de
+grains et n'étaient pas parfaitement alignés avec les directions principales du
+réseau. Pour améliorer la précision, il aurait été préférable d'aligner les axes
+de mesure exactement selon les directions horizontale et verticale du réseau et de
+mesurer une distance couvrant un plus grand nombre de périodes. Par exemple, une
+mesure sur une vingtaine de grains consécutifs aurait permis de réduire
+significativement l'incertitude relative par rapport à une mesure effectuée sur
+seulement quelques grains.
 
-Les rugosités mesurées sur chaque plan sont résumées dans le
-tableau~\ref{tab:ech1_rugo}.
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/grating_profil_x.png}
+  \caption{Réseau --- profil X et spectre de puissance.}
+  \label{fig:grating_x}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/grating_profil_y.png}
+  \caption{Réseau --- profil Y et spectre de puissance.}
+  \label{fig:grating_y}
+\end{minipage}
+\end{figure}
 
-% ====================================================================
-% TODO : Remplacer par tes valeurs.
-% ====================================================================
 \begin{table}[H]
 \centering
-\caption{Rugosité de l'échantillon de calibration TGZ3.}
-\label{tab:ech1_rugo}
-\begin{tabular}{lcc}
+\caption{Pas mesuré et statistiques des profils du réseau.}
+\label{tab:grating_pas}
+\footnotesize
+\begin{tabular}{lccccc}
 \toprule
- & Plan inférieur & Plan supérieur \\
+Profil & Pas $p$ (FFT) & $R_{pv}$ / nm & $R_q$ / nm & $R_a$ / nm & $R_z$ / nm \\
 \midrule
-$R_a$ / nm & 28{,}3 & 33{,}0 \\
-$R_q$ / nm & 33{,}5 & 39{,}9 \\
+X (horizontal) & $\approx 1{,}25\;\mu$m & $139{,}8$ & $40{,}6$ & $34{,}9$ & --- \\
+Y (vertical)   & $\approx 1{,}0\;\mu$m  & $126{,}8$ & $37{,}3$ & $33{,}3$ & $101{,}8$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-% ====================================================================
-% TODO : Commenter la cohérence avec la valeur nominale de la TGZ3
-% (hauteur de marche nominale = 518 nm ± 5 nm selon le fabricant MikroMasch).
-% Si ta valeur mesurée diffère, discuter l'écart.
-% ====================================================================
+Le pas moyen mesuré ($\approx 1{,}1\;\mu$m, X et Y confondus) est compatible avec la
+valeur nominale de $1\;\mu$m, à $\sim 10$--$25\,\%$ près. On conclut que
+\textbf{l'étalonnage latéral du scanner est correct} dans la limite de cette précision.
 
-\subsection{Échantillon 2 : Si/Al déposé à 150\,°C}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/grating_lfm.png}
+\caption{Réseau --- friction (\textit{Lateral C--D}), aller/retour.}
+\label{fig:grating_lfm}
+\end{figure}
 
-% ====================================================================
-% TODO : Remplacer les images et les valeurs.
-% ATTENTION : dans le rapport Proietto/Saura, les rugosités sont en mV
-% et non en nm, ce qui est probablement une erreur de calibration ou
-% d'unité dans XEI. Vérifier dans tes mesures que les unités sont
-% bien en nm ou µm, PAS en mV.
-% ====================================================================
+% --------------------------------------------------------------------
+% ÉCH. 2 : OR
+% --------------------------------------------------------------------
+\subsection{Film mince d'or}
+\label{sec:or}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech2_topo.png}
-%\caption{Image topographique de l'échantillon Si/Al
-%         ($5 \times 5\;\mu$m$^2$).}
-%\label{fig:ech2_topo}
-%\end{figure}
+L'or est un matériau mou : la pointe peut localement déformer ou rayer la surface
+en mode contact. L'échantillon a d'abord été imagé sur $5\times5\;\mu$m$^2$, puis un
+zoom propre de $1\times1\;\mu$m$^2$ a été réalisé pour caractériser la structure
+granulaire. Sur l'image $5\times5\;\mu$m$^2$ (figure~\ref{fig:or_5um}), le fond
+granulaire est fin et très plat ; quelques taches brillantes (jusqu'à $\sim 79$\,nm) et deux rayures dominent
+l'image. Ces taches ne correspondent probablement pas à une contamination
+déposée en surface mais à d'autres matériaux introduits lors de la fabrication du film mince. En effet si le spottering arrache trop de matière, des particules peuvent être projetées sur la surface du film. Ces taches sont des défauts ponctuels qui faussent les statistiques de rugosité : elles font exploser $R_{pv}$ et $R_{sk}$, donnant une impression de surface très rugueuse alors que le film lui-même est en réalité très plat. En zoomant sur une zone exempte de ces défauts (figure~\ref{fig:or_1um}), on observe une structure granulaire fine, typique d'un film mince d'or, avec une rugosité beaucoup plus faible ($R_q\approx1{,}0$\,nm).
 
-L'image topographique révèle une surface granulaire avec des îlots
-d'oxyde en surépaisseur. Les zones claires correspondent aux sommets
-des grains, les zones sombres aux creux entre les grains.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Images/or_topo_5um.png}
+\caption{Or --- topographie ($5\times5\;\mu$m$^2$).}
+\label{fig:or_5um}
+\end{figure}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech2_profil.png}
-%\caption{Profil de hauteur le long de la coupe (échantillon 2).}
-%\label{fig:ech2_profil}
-%\end{figure}
+\paragraph{Origine des taches blanches.}
+Les zones blanches observées sur l'image topographique proviennent vraisemblablement
+de la méthode de dépôt utilisée pour réaliser le film mince. Lors du procédé de
+sputtering, si trop de matière est arrachée à la cible, des particules ou des
+espèces autres que l'or peuvent être projetées puis incorporées localement à la
+surface du film. Les taches observées correspondent donc probablement à des
+inclusions d'autres matériaux ou à des défauts issus du procédé de fabrication,
+plutôt qu'à la morphologie intrinsèque du film d'or. Ces défauts ponctuels influencent fortement les paramètres de rugosité. En
+particulier, ils augmentent artificiellement la différence pic-vallée $R_{pv}$ ainsi que l'asymétrie de la distribution des hauteurs $R_{sk}$, donnant l'impression d'une surface très rugueuse alors que le film lui-même est en réalité relativement plat. En zoomant sur une zone exempte de ces défauts
+(figure~\ref{fig:or_1um}), on observe une structure granulaire fine, caractéristique d'un film mince d'or, avec une rugosité beaucoup plus faible ($R_q \approx 1.0$\,nm).
 
-% ====================================================================
-% TODO : Remplacer ces valeurs. Vérifier les UNITÉS (nm, pas mV !).
-% ====================================================================
-Les paramètres de rugosité pour une zone de $5 \times 5\;\mu$m$^2$ :
-\begin{itemize}
-    \item $R_a = $ \textbf{[À COMPLÉTER]} nm
-    \item $R_q = $ \textbf{[À COMPLÉTER]} nm
-    \item $R_{pv} = $ \textbf{[À COMPLÉTER]} nm
-\end{itemize}
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/or_topo_1um.png}
+  \caption{Or --- zoom ($1\times1\;\mu$m$^2$).}
+  \label{fig:or_1um}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/or_3d.png}
+  \caption{Or --- vue 3D ($1\times1\;\mu$m$^2$).}
+  \label{fig:or_3d_zoom}
+\end{minipage}
+\end{figure}
 
-% ====================================================================
-% TODO : Si tu as fait des mesures de taille de grain, les ajouter ici.
-% ====================================================================
-
-
-\subsection{Échantillon 3 : film PS/PMMA}
-
-% ====================================================================
-% TODO : Adapter le mode de mesure utilisé. Dans le rapport Proietto,
-% c'est un mode "force constante" avec indentation pixel par pixel
-% (probablement PinPoint ou Force Volume). Vérifier quel mode tu as
-% utilisé et adapter le texte.
-% ====================================================================
-
-Pour cet échantillon polymère, un mode d'acquisition par indentation
-ponctuelle a été utilisé : la pointe s'arrête à chaque pixel, pénètre
-la surface, puis avance au point suivant. Cela permet d'obtenir
-simultanément la topographie et une carte d'adhésion.
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech3_topo.png}
-%\caption{Image topographique du film PS/PMMA
-%         ($30 \times 30\;\mu$m$^2$).}
-%\label{fig:ech3_topo}
-%\end{figure}
-
-L'image topographique met en évidence une craquelure traversant la zone
-observée, ainsi que des amas de polystyrène en surface (zones blanchâtres).
-
-% ====================================================================
-% TODO : Remplacer par tes valeurs mesurées.
-% ====================================================================
+La structure granulaire est résolue ; cette zone, exempte de gros débris, reflète la
+rugosité réelle du film. On pourrait penser, en regardant les images, qu'il y a de gros
+grains d'or --- même en 3D certains grains paraissent énormes. Cependant, en les
+caractérisant via le profil en travers d'un grain (figure~\ref{fig:or_grain}), on
+constate qu'ils sont en réalité très larges ($\approx 58$\,nm) mais très plats
+($\approx 3$\,nm d'amplitude), ce qui correspond à une structure granulaire fine et
+plate, typique d'un film mince d'or. Ils ne sont donc pas si grands.
 
 \begin{table}[H]
 \centering
-\caption{Rugosité du film PS/PMMA ($30 \times 30\;\mu$m$^2$).}
-\label{tab:ech3_rugo}
-\begin{tabular}{lccc}
+\caption{Statistiques de hauteur du film d'or (en nm).}
+\label{tab:or_topo}
+\footnotesize
+\begin{tabular}{lcccccccc}
 \toprule
-Zone & $R_a$ / $\mu$m & $R_q$ / $\mu$m & $R_{pv}$ / $\mu$m \\
+Zone & Min & Max & $R_{pv}$ & $R_q$ & $R_a$ & $R_z$ & $R_{sk}$ & $R_{ku}$ \\
 \midrule
-Sans craquelure & 0{,}203 & 0{,}267 & 1{,}729 \\
-Avec craquelure & 0{,}563 & 0{,}657 & 2{,}399 \\
+$5\times5\;\mu$m$^2$ & $-10{,}9$ & $78{,}9$ & $89{,}8$ & $4{,}34$ & $1{,}68$ & $82{,}6$ & $8{,}93$ & $107{,}1$ \\
+$1\times1\;\mu$m$^2$ & $-3{,}10$ & $7{,}04$ & $10{,}1$ & $1{,}04$ & $0{,}77$ & $9{,}85$ & $1{,}27$ & $8{,}42$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-La craquelure augmente significativement les paramètres de rugosité :
-$R_q$ passe de $0{,}267$ à $0{,}657\;\mu$m (facteur $\times 2{,}5$) et
-$R_{pv}$ de $1{,}729$ à $2{,}399\;\mu$m. L'écart de force d'adhésion
-entre les domaines PS et PMMA est d'environ 100\,nN, mettant en évidence
-le contraste chimique entre les deux polymères.
+\paragraph{Interprétation des statistiques.}
+Sur l'image $5\times5\;\mu$m$^2$, les statistiques sont \emph{anormalement élevées} :
+la distribution des hauteurs est extrêmement piquée et asymétrique, car dominée par
+quelques particules hautes, autrement dit les imperfections de l'échantillon. Ces
+paramètres \textbf{ne reflètent donc pas la rugosité du film} mais la présence de
+contaminants. L'image zoomée de $1\times1\;\mu$m$^2$ donne une mesure sans imperfections,
+plus représentative : $R_q\approx1{,}0$\,nm, $R_a\approx0{,}8$\,nm. C'est cette valeur
+qu'il faut retenir pour le film. Il est en outre intéressant de constater qu'à l'échelle
+du micromètre on voit apparaître les grains d'or.
+
+\paragraph{Taille de grain.}
+La taille d'un des « gros » grains (entouré en rouge sur la figure~\ref{fig:or_1um}) a
+été mesurée. Ses caractéristiques dimensionnelles (figure~\ref{fig:or_grain}) donnent
+une largeur $\Delta X \approx 58$\,nm pour une amplitude verticale $\Delta Z \approx 3$\,nm.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/or_grain_1um.png}
+\caption{Or --- profil en travers d'un grain.}
+\label{fig:or_grain}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/or_lfm.png}
+\caption{Or --- friction (\textit{Lateral C--D}), aller/retour.}
+\label{fig:or_lfm}
+\end{figure}
+
+% --------------------------------------------------------------------
+% ÉCH. 3 : GRAPHITE
+% --------------------------------------------------------------------
+\subsection{Graphite}
+\label{sec:graphite}
+
+Le graphite (graphite pyrolytique hautement orienté, HOPG) est un matériau lamellaire :
+sa structure cristalline est constituée de plans de graphène empilés, faiblement liés
+entre eux par des forces de van der Waals. Sa surface présente donc des terrasses
+atomiquement planes séparées par des marches.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Images/graphite_topo.png}
+\caption{Graphite --- topographie ($10\times10\;\mu$m$^2$).}
+\label{fig:graphite_topo}
+\end{figure}
+
+La distribution des hauteurs est quasi symétrique ($R_{sk}\approx0$) et proche
+d'une gaussienne ($R_{ku}=2{,}8$), ce qui est cohérent avec une surface en
+terrasses planes. Le $R_q=2{,}3$\,nm sur $10\times10\;\mu$m$^2$ intègre plusieurs
+marches successives (tableau~\ref{tab:graphite}).
+
+\begin{table}[H]
+\centering
+\caption{Statistiques du graphite : topographie (nm) et friction (mV).}
+\label{tab:graphite}
+\footnotesize
+\begin{tabular}{llccccccc}
+\toprule
+Signal & Unité & Min & Max & $R_{pv}$ & $R_q$ & $R_a$ & $R_{sk}$ & $R_{ku}$ \\
+\midrule
+\textit{Z~Height} (topo.)       & nm & $-8{,}6$  & $7{,}7$  & $16{,}3$  & $2{,}28$  & $1{,}85$  & $-0{,}06$ & $2{,}77$ \\
+\textit{Lateral C--D} (frict.)  & mV & $-432{,}2$ & $86{,}5$ & $518{,}7$ & $40{,}8$  & $29{,}8$  & $-1{,}98$ & $9{,}41$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Friction aux bords de marche.}
+C'est le seul échantillon pour lequel le signal de friction
+(figure~\ref{fig:graphite_lfm}) apporte une information marquante : il souligne
+nettement les bords de marche, qui apparaissent sombres au retour et clairs à l'aller.
+Cette inversion confirme qu'il s'agit bien d'un signal de friction et non d'un artefact
+topographique (§\ref{sec:lfm}) : la pointe « bute » sur chaque marche montante, d'où un
+pic de force latérale localisé sur le contour. Les signaux de friction des deux autres
+échantillons (figures~\ref{fig:grating_lfm} et~\ref{fig:or_lfm}) ne présentent pas ce
+contraste marqué.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/graphite_lfm.png}
+\caption{Graphite --- friction (\textit{Lateral C--D}), aller/retour.}
+\label{fig:graphite_lfm}
+\end{figure}
+
+\paragraph{Hauteur de marche.}
+Aucun profil de marche atomique n'a été mesuré sur nos images. À titre de référence,
+la hauteur d'un plan de graphène vaut $0{,}335$\,nm dans la littérature. Une mesure de
+profil en travers d'une marche permettrait d'extraire cette hauteur et de la comparer
+à la valeur théorique.
 
 % ====================================================================
-% TODO : Si tu as une image de la carte d'adhésion, l'ajouter ici.
-% ====================================================================
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=\linewidth]{Images/ech3_adhesion.png}
-%\caption{Carte d'adhésion du film PS/PMMA.}
-%\label{fig:ech3_adhesion}
-%\end{figure}
-
-
-% ====================================================================
-% DISCUSSION / SOURCES D'INCERTITUDE
+% DISCUSSION
 % ====================================================================
 \section{Discussion}
 
-% ====================================================================
-% TODO : Adapter cette section à tes observations réelles.
-% ====================================================================
-
-Plusieurs sources d'incertitude influencent les mesures :
+\paragraph{Sources d'incertitude.}
 \begin{itemize}
-    \item \textbf{Rayon de courbure de la pointe :} une pointe émoussée
-          élargit les structures latéralement (convolution pointe--surface)
-          et sous-estime la profondeur des creux étroits.
-    \item \textbf{Vitesse de balayage et gain :} un gain trop faible
-          empêche l'asservissement de suivre fidèlement les structures
-          raides ; un gain trop élevé provoque des oscillations du
-          scanner $z$.
-    \item \textbf{Traitement d'image :} l'ordre du polynôme choisi pour
-          le flatten ligne par ligne peut artificiellement supprimer des
-          structures réelles (ordre trop élevé) ou laisser des artefacts
-          (ordre trop bas).
-    \item \textbf{Dérive thermique :} sur des acquisitions longues
-          (images haute résolution), la dérive piézoélectrique peut
-          affecter la reproductibilité des mesures.
+    \item \textbf{Rayon de courbure de la pointe :} une pointe émoussée élargit
+          latéralement les structures et sous-estime la profondeur des creux étroits,
+          ce qui limite la mesure de la taille de grain de l'or.
+    \item \textbf{Gain et vitesse de balayage :} un gain trop faible empêche le suivi
+          des structures raides ; un gain trop élevé fait entrer le scanner $z$ en
+          résonance.
+    \item \textbf{Traitement d'image (\textit{Flatten}) :} un ordre de polynôme trop
+          élevé peut supprimer des structures réelles (notamment les marches du
+          graphite), un ordre trop bas laisse des artefacts de ligne.
+    \item \textbf{Contamination et endommagement :} sur l'or, les particules de
+          surface faussent fortement $R_{sk}$ et $R_{ku}$ ; la dureté de la pointe peut
+          rayer ce matériau mou.
+    \item \textbf{Mesure du pas du réseau :} la principale source d'erreur provient du
+      choix des profils de mesure. Les axes n'étaient pas parfaitement alignés
+      avec les directions principales du réseau et le nombre de périodes utilisées
+      pour le calcul était trop faible. Une mesure réalisée sur une vingtaine de
+      grains alignés horizontalement ou verticalement aurait permis de réduire
+      fortement l'incertitude. L'écart d'environ $10\,\%$ observé sur le pas
+      mesuré doit donc être attribué principalement à la méthode de mesure plutôt
+      qu'au microscope lui-même.
 \end{itemize}
 
-% ====================================================================
-% TODO : Discuter la comparaison avec la valeur nominale de la TGZ3.
-% Par exemple : "La hauteur de marche mesurée (531 nm) diffère de
-% la valeur nominale (518 nm) de 2,5 %, ce qui pourrait s'expliquer
-% par..."
-% ====================================================================
-
+\paragraph{Limites du mode contact et perspectives.}
+Tous nos échantillons ont été imagés uniquement en \textbf{mode contact}. Il aurait
+été instructif d'observer ces mêmes surfaces avec d'autres modes :
+\begin{itemize}
+    \item un \textbf{mode dynamique} (non-contact / tapping) réduirait les forces
+          latérales et l'usure, particulièrement pertinent pour l'or, facilement rayé
+          par la pointe (rayures visibles sur nos images) ;
+    \item un \textbf{mode à indentation ponctuelle} (PinPoint / Force Volume)
+          fournirait des cartes de module d'Young et de force d'adhésion, révélant des
+          contrastes mécaniques et chimiques invisibles en topographie seule.
+\end{itemize}
 
 % ====================================================================
 % CONCLUSION
 % ====================================================================
 \section{Conclusion}
 
-% ====================================================================
-% TODO : Rédiger ta propre conclusion en résumant tes résultats
-% principaux (valeurs numériques) et ce que tu en retires.
-% ====================================================================
+Ce laboratoire a permis de maîtriser l'AFM en mode contact et le traitement d'images
+sous XEI. Le réseau de calibration a permis de vérifier l'ordre de grandeur du pas
+latéral du scanner. La valeur mesurée ($\approx 1{,}1\;\mu$m pour un pas nominal
+de $1\;\mu$m) présente toutefois une erreur d'environ $10\,\%$, indiquant que la
+méthode de mesure utilisée pourrait être améliorée, notamment en alignant mieux
+les profils et en moyennant sur un plus grand nombre de périodes. Le film d'or présente
+une structure granulaire fine (grains $\approx 58$\,nm, $R_q\approx1{,}0$\,nm sur
+$1\times1\;\mu$m$^2$), la mesure sur grande zone étant biaisée par la contamination. Le
+graphite révèle des terrasses atomiquement planes ($R_q\approx2{,}3$\,nm) dont les bords
+de marche sont soulignés par le signal de friction. Le tableau~\ref{tab:recap} récapitule
+les résultats.
 
-Ce laboratoire a permis de se familiariser avec l'utilisation de l'AFM
-en mode contact et le traitement d'images sous XEI. Les mesures sur
-l'échantillon de calibration TGZ3 ont validé le bon étalonnage du
-scanner ($h_{\text{marche}} = 531$\,nm). L'échantillon Si/Al présente
-une morphologie granulaire avec des îlots d'oxyde en surface. Enfin,
-le film PS/PMMA montre un contraste de propriétés mécaniques entre les
-deux phases polymères, exploitable via la carte d'adhésion.
+\begin{table}[H]
+\centering
+\caption{Récapitulatif des résultats (mode contact pour les trois échantillons).}
+\label{tab:recap}
+\footnotesize
+\begin{tabular}{lccccl}
+\toprule
+Échantillon & Zone & $R_q$ / nm & $R_a$ / nm & $R_{pv}$ / nm & Grandeur clé \\
+\midrule
+Réseau de calibration & $25\times25\;\mu$m$^2$ & $58{,}0$ & $42{,}4$ & $677$  & pas $\approx 1{,}1\;\mu$m (nom. $1$) \\
+Or (film)             & $1\times1\;\mu$m$^2$   & $1{,}04$ & $0{,}77$ & $10{,}1$ & grain $\approx 58$\,nm \\
+Graphite              & $10\times10\;\mu$m$^2$ & $2{,}28$ & $1{,}85$ & $16{,}3$ & étages (marche th. $0{,}335$\,nm) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-L'AFM se confirme comme un outil métrologique puissant, offrant une
-information 3D calibrée à l'échelle nanométrique et la capacité de
-mesurer simultanément plusieurs propriétés physiques de la surface.
-
+L'AFM se confirme comme un outil métrologique puissant, offrant une information 3D
+calibrée à l'échelle nanométrique et la capacité de mesurer simultanément topographie
+et friction.
 
 % ====================================================================
 % ANNEXE
@@ -466,60 +567,119 @@ mesurer simultanément plusieurs propriétés physiques de la surface.
 
 \section{Récapitulatif des paramètres d'acquisition}
 
-% ====================================================================
-% TODO : Remplir ce tableau avec tes paramètres réels.
-% ====================================================================
 \begin{table}[H]
 \centering
-\caption{Paramètres d'acquisition pour chaque échantillon.}
+\caption{Paramètres d'acquisition.}
 \label{tab:params}
+\footnotesize
 \begin{tabular}{lccc}
 \toprule
-Paramètre & Éch. 1 & Éch. 2 & Éch. 3 \\
+Paramètre & Réseau & Or & Graphite \\
 \midrule
-Mode & Contact & Contact & Force constante \\
-Taille de scan / $\mu$m$^2$ & $10 \times 10$ & $5 \times 5$ & $30 \times 30$ \\
-Pixels & $256 \times 256$ & $256 \times 256$ & $256 \times 256$ \\
-Scan rate / Hz & 1{,}0 & 1{,}0 & -- \\
-Gain & 1 & 1 & -- \\
-Flatten (XEI) & Ligne, ordre 1 & Ligne, ordre 1 & Ligne, ordre 1 \\
+Mode                     & Contact         & Contact                 & Contact \\
+Taille de scan           & $25\times25\;\mu$m$^2$ & $5\times5$ et $1\times1\;\mu$m$^2$ & $10\times10\;\mu$m$^2$ \\
+Pixels                   & $256\times256$  & $256\times256$          & $256\times256$ \\
+Scan rate / Hz           & $1{,}0$         & $1{,}0$                 & $1{,}0$ \\
+Gain $z$                 & $1$             & $1$                     & $1$ \\
+\textit{Flatten} (XEI)   & Ligne, ordre 5  & Ligne, ordre 5          & Ligne, ordre 5 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-
-\section{Figures et Tables}
-
 % ====================================================================
-% TODO : Décommenter et ajouter ici les figures supplémentaires
-% (vues 3D, profils de coupe, etc.) que tu n'as pas placées dans
-% le corps du texte.
+% ANNEXE B : IMAGES AGRANDIES
 % ====================================================================
+\section{Images AFM (versions agrandies)}
+\label{ann:images}
 
-% Exemple :
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.8\linewidth]{Images/ech1_3D.png}
-%\caption{Vue 3D de l'échantillon de calibration TGZ3.}
-%\label{fig:ech1_3D}
-%\end{figure}
+Cette annexe reprend en grand format toutes les images du rapport.
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.8\linewidth]{Images/ech2_3D.png}
-%\caption{Vue 3D de l'échantillon Si/Al.}
-%\label{fig:ech2_3D}
-%\end{figure}
+\subsection{Réseau de calibration}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.8\linewidth]{Images/ech3_3D.png}
-%\caption{Vue 3D du film PS/PMMA.}
-%\label{fig:ech3_3D}
-%\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/grating_topo.png}
+\caption{Réseau --- topographie (agrandissement).}
+\label{fig:grating_topo_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/grating_profil_x.png}
+\caption{Réseau --- profil X et spectre de puissance (agrandissement).}
+\label{fig:grating_x_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/grating_profil_y.png}
+\caption{Réseau --- profil Y et spectre de puissance (agrandissement).}
+\label{fig:grating_y_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/grating_lfm.png}
+\caption{Réseau --- friction \textit{Lateral C--D}, aller/retour (agrandissement).}
+\label{fig:grating_lfm_an}
+\end{figure}
+
+\subsection{Film mince d'or}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/or_topo_5um.png}
+\caption{Or --- topographie $5\times5\;\mu$m$^2$ (agrandissement).}
+\label{fig:or_5um_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/or_topo_1um.png}
+\caption{Or --- zoom $1\times1\;\mu$m$^2$ (agrandissement).}
+\label{fig:or_1um_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/or_3d.png}
+\caption{Or --- vue 3D (agrandissement).}
+\label{fig:or_3d_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/or_grain_1um.png}
+\caption{Or --- profil en travers d'un grain (agrandissement).}
+\label{fig:or_grain_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/or_lfm.png}
+\caption{Or --- friction \textit{Lateral C--D}, aller/retour (agrandissement).}
+\label{fig:or_lfm_an}
+\end{figure}
+
+\subsection{Graphite}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\linewidth]{Images/graphite_topo.png}
+\caption{Graphite --- topographie (agrandissement).}
+\label{fig:graphite_topo_an}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Images/graphite_lfm.png}
+\caption{Graphite --- friction \textit{Lateral C--D}, aller/retour (agrandissement).}
+\label{fig:graphite_lfm_an}
+\end{figure}
+
+\section{Listes}
 
 \listoffigures
 \listoftables
-
 
 \end{document}
