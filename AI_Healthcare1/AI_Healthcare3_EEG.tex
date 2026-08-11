@@ -64,8 +64,8 @@ Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guilhem.roziervi@hes-so.c
 \rule{\linewidth}{0.4pt}
 \onehalfspacing
 \textbf{Abstract}\\
-Three raw datasets describing a prostate cancer (PC) cohort -- demographic/clinical records, biochemical laboratory values, and coded comorbidity diagnoses -- were cleaned, type-corrected, and merged into a single analysis-ready dataset (1{,}159 patients, 25 variables). Missing biochemical values were imputed and the resulting panel was summarized descriptively and by correlation structure. Prostate-specific antigen (PSA) was then evaluated as a diagnostic marker of metastasis at two fixed cutoffs and across its full range via ROC analysis (AUC = 0.670), and the ten biochemical markers were reduced to three principal components (PC1--PC3, 69.3\% cumulative variance) using PCA. Results show PSA has moderate, cutoff-dependent discriminative power, and that the biomarker panel is compressible with limited information loss.\\
-\noindent\textit{Keywords:} prostate cancer, PSA, missing data, ROC curve, PCA, biomarker panel\\
+Three raw datasets describing a prostate cancer (PC) cohort -- demographic/clinical records, biochemical laboratory values, and coded comorbidity diagnoses -- were cleaned, type-corrected, and merged into a single analysis-ready dataset (1{,}159 patients, 25 variables). Missing biochemical values were imputed and the resulting panel was summarized descriptively and by correlation structure. Prostate-specific antigen (PSA) was then evaluated as a diagnostic marker of metastasis at two fixed cutoffs and across its full range via ROC analysis (AUC = 0.670), and the ten biochemical markers were reduced to three principal components (PC1--PC3, 69.3\% cumulative variance) using PCA. A multivariable logistic regression model was then built on the full merged dataset, refined by backward elimination (21 candidate predictors reduced to 13), and validated with 10-fold stratified cross-validation, reaching a mean AUC of 0.855 (accuracy 0.783) -- a substantial improvement over PSA alone. Alternative classifiers (SVM, random forest, regularized logistic regression) performed within 1--2 points of the final logistic model, and a single-patient explanation was produced with LIME. Results show PSA has moderate, cutoff-dependent discriminative power; that the biomarker panel is compressible with limited information loss; and that combining biomarkers, comorbidities and demographics substantially improves discrimination over PSA alone, at the cost of added complexity and reduced interpretability.\\
+\noindent\textit{Keywords:} prostate cancer, PSA, missing data, ROC curve, PCA, biomarker panel, logistic regression, cross-validation, LIME\\
 \rule{\linewidth}{0.4pt}
 ]
 \singlespacing
@@ -143,11 +143,29 @@ Pairwise Pearson correlations between the ten biomarkers were computed and visua
 \end{figure}
 The correlation matrix illustrates the degree to which the biochemical variables in DATASET2 co‑vary, revealing a generally modest pattern of linear associations. Most pairwise correlations cluster around zero, indicating that the majority of variables behave largely independently of one another. A few moderate correlations are visible, suggesting biologically plausible relationships — for example, parameters linked to hematologic or renal function show mild positive or negative associations, though none approach the strength typically required to imply redundancy or multicollinearity. Importantly, the absence of strong correlations (i.e., values approaching ±1) suggests that the dataset does not contain highly collinear predictors, and thus each variable contributes distinct informational value. Overall, the correlation structure supports the use of these variables in multivariable analyses without substantial risk of instability due to interdependence.
 
-\subsection{ATTENTION: PSA diagnostic performance}
+\subsection{PSA diagnostic performance}
 Metastasis was used as the ground-truth label. Two fixed PSA cutoffs (20 and 100~ng/mL) were tested by building binary test-result columns and computing sensitivity, specificity and accuracy against the confusion matrix. A full receiver operating characteristic (ROC) analysis was then run using PSA as a continuous score, and the optimal cutoff was located two ways: (i) the Youden index ($\mathrm{TPR}-\mathrm{FPR}$, maximized), and (ii) class-size-weighted maximum accuracy.
 
-\subsection{ATTENTION: Principal Component Analysis}
+\subsection{Principal Component Analysis}
 The ten biomarkers were standardized (zero mean, unit variance, since PCA is scale-sensitive) and decomposed with PCA. Components were retained using the eigenvalue$>1$ (Kaiser) criterion.
+
+\subsection{Simple logistic regression (Module 1.3, Task 1)}
+Before building a multivariable model, urinary retention was tested alone as a predictor of metastasis, a hypothesis suggested by clinicians. A univariate logistic regression (\texttt{metastasis} $\sim$ \texttt{urinary\_retention}) was fitted and its coefficient converted to an odds ratio.
+
+\subsection{Multiple logistic regression and collinearity (Task 2)}
+A second model was fitted using every remaining variable in \texttt{DATASET123}, excluding \texttt{ID}, the two date columns, \texttt{birthdate}, and \texttt{age\_at\_metastasis} (defined only when \texttt{metastasis=1}, so including it would leak the outcome). The three PCA components from Module 1.2 were also excluded from this first pass, so that a raw-biomarker model could be directly compared, via variance inflation factor (VIF), against a version using PC1--PC3 in place of the ten raw biomarkers.
+
+\subsection{Feature selection via backward elimination (Task 3)}
+Starting from the full raw-biomarker model of Task 2, predictors were removed one at a time -- the least significant (highest $p$-value) first -- until every remaining predictor was significant at $\alpha=0.05$.
+
+\subsection{10-fold stratified cross-validation (Task 4)}
+The backward-elimination model was re-fit as a scikit-learn pipeline (standardization + logistic regression) and evaluated with 10-fold stratified cross-validation, so that class balance is preserved in every fold. Accuracy, sensitivity, specificity, precision, F1-score and AUC were computed per fold and averaged.
+
+\subsection{Model comparison (Task 5, optional)}
+The same cross-validation scheme was used to compare four classifiers on the final variable set: logistic regression, support vector machine (SVM), random forest, and L1-regularized (LASSO) logistic regression.
+
+\subsection{Model explainability with LIME (Task 6, optional)}
+For a single randomly selected patient, LIME (Local Interpretable Model-agnostic Explanations) was used to identify which of that patient's variable values contributed most to their predicted probability of metastasis, and in which direction.
 
 % RESULTS
 \section{Results}
@@ -251,16 +269,83 @@ coag\_factor  & $-$0.405 & $-$0.063 & $-$0.296 \\
 
 Keeping 3 of 10 markers as components (a $70\%$ dimensionality reduction) retains roughly two-thirds of the panel's variance, which is a reasonable trade-off for use as predictors in a downstream model, at the cost of losing direct clinical interpretability of any single original marker.
 
+\subsection{Simple logistic regression}
+Urinary retention alone was a significant predictor of metastasis (coefficient $=0.911$, $p<0.001$; odds ratio $=2.49$): a patient with urinary retention has roughly 2.5 times the odds of metastasis of one without, with no adjustment for other variables. Predicted probability of metastasis was 0.526 for patients with retention versus 0.308 for those without. Pseudo $R^2$ was only 0.029, confirming retention alone explains little of the outcome's variance -- expected for a single-predictor model, and the motivation for Task 2. At the default 0.50 probability cutoff, this univariate model reached 65\% accuracy but only 37\% recall on the metastasis class (precision 53\%), since almost no patient's predicted probability clears 0.50 on retention status alone.
+
+\subsection{Multiple logistic regression and collinearity}
+The full model (21 predictors) reached pseudo $R^2=0.320$ (AIC $\approx 1077$), a large improvement over the univariate model. However, the VIF check (Table~\ref{tab:vif}) showed the raw-biomarker model does not satisfy the independence-of-predictors assumption: creatinine, albumin and coagulation factor all exceeded the VIF$=10$ problematic threshold, with globulin and thrombocyte in the 5--10 caution range. Replacing the ten raw biomarkers with PC1--PC3 dropped every VIF to $\approx$1--2, confirming that the PCA components -- orthogonal by construction -- fully resolve the collinearity, at the cost of losing direct clinical interpretability of the affected coefficients.
+
+\begin{table}[H]
+\centering
+\caption{Variance inflation factor, raw-biomarker model (variables with VIF~$\geq$~5 shown).}
+\label{tab:vif}
+\begin{tabular}{lr}
+\toprule
+Variable & VIF \\
+\midrule
+Creatinine & 63.4 \\
+Albumin & 35.4 \\
+Coagulation factor & 14.7 \\
+Globulin & 6.6 \\
+Thrombocyte & 5.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Backward elimination}
+Backward elimination removed 8 of the 21 candidate predictors (in order: civil status, coagulation factor, hypercholesterolaemia, hearing loss, thrombocyte, globulin, the PSA$>$100 flag, creatinine), leaving 13 variables. Model fit improved slightly despite fewer parameters (AIC $\approx 1068$ vs. $\approx 1077$; pseudo $R^2$ 0.315 vs. 0.320), indicating the dropped variables contributed noise rather than signal. Notably, creatinine and coagulation factor -- both flagged for high VIF -- were among the first variables dropped, consistent with the collinearity finding above. At the default 0.50 cutoff, the final model's in-sample performance improved substantially over the univariate model: 79\% accuracy, 68\% recall and 72\% precision on the metastasis class (Table~\ref{tab:final_perf}).
+
+\begin{table}[H]
+\centering
+\caption{Final model in-sample classification performance (0.50 cutoff).}
+\label{tab:final_perf}
+\begin{tabular}{lccc}
+\toprule
+Class & Precision & Recall & F1 \\
+\midrule
+No metastasis & 0.82 & 0.85 & 0.84 \\
+Metastasis & 0.72 & 0.68 & 0.70 \\
+\midrule
+Accuracy & \multicolumn{3}{c}{0.79} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-validated performance}
+In-sample performance is optimistic, since the model is evaluated on the same data it was fit on. Under 10-fold stratified cross-validation, mean performance was: accuracy 0.783 (SD 0.028), sensitivity 0.675 (SD 0.058), specificity 0.846 (SD 0.044), precision 0.718 (SD 0.055), F1 0.693 (SD 0.038), AUC 0.855 (SD 0.023). The low fold-to-fold standard deviation on every metric indicates the result is stable rather than an artifact of one particular train/test split. Compared to PSA alone (AUC 0.670, Section~4.5), the cross-validated multivariable model represents a substantial improvement ($+0.185$ AUC), confirming that combining biomarkers, comorbidities and demographics captures information a single continuous PSA score cannot.
+
+\subsection{Model comparison}
+Table~\ref{tab:modelcomp} compares four classifiers on the same 13 variables under identical 10-fold cross-validation. All four land within a narrow band (accuracy 0.783--0.786, AUC 0.841--0.855); no model dominates. SVM has the highest sensitivity/F1, random forest the highest precision, and logistic regression (plain or L1-regularized) the highest AUC. Given the near-tie in performance, logistic regression's directly interpretable coefficients (odds ratios) make it the more defensible choice for a clinical decision-support context over the less transparent SVM and random forest.
+
+\begin{table}[H]
+\centering
+\caption{10-fold cross-validated performance by model type.}
+\label{tab:modelcomp}
+\begin{tabular}{lccccc}
+\toprule
+Model & Acc. & Sens. & Prec. & F1 & AUC \\
+\midrule
+Logistic Reg. & 0.783 & 0.675 & 0.718 & 0.693 & 0.855 \\
+SVM & 0.786 & 0.713 & 0.705 & 0.707 & 0.841 \\
+Random Forest & 0.785 & 0.682 & 0.716 & 0.696 & 0.843 \\
+Reg.\ LR (L1) & 0.783 & 0.677 & 0.717 & 0.694 & 0.855 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Individual prediction explanation (LIME)}
+For one randomly selected patient, LIME identified the family history of cancer, albumin, diabetes status, age at diagnosis and lymphocyte count as the five locally most influential variables on that patient's predicted probability, with the absence of family history and a low lymphocyte count pulling the prediction toward "no metastasis," and elevated albumin, absence of diabetes, and older age at diagnosis pulling it toward "metastasis." Whether this specific combination is clinically plausible for that patient would need to be checked against their full record; LIME explains one prediction at a time and does not generalize the pattern to other patients.
+
 % CONCLUSION
 \section{Conclusion}
 
-\textbf{Interpretation.} A single, merged, imputed cohort table was produced from three heterogeneous sources without patient loss. PSA alone is a moderate (AUC = 0.670), not strong, discriminator of metastasis; no single cutoff is simultaneously sensitive and specific, and the "right" cutoff depends on the clinical use case (screening favours the low, high-sensitivity cutoff; confirmation favours the high, high-specificity cutoff). The ten-marker biochemical panel compresses to three interpretable components (cellular/hematologic, renal/nutritional, PSA-dominated) retaining 69.3\% of variance.
+\textbf{Interpretation.} A single, merged, imputed cohort table was produced from three heterogeneous sources without patient loss. PSA alone is a moderate (AUC = 0.670), not strong, discriminator of metastasis; no single cutoff is simultaneously sensitive and specific, and the "right" cutoff depends on the clinical use case (screening favours the low, high-sensitivity cutoff; confirmation favours the high, high-specificity cutoff). The ten-marker biochemical panel compresses to three interpretable components (cellular/hematologic, renal/nutritional, PSA-dominated) retaining 69.3\% of variance. Combining the raw biomarkers with demographic and comorbidity variables in a multivariable logistic regression model, refined by backward elimination and validated with 10-fold cross-validation, raises discrimination from AUC 0.670 (PSA alone) to AUC 0.855 -- a substantial gain -- while remaining fully interpretable via odds ratios, and performing on par with less transparent alternatives (SVM, random forest).
 
-\textbf{Outcome.} Module 1.1 delivered a clean, merged, analysis-ready dataset (\texttt{DATASET123}). Module 1.2 delivered a quantified PSA performance profile and a reduced 3-component representation of the biomarker panel (\texttt{DATASET\_with\_PCA.csv}).
+\textbf{Outcome.} Module 1.1 delivered a clean, merged, analysis-ready dataset (\texttt{DATASET123}). Module 1.2 delivered a quantified PSA performance profile and a reduced 3-component representation of the biomarker panel (\texttt{DATASET\_with\_PCA.csv}). Module 1.3 delivered a validated multivariable classifier (13 predictors, cross-validated AUC 0.855), a comparison against three alternative model types, and a worked example of per-patient explainability via LIME.
 
-\textbf{Impact.} These outputs directly enable the next modelling step: the PCA components (or the raw imputed markers) and the demographic/comorbidity variables together form the feature set for a metastasis classifier, and the ROC/Youden analysis gives a defensible, data-driven cutoff instead of an arbitrary one.
+\textbf{Impact.} These outputs directly enable clinical decision support: the final logistic regression model and its odds ratios could inform a risk-stratification tool that goes well beyond a single PSA cutoff, while remaining interpretable enough for clinician review (unlike the SVM/random forest alternatives, which matched but did not exceed its performance). The ROC/Youden analysis from Module 1.2 additionally gives a defensible, data-driven single-marker cutoff for settings where only PSA is available.
 
-\textbf{Limitations and future steps.} The mean-vs-median imputation discrepancy identified in Section~3.5 should be corrected (re-run with true median imputation and confirm downstream results are stable to the choice). PSA alone is an insufficient classifier (AUC 0.670); Module 1.3 -- feature selection over the full merged/PCA-reduced dataset and a multivariable classification model, evaluated via a confusion matrix -- was not carried out in this work and is the natural next step to improve on single-marker performance.
+\textbf{Limitations and future steps.} The mean-vs-median imputation discrepancy identified in Section~3.5 should be corrected (re-run with true median imputation and confirm downstream results are stable to the choice). The Module 1.3 predictor set included \texttt{test\_result20} (the PSA$>$20 flag from Module 1.2) alongside continuous PSA itself; this variable survived backward elimination and is a partial duplicate of information already in \texttt{psa} -- worth re-running without it to confirm the final model's performance does not depend on this redundancy. The diabetes coefficient in the final model was negative (protective direction), which is not obviously consistent with clinical expectations and should be treated as a hypothesis for domain-expert review rather than an established finding, since it may reflect a confound specific to this cohort rather than a real physiological effect. More broadly, this analysis is retrospective and cross-sectional: biomarkers and outcome were measured close together in time, which limits causal interpretation (e.g. whether urinary retention precedes metastasis or co-occurs with it). A prospective design -- enrolling patients at initial diagnosis before metastatic status is known, and following them longitudinally with scheduled imaging to record time-to-metastasis -- would support survival analysis (e.g. Cox proportional hazards) instead of a binary logistic outcome, better using censored data from patients who have not yet metastasized at study end, and would let the model be tested on its ability to predict future metastasis rather than correlate with already-diagnosed metastasis.
 
 \end{multicols*}
 \section{annexe}
