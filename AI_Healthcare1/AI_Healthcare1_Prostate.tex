@@ -7,7 +7,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{lipsum}
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -47,7 +46,7 @@
 \begin{center}
 \vspace*{0mm}
 {\large
-AI in Healthcare data\\
+AI in Healthcare – Data Preparation and Analysis \\
 \vspace{3mm}
 Data Preparation, Summarization, Visualization, Reduction and \\
 Diagnostic Performance Analysis of a Prostate Cancer Cohort
@@ -57,14 +56,14 @@ Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guroz26@student.sdu.dk}{g
 \\
 \vspace{3mm}
 \footnotesize{
-\textit{AI in Healthcare Summer Camp -- Data Preparation, Summarization, Visualization and Reduction}
+\textit{AI in Healthcare Summer Camp – Data Preparation, Summarization, Visualization and Reduction}
 }\\
 \vspace{9mm}
 \end{center}
 \rule{\linewidth}{0.4pt}
 \onehalfspacing
 \textbf{Abstract}\\
-Three raw datasets (demographic/clinical, lab values, comorbidity codes) were cleaned, merged and imputed into a single table (1,159 patients, 25 variables). PSA was evaluated as a metastasis marker via ROC (AUC=0.670). PCA reduced ten biomarkers to three components (69.3\% variance). A logistic regression model (backward elimination, 10-fold CV) reached AUC 0.855 (accuracy 0.783), outperforming PSA alone. SVM and random forest performed similarly. LIME explained one patient's prediction. PSA is only a moderate discriminator; combining biomarkers, comorbidities and demographics improves prediction substantially.\\
+Three raw datasets (demographic/clinical, biochemical, comorbidity codes) were cleaned, merged and imputed into a single table (1,159 patients, 25 variables). PSA was evaluated as a metastasis marker via ROC (AUC=0.670). PCA reduced ten biochemical markers to three components (69.3\% variance). A logistic regression model with backward elimination and 10-fold cross-validation reached AUC 0.855 (accuracy 0.783), outperforming PSA alone. SVM and random forest performed similarly. LIME explained one patient's prediction. PSA alone is a moderate discriminator; combining biomarkers, comorbidities and demographics improves prediction substantially.\\
 \noindent\textit{Keywords:} prostate cancer, PSA, ROC, PCA, logistic regression, cross-validation, LIME\\
 \rule{\linewidth}{0.4pt}
 ]
@@ -74,50 +73,48 @@ Three raw datasets (demographic/clinical, lab values, comorbidity codes) were cl
 
 \setlength{\parskip}{1pt}
 \columnbreak
-% INTRODUCTION
+
 \section{Introduction}
-Prostate cancer (PC) is common. Diagnosis relies on heterogeneous data: clinical records, lab tests, and medical history. Before any modelling, data must be cleaned, merged and understood. This report covers data preparation, visualization, feature reduction and classification. The main questions: (i) how to prepare three separate data sources into one reliable table, and (ii) how well does PSA alone discriminate metastasis, and can we compress the biomarker panel without losing too much information.
+Prostate cancer (PC) is common and diagnosis relies on heterogeneous data: clinical records, laboratory tests, and medical history. Before modelling, data must be cleaned and merged. This report covers data preparation, visualisation, feature reduction and classification. The main questions: (i) how to prepare three separate sources into one reliable table, and (ii) how well does PSA alone discriminate metastasis, and can the biomarker panel be compressed without losing too much information.
 
 \section{Data}
-
 Three source files, linked by patient \texttt{ID}:
-
 \begin{itemize}
-\item \textbf{DATASET1} -- clinical: civil status, family cancer history, metastasis (outcome), dates (diagnosis, metastasis, birth).
-\item \textbf{DATASET2} -- laboratory: ten numeric markers (monocyte, urea, lymphocyte, thrombocyte, erythrocyte, albumin, creatinine, globulin, PSA, coagulation factor).
-\item \textbf{DATASET3} -- medical history: one row per condition (diabetes, hearing loss, hypercholesterolaemia, hypertension, osteoporosis, urinary retention).
+\item \textbf{DATASET1} – clinical: civil status, family cancer history, metastasis (outcome), dates (diagnosis, metastasis, birth).
+\item \textbf{DATASET2} – laboratory: ten numeric markers (monocyte, urea, lymphocyte, thrombocyte, erythrocyte, albumin, creatinine, globulin, PSA, coagulation factor).
+\item \textbf{DATASET3} – medical history: one row per condition (diabetes, hearing loss, hypercholesterolaemia, hypertension, osteoporosis, urinary retention).
 \end{itemize}
 
 \section{Data Preparation and Results}
 
 \subsection{Type correction and reshaping}
-\textbf{Method:} Converted categorical variables in DATASET1 to proper types; parsed dates. DATASET2 types were fine. DATASET3 was pivoted from long to wide format (one binary column per disease).
+\textbf{Method:} Converted categorical variables in DATASET1 to proper types; parsed dates. DATASET2 types were already correct. DATASET3 was pivoted from long to wide format, creating one binary column per disease.
 
 \textbf{Result:} All variables now in correct format for analysis.
 
 \subsection{Missing data and imputation}
-\textbf{Method:} Checked missingness. DATASET1 had 63.7\% missing in metastasis date (expected for non-metastatic patients). DATASET2 had scattered missingness (0.3--14.1\%). Histograms (Fig.~\ref{fig:hist}) showed most markers skewed, so we used median imputation.
+\textbf{Method:} Checked missingness. DATASET1 had 63.7\% missing in metastasis date (expected for non-metastatic patients). DATASET2 had scattered missingness (0.3–14.1\%). Histograms (Fig.~\ref{fig:hist}) showed most markers skewed, so we used median imputation (robust to outliers).
 
 \textbf{Result:} Missing data handled; no patient loss.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{Images/biomarker_hist.png}
-\caption{Distribution of ten biochemical markers.}
+\caption{Distributions of ten biochemical markers.}
 \label{fig:hist}
 \end{figure}
 
 \subsection{Merging}
-\textbf{Method:} Left-joined DATASET1, DATASET2 and the wide disease table on \texttt{ID}. Filled missing disease flags with 0.
+\textbf{Method:} Left-joined DATASET1, DATASET2 and the wide disease table on \texttt{ID}. Missing disease flags set to 0.
 
-\textbf{Result:} Final merged dataset \texttt{DATASET123}: 1,159 rows $\times$ 25 columns.
+\textbf{Result:} Final merged dataset \texttt{DATASET123}: 1,159 rows × 25 columns.
 
 \subsection{Patient characteristics}
 Table~\ref{tab:characteristics} summarises the cohort.
 
 \begin{table}[H]
 \centering
-\caption{Patient characteristics (N = 1,159).}
+\caption{Patient characteristics (N=1,159).}
 \label{tab:characteristics}
 \begin{tabular}{lr}
 \toprule
@@ -126,7 +123,6 @@ Variable & Value \\
 Age at PC diagnosis (yr) & 74.3 $\pm$ 8.7 \\
 Age at metastasis (yr)$^{*}$ & 78.9 $\pm$ 8.5 \\
 Metastasis: yes & 421 (36.3\%) \\
-Metastasis: no & 738 (63.7\%) \\
 Family history: yes & 623 (53.8\%) \\
 Civil status: married/cohabiting & 808 (69.7\%) \\
 \bottomrule
@@ -134,12 +130,12 @@ Civil status: married/cohabiting & 808 (69.7\%) \\
 \footnotesize{$^{*}$only for patients with metastasis.}
 \end{table}
 
-About one third developed metastasis, on average 4.6 years after initial diagnosis.
+About one third developed metastasis, on average 4.6 years after diagnosis.
 
 \subsection{Correlation structure}
 \textbf{Method:} Computed Pearson correlations among the ten biomarkers and visualised as heatmap (Fig.~\ref{fig:corr}).
 
-\textbf{Result:} Most correlations weak; no strong collinearity. Fine to use all markers.
+\textbf{Result:} Most correlations weak; no strong collinearity. All markers can be used.
 
 \begin{figure}[H]
 \centering
@@ -149,7 +145,7 @@ About one third developed metastasis, on average 4.6 years after initial diagnos
 \end{figure}
 
 \subsection{PSA diagnostic performance}
-\textbf{Method:} Tested two fixed cutoffs (20 and 100 ng/mL) for metastasis classification; also performed ROC analysis and found optimal cutoffs via Youden index and maximum accuracy.
+\textbf{Method:} Tested two fixed cutoffs (20 and 100 ng/mL) for metastasis classification; performed ROC analysis and determined optimal cutoffs via Youden index and maximum accuracy.
 
 \textbf{Result:} Table~\ref{tab:psa} shows performance. Lower cutoff gives higher sensitivity; higher cutoff gives higher specificity. Accuracy similar (~0.65) due to class imbalance.
 
@@ -291,12 +287,11 @@ Reg. LR (L1) & 0.783 & 0.677 & 0.717 & 0.694 & 0.855 \\
 \textbf{Result:} Top influential features: family history, albumin, diabetes, age, lymphocytes. LIME shows direction of each contribution for that patient.
 
 \section{Conclusion}
-
 \textbf{Interpretation:} We produced a clean merged dataset. PSA alone is a moderate discriminator (AUC 0.670), no single cutoff is perfect. PCA reduces ten markers to three components retaining 69\% variance. A multivariable logistic model (13 predictors, cross-validated AUC 0.855) beats PSA significantly and remains interpretable. SVM and random forest give similar performance but are less transparent.
 
 \textbf{Impact:} The logistic model can support risk stratification. The ROC analysis provides data-driven cutoffs when only PSA is available.
 
-\textbf{Limitations:} Retrospective, cross-sectional design limits causal claims. Some issues: median imputation should be verified; PSA>20 flag duplicates continuous PSA; diabetes coefficient was negative (unexpected) – needs expert review. Future prospective studies with time-to-event data could use survival analysis.
+\textbf{Limitations:} Retrospective, cross-sectional design limits causal claims. Issues: median imputation should be verified; PSA>20 flag duplicates continuous PSA; diabetes coefficient negative (unexpected) – needs expert review. Future prospective studies with time-to-event data could use survival analysis.
 
 \end{multicols*}
 \section{Annexe}
