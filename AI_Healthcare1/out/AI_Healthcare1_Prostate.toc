@@ -1,19 +1,18 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
-\contentsline {section}{\numberline {2}Data}{2}{section.2}%
-\contentsline {section}{\numberline {3}Data Preparation and Results}{2}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Type correction}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Missing data handling and imputation}{2}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Recoding, reshaping, and merging}{2}{subsection.3.3}%
+\contentsline {section}{\numberline {2}Data}{1}{section.2}%
+\contentsline {section}{\numberline {3}Data Preparation and Results}{1}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Type correction and reshaping}{1}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Missing data and imputation}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Merging}{2}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Patient characteristics}{2}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Correlation structure}{3}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}PSA diagnostic performance}{3}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}ROC analysis and optimal cutoff}{3}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Principal Component Analysis}{3}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Univariate logistic regression}{4}{subsection.3.9}%
-\contentsline {subsection}{\numberline {3.10}Multiple logistic regression and collinearity}{4}{subsection.3.10}%
-\contentsline {subsection}{\numberline {3.11}Feature selection via backward elimination}{4}{subsection.3.11}%
-\contentsline {subsection}{\numberline {3.12}Cross-validated performance}{5}{subsection.3.12}%
-\contentsline {subsection}{\numberline {3.13}Model comparison}{5}{subsection.3.13}%
-\contentsline {subsection}{\numberline {3.14}Model explainability with LIME}{5}{subsection.3.14}%
-\contentsline {section}{\numberline {4}Conclusion}{5}{section.4}%
-\contentsline {section}{\numberline {5}Annexe}{7}{section.5}%
+\contentsline {subsection}{\numberline {3.5}Correlation structure}{2}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}PSA diagnostic performance}{2}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Principal Component Analysis (PCA)}{3}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Univariate logistic regression (urinary retention)}{3}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Multiple logistic regression and collinearity}{3}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Backward elimination}{3}{subsection.3.10}%
+\contentsline {subsection}{\numberline {3.11}Cross-validated performance}{3}{subsection.3.11}%
+\contentsline {subsection}{\numberline {3.12}Model comparison}{3}{subsection.3.12}%
+\contentsline {subsection}{\numberline {3.13}LIME explanation}{4}{subsection.3.13}%
+\contentsline {section}{\numberline {4}Conclusion}{4}{section.4}%
+\contentsline {section}{\numberline {5}Annexe}{5}{section.5}%
