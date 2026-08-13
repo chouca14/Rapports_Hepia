@@ -1,12 +1,12 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
-\contentsline {section}{\numberline {2}Task 1: Polyp Characterization}{1}{section.2}%
+\contentsline {section}{\numberline {2}Polyp Characterization}{1}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Model Description: DenseNet121}{1}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Data Preparation}{2}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Implementation Details}{2}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Results}{2}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Task 2: Semantic Segmentation}{3}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Model Description: Attention U-Net}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Data Preparation}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Data Preparation}{4}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Implementation Details}{4}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Results}{4}{subsection.3.4}%
 \contentsline {section}{\numberline {4}Conclusion}{6}{section.4}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  13 AUG 2026 12:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.22)  13 AUG 2026 13:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -524,15 +524,18 @@ LaTeX Font Info:    Font shape `T1/txr/b/n' in size <10> not available
 \tf@toc=\write4
 \openout4 = `AI_Healthcare2_Colorectal.toc'.
 
-
+LaTeX Font Info:    Trying to load font information for TS1+txr on input line 90.
+ (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/txfonts\ts1txr.fd
+File: ts1txr.fd 2000/12/15 v3.1
+)
 
 Package multicol Warning: I moved some lines to the next page.
-(multicol)                Footnotes on page 1 might be wrong on input line 92.
+(multicol)                Footnotes on page 1 might be wrong on input line 96.
 
 <Images/hepia_simple.png, id=65, 165.50381pt x 69.5116pt>
 File: Images/hepia_simple.png Graphic file (type png)
 <use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 92.
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 96.
 (pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -544,53 +547,53 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [1
 
 {C:/Users/miste/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <./Images/hepia_simple.png>]
-<Images/densenet121_training_curves.png, id=80, 867.24pt x 289.08pt>
+<Images/densenet121_training_curves.png, id=81, 426.1521pt x 498.1812pt>
 File: Images/densenet121_training_curves.png Graphic file (type png)
 <use Images/densenet121_training_curves.png>
-Package pdftex.def Info: Images/densenet121_training_curves.png  used on input line 103.
-(pdftex.def)             Requested size: 254.65216pt x 84.88086pt.
-<Images/densenet121_confusion_matrix.png, id=81, 361.35pt x 361.35pt>
+Package pdftex.def Info: Images/densenet121_training_curves.png  used on input line 107.
+(pdftex.def)             Requested size: 254.65216pt x 297.69476pt.
+<Images/densenet121_confusion_matrix.png, id=84, 361.35pt x 361.35pt>
 File: Images/densenet121_confusion_matrix.png Graphic file (type png)
 <use Images/densenet121_confusion_matrix.png>
-Package pdftex.def Info: Images/densenet121_confusion_matrix.png  used on input line 129.
+Package pdftex.def Info: Images/densenet121_confusion_matrix.png  used on input line 133.
 (pdftex.def)             Requested size: 203.7225pt x 203.72203pt.
-<Images/densenet121_roc.png, id=82, 397.485pt x 361.35pt>
+<Images/densenet121_roc.png, id=88, 397.485pt x 361.35pt>
 File: Images/densenet121_roc.png Graphic file (type png)
 <use Images/densenet121_roc.png>
-Package pdftex.def Info: Images/densenet121_roc.png  used on input line 138.
+Package pdftex.def Info: Images/densenet121_roc.png  used on input line 142.
 (pdftex.def)             Requested size: 203.7225pt x 185.20685pt.
-<Images/densenet121_pr_curve.png, id=83, 397.485pt x 361.35pt>
+File: Images/hepia_simple.png Graphic file (type png)
+<use Images/hepia_simple.png>
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 146.
+(pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 31.40417pt, for example:
+(fancyhdr)                \setlength{\headheight}{31.40417pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-19.40417pt}.
+
+[2 <./Images/densenet121_training_curves.png> <./Images/densenet121_confusion_matrix.png>]
+<Images/densenet121_pr_curve.png, id=99, 397.485pt x 361.35pt>
 File: Images/densenet121_pr_curve.png Graphic file (type png)
 <use Images/densenet121_pr_curve.png>
-Package pdftex.def Info: Images/densenet121_pr_curve.png  used on input line 145.
+Package pdftex.def Info: Images/densenet121_pr_curve.png  used on input line 149.
 (pdftex.def)             Requested size: 203.7225pt x 185.20685pt.
-File: Images/hepia_simple.png Graphic file (type png)
-<use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 149.
-(pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.40417pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.40417pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-19.40417pt}.
-
-[2 <./Images/densenet121_training_curves.png> <./Images/densenet121_confusion_matrix.png> <./Images/densenet121_roc.png>]
-<Images/densenet121_gradcam.png, id=95, 867.24pt x 433.62pt>
+<Images/densenet121_gradcam.png, id=101, 867.24pt x 433.62pt>
 File: Images/densenet121_gradcam.png Graphic file (type png)
 <use Images/densenet121_gradcam.png>
-Package pdftex.def Info: Images/densenet121_gradcam.png  used on input line 154.
+Package pdftex.def Info: Images/densenet121_gradcam.png  used on input line 158.
 (pdftex.def)             Requested size: 254.65216pt x 127.3213pt.
-LaTeX Font Info:    Trying to load font information for TS1+txr on input line 185.
- (C:\Users\miste\AppData\Local\Programs\MiKTeX\tex/latex/txfonts\ts1txr.fd
-File: ts1txr.fd 2000/12/15 v3.1
-)
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
+
+ []
+
 File: Images/hepia_simple.png Graphic file (type png)
 <use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 196.
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 200.
 (pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 31.40417pt, for example:
@@ -598,27 +601,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-19.40417pt}.
 
-[3 <./Images/densenet121_pr_curve.png> <./Images/densenet121_gradcam.png>]
-<Images/unet_training_curves.png, id=107, 426.6339pt x 498.1812pt>
+[3 <./Images/densenet121_roc.png> <./Images/densenet121_pr_curve.png> <./Images/densenet121_gradcam.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
+
+ []
+
+<Images/unet_training_curves.png, id=115, 426.6339pt x 498.1812pt>
 File: Images/unet_training_curves.png Graphic file (type png)
 <use Images/unet_training_curves.png>
-Package pdftex.def Info: Images/unet_training_curves.png  used on input line 208.
+Package pdftex.def Info: Images/unet_training_curves.png  used on input line 213.
 (pdftex.def)             Requested size: 254.65216pt x 297.36029pt.
-<Images/unet_confusion_matrix.png, id=108, 361.35pt x 361.35pt>
+<Images/unet_confusion_matrix.png, id=118, 361.35pt x 361.35pt>
 File: Images/unet_confusion_matrix.png Graphic file (type png)
 <use Images/unet_confusion_matrix.png>
-Package pdftex.def Info: Images/unet_confusion_matrix.png  used on input line 236.
+Package pdftex.def Info: Images/unet_confusion_matrix.png  used on input line 241.
 (pdftex.def)             Requested size: 203.7225pt x 203.72203pt.
-<Images/unet_roc.png, id=109, 397.485pt x 361.35pt>
-File: Images/unet_roc.png Graphic file (type png)
-<use Images/unet_roc.png>
-Package pdftex.def Info: Images/unet_roc.png  used on input line 245.
-(pdftex.def)             Requested size: 203.7225pt x 185.20685pt.
 File: Images/hepia_simple.png Graphic file (type png)
 <use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 249.
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 247.
 (pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 31.40417pt, for example:
@@ -627,25 +628,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-19.40417pt}.
 
 [4 <./Images/unet_training_curves.png>]
-<Images/unet_test_predictions.png, id=118, 433.62pt x 433.62pt>
+<Images/unet_roc.png, id=129, 397.485pt x 361.35pt>
+File: Images/unet_roc.png Graphic file (type png)
+<use Images/unet_roc.png>
+Package pdftex.def Info: Images/unet_roc.png  used on input line 250.
+(pdftex.def)             Requested size: 203.7225pt x 185.20685pt.
+<Images/unet_test_predictions.png, id=135, 433.62pt x 433.62pt>
 File: Images/unet_test_predictions.png Graphic file (type png)
 <use Images/unet_test_predictions.png>
-Package pdftex.def Info: Images/unet_test_predictions.png  used on input line 277.
+Package pdftex.def Info: Images/unet_test_predictions.png  used on input line 282.
 (pdftex.def)             Requested size: 254.65216pt x 254.65584pt.
-<Images/unet_overlay.png, id=119, 650.43pt x 325.215pt>
+<Images/unet_overlay.png, id=136, 650.43pt x 325.215pt>
 File: Images/unet_overlay.png Graphic file (type png)
 <use Images/unet_overlay.png>
-Package pdftex.def Info: Images/unet_overlay.png  used on input line 284.
+Package pdftex.def Info: Images/unet_overlay.png  used on input line 289.
 (pdftex.def)             Requested size: 254.65216pt x 127.32462pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--291
-
- []
-
 File: Images/hepia_simple.png Graphic file (type png)
 <use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 291.
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 297.
 (pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 31.40417pt, for example:
@@ -654,18 +656,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-19.40417pt}.
 
 [5 <./Images/unet_confusion_matrix.png> <./Images/unet_roc.png> <./Images/unet_test_predictions.png> <./Images/unet_overlay.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 292--293
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--299
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
 
  []
 
 File: Images/hepia_simple.png Graphic file (type png)
 <use Images/hepia_simple.png>
-Package pdftex.def Info: Images/hepia_simple.png  used on input line 302.
+Package pdftex.def Info: Images/hepia_simple.png  used on input line 317.
 (pdftex.def)             Requested size: 66.20035pt x 27.80414pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -680,23 +687,23 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `AI_Healthcare2_Colorectal.out' has not changed.
-(rerunfilecheck)             Checksum: 7120918CF4A8C2454C8CEA62D429F8D1;1851.
+(rerunfilecheck)             Checksum: AB02BEF3C38E5F278113F71F1AEF6930;1805.
  ) 
 Here is how much of TeX's memory you used:
- 12809 strings out of 474486
- 203518 string characters out of 5743755
+ 12812 strings out of 474486
+ 203589 string characters out of 5743755
  1949542 words of memory out of 5000000
- 34878 multiletter control sequences out of 15000+600000
+ 34881 multiletter control sequences out of 15000+600000
  607253 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,79p,1463b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,16n,79p,1312b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
-<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtcxr.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtxi.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtxmi.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtxr.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/txex.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/txsy.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on c:\Users\miste\Rapports_Hepia\AI_Healthcare1\out\AI_Healthcare2_Colorectal.pdf (6 pages, 4642396 bytes).
+<C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtcxr.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtxmi.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/rtxr.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/txsy.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on c:\Users\miste\Rapports_Hepia\AI_Healthcare1\out\AI_Healthcare2_Colorectal.pdf (6 pages, 4732542 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
+ 192 PDF objects out of 1000 (max. 8388607)
  34 named destinations out of 1000 (max. 500000)
  152 words of extra memory for PDF output out of 10000 (max. 10000000)
 

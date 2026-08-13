@@ -78,14 +78,18 @@ Medical image analysis has become a crucial application of deep learning, partic
 
 Colorectal cancer is the third most common cancer and second leading cause of cancer-related mortality. Early detection through polyp identification can significantly reduce mortality rates. CCE offers a less invasive alternative to traditional colonoscopy but presents challenges: lower image resolution, missing regions of interest, and polyp variability. Similarly, neuronal membrane segmentation from electron microscopy images is essential for connectomics research, where UNet-family architectures (here, Attention U-Net) have become a standard approach.
 
-\section{Task 1: Polyp Characterization}
+\section{Polyp Characterization}
 
 \subsection{Model Description: DenseNet121}
-DenseNet (Huang et al., 2017) introduces dense connectivity where each layer receives inputs from all preceding layers within a dense block. Instead of adding feature maps like ResNet's skip connections, DenseNet concatenates them: \(x_\ell = H_\ell([x_0, x_1, ..., x_{\ell-1}])\). This concatenation is the key structural difference.
+DenseNet introduces dense connectivity where each layer receives inputs from all preceding layers within a dense block. Instead of adding feature maps like ResNet's skip connections, DenseNet concatenates them: \(x_\ell = H_\ell([x_0, x_1, ..., x_{\ell-1}])\). This concatenation is the key structural difference.
 
-The DenseNet121 architecture consists of 4 dense blocks (with 6, 12, 24, and 16 layers respectively). Each block uses a bottleneck design: \(1 \times 1\) convolution followed by \(3 \times 3\) convolution with preactivation (BN-ReLU-Conv order). Transition layers (1x1 conv + 2x2 average pooling) between blocks compress channel count and reduce spatial resolution. The growth rate \(k=32\) determines how many new feature maps each layer adds.
+The DenseNet121 architecture consists of 4 dense blocks (with 6, 12, 24, and 16 layers respectively). Each block uses a bottleneck design: \(1 \times 1\) convolution followed by \(3 \times 3\) convolution with preactivation. Transition layers (1x1 conv + 2x2 average pooling) between blocks compress channel count and reduce spatial resolution. The growth rate \(k=32\) determines how many new feature maps each layer adds.
 
-DenseNet is particularly suitable for this task for three reasons: (1) Feature reuse reduces parameters compared to ResNet or VGG of similar depth, which is crucial given the limited CCE dataset size. (2) Short gradient paths from early layers to the loss mitigate vanishing gradients without requiring residual summation. (3) It is a well-established baseline in medical imaging (e.g., CheXNet for chest X-rays) due to its parameter efficiency on limited labeled data. The trade-off is higher memory consumption during training since activations must be kept for the entire dense block.
+DenseNet is particularly suitable for this task for two reasons: 
+\begin{itemize}
+	\item Feature reuse reduces parameters compared to ResNet or VGG of similar depth, which is crucial given the limited CCE dataset size.
+	\item It is a well-established baseline in medical imaging (e.g., CheXNet for chest X-rays) due to its parameter efficiency on limited labeled data. The trade-off is higher memory consumption during training since activations must be kept for the entire dense block.
+\end{itemize}
 
 \subsection{Data Preparation}
 The CCE dataset consists of RGB images of resolution \(512 \times 512\), resized to \(224 \times 224\) for compatibility with ImageNet-pretrained models. Binary classification labels: Non-neoplasia (class 0) and Neoplasia (class 1). The dataset was split into training (1667 images), validation (562 images), and test (569 images) sets using provided text files.
@@ -93,10 +97,10 @@ The CCE dataset consists of RGB images of resolution \(512 \times 512\), resized
 Data augmentation on the training set included random horizontal flips and rotations (\(\pm10^\circ\)), with normalization using mean and standard deviation of 0.5 across all channels.
 
 \subsection{Implementation Details}
-We used DenseNet121 pretrained on ImageNet via PyTorch's torchvision library. The classifier head was replaced with a single neuron for binary classification (output passed through sigmoid for probability). Loss function: Binary Cross-Entropy with Logits Loss (BCEWithLogitsLoss). Optimizer: Adam with learning rate \(10^{-4}\) and betas \((0.9, 0.999)\). Early stopping with patience 5: training stopped after 10 epochs when validation loss stopped improving for 5 consecutive epochs (best checkpoint, from epoch 5, restored). Batch size: 32.
+We used DenseNet121 pretrained on ImageNet via PyTorch's torchvision library. The classifier head was replaced with a single neuron for binary classification. Loss function: Binary Cross-Entropy with Logits Loss (BCEWithLogitsLoss). Optimizer: Adam with learning rate \(10^{-4}\) and betas \((0.9, 0.999)\). Early stopping with patience 5: training stopped after 10 epochs when validation loss stopped improving for 5 consecutive epochs (best checkpoint, from epoch 5, restored). Batch size: 32.
 
 \subsection{Results}
-Figure 1 shows training and validation loss and accuracy over epochs. The model converged quickly: validation accuracy rose from 84.16\% at epoch 1 to 94.48\% by epoch 2, then fluctuated in the 94-97\% range while training accuracy climbed steadily from 76.84\% to 99.40\% by epoch 10, with a growing train/validation gap indicating mild overfitting. Validation loss reached its minimum (0.0961) at epoch 5 and rose thereafter (peaking at 0.1758 at epoch 7 before settling around 0.14); early stopping (patience 5) triggered at epoch 10, restoring the epoch-5 checkpoint.
+Figure~\ref{fig:densenet_curves} shows training and validation loss and accuracy over epochs. The model converged quickly: validation accuracy rose from 84.16\% at epoch 1 to 94.48\% by epoch 2, then fluctuated in the 94-97\% range while training accuracy climbed steadily from 76.84\% to 99.40\% by epoch 10, with a growing train/validation gap indicating mild overfitting. Validation loss reached its minimum (0.0961) at epoch 5 and rose thereafter (peaking at 0.1758 at epoch 7 before settling around 0.14); early stopping (patience 5) triggered at epoch 10, restoring the epoch-5 checkpoint.
 
 \begin{figure}[H]
 \centering
@@ -105,7 +109,7 @@ Figure 1 shows training and validation loss and accuracy over epochs. The model 
 \label{fig:densenet_curves}
 \end{figure}
 
-Table 1 reports comprehensive performance metrics on the test set (569 images). The model misclassified 20 of 569 images (confusion matrix shown in Figure 2): 6 false positives and 14 false negatives.
+Table~\ref{tab:densenet_perf} reports comprehensive performance metrics on the test set (569 images). The model misclassified 20 of 569 images (confusion matrix shown in Figure~\ref{fig:densenet_confusion}): 6 false positives and 14 false negatives.
 
 \begin{table}[H]
 \centering
@@ -119,7 +123,7 @@ Accuracy (\%) & 96.49 \\
 Sensitivity (\%) & 94.19 \\
 Specificity (\%) & 98.17 \\
 F1 Score & 0.9578 \\
-AUC & 0.9898 \\
+AUC & 0.9930 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -131,12 +135,12 @@ AUC & 0.9898 \\
 \label{fig:densenet_confusion}
 \end{figure}
 
-The ROC curve (Figure 3) gives an AUC of 0.990, not perfect but still excellent discriminative ability; the curve sits close to the top-left corner across nearly the full false-positive-rate range. The Precision-Recall curve (Figure 4) shows precision holding at essentially 1.0 up to recall $\approx$0.8, then degrading sharply as recall approaches 1.0 (down to $\approx$0.4 at full recall), meaning the last few positives are only recoverable at a steep precision cost -- consistent with the 20 misclassifications in Table 1.
+The ROC curve (Figure~\ref{fig:densenet_roc}) gives an AUC of 0.993, not perfect but still excellent discriminative ability; the curve sits close to the top-left corner across nearly the full false-positive-rate range. The Precision-Recall curve (Figure~\ref{fig:densenet_pr}) shows precision holding at essentially 1.0 up to recall $\approx$0.8, then degrading sharply as recall approaches 1.0, meaning the last few positives are only recoverable at a steep precision cost -- consistent with the 20 misclassifications in Table~\ref{tab:densenet_perf}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{Images/densenet121_roc.png}
-\caption{ROC curve - DenseNet121 (AUC = 0.990).}
+\caption{ROC curve - DenseNet121 (AUC = 0.993).}
 \label{fig:densenet_roc}
 \end{figure}
 
@@ -147,7 +151,7 @@ The ROC curve (Figure 3) gives an AUC of 0.990, not perfect but still excellent 
 \label{fig:densenet_pr}
 \end{figure}
 
-Figure 5 shows Grad-CAM heatmaps overlaid on test images, highlighting the regions the model focused on when making predictions. The attention is concentrated on polyp regions, validating that the model learns clinically relevant features.
+Figure~\ref{fig:densenet_gradcam} shows Grad-CAM heatmaps overlaid on test images, highlighting the regions the model focused on when making predictions. The attention is concentrated on polyp regions, validating that the model learns clinically relevant features.
 
 \begin{figure}[H]
 \centering
@@ -156,7 +160,7 @@ Figure 5 shows Grad-CAM heatmaps overlaid on test images, highlighting the regio
 \label{fig:densenet_gradcam}
 \end{figure}
 
-Table 2 compares our DenseNet121 (pretrained) with a scratch-trained ResNet18 from a group member; the third member's results will be added when available.
+Table~\ref{tab:model_comparison} compares our DenseNet121 (pretrained) with a scratch-trained ResNet18 and a pretrained MobileNet from group members.
 
 \begin{table}[H]
 \centering
@@ -168,40 +172,41 @@ Table 2 compares our DenseNet121 (pretrained) with a scratch-trained ResNet18 fr
 \toprule
 Model & Type & Acc. & Sens. & Spec. & F1 & AUC \\
 \midrule
-DenseNet121 & Pretr. & 96.49 & 94.19 & 98.17 & 0.9580 & 0.9900 \\
+DenseNet121 & Pretr. & 96.49 & 94.19 & 98.17 & 0.9580 & 0.9930 \\
 ResNet18   & Scratch & 94.31 & 95.24 & 93.55 & 0.9375 & 0.9846 \\
 MobileNet  & Pretr. & 95.02 & 91.27 & 98.06 & 0.9426 & 0.9895 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-This comparison highlights three points. (1) Both pretrained backbones (DenseNet121, MobileNet) beat the scratch-trained ResNet18 on accuracy, specificity, and AUC, suggesting ImageNet pretraining -- not architecture choice -- is the dominant factor on this $\sim$1700-image training set. (2) DenseNet121 and MobileNet reach similar AUC ($\geq$0.989 both) but trade off differently: DenseNet121's sensitivity (94.19\%) exceeds MobileNet's (91.27\%) at effectively no specificity cost (98.17\% vs 98.06\%), which matters clinically since a missed neoplasia (false negative) is costlier than a false alarm. (3) ResNet18's specificity (93.55\%) trails both pretrained models by $\sim$4.5 points despite its highest sensitivity (95.24\%) of the three -- it over-predicts the positive class, consistent with a from-scratch model on a training set well below typical data requirements for that regime. \textit{Note: these ResNet18/MobileNet figures are taken as reported by the group members and not independently verified; the accuracy/sensitivity/specificity for ResNet18 quoted in the Conclusion (70.83\%/93.75\%/25\%) do not match this table (94.31\%/95.24\%/93.55\%) -- that inconsistency should be resolved before submission.}
+This comparison highlights three points. 
+\begin{itemize}
+	\item Both pretrained backbones (DenseNet121, MobileNet) beat the scratch-trained ResNet18 on accuracy, specificity, and AUC, suggesting ImageNet pretraining is the dominant factor on this $\sim$1700-image training set.
+	\item DenseNet121 and MobileNet reach similar AUC ($\geq$0.989 both) but trade off differently: DenseNet121's sensitivity (94.19\%) exceeds MobileNet's (91.27\%) at effectively no specificity cost (98.17\% vs 98.06\%), which matters clinically since a missed neoplasia (false negative) is costlier than a false alarm.
+	\item ResNet18's specificity (93.55\%) trails both pretrained models by $\sim$4.5 points despite its highest sensitivity (95.24\%) of the three -- it over-predicts the positive class, consistent with a from-scratch model on a training set well below typical data requirements for that regime.
+\end{itemize}
+
 
 \section{Task 2: Semantic Segmentation}
 
 \subsection{Model Description: Attention U-Net}
-The segmentation model was changed from a plain UNet to Attention U-Net (Oktay et al., 2018) after an intermediate attempt with DeepLabV3+ (lite) underperformed badly on this dataset (Jaccard 0.13, IoU 0.23, AUC 0.63, early-stopped at epoch 20): its stride-8 dilated backbone discards spatial resolution that cannot be relearned from only 24 training images, and its BatchNorm layers give noisy running statistics at batch size 2, a known failure mode for small-batch medical imaging.
+Attention U-Net keeps UNet's symmetric, full-resolution encoder-decoder with skip connections, but adds an attention gate on every skip connection: before concatenation, each encoder feature map is gated by a signal computed jointly from itself and the corresponding decoder feature map, letting the decoder suppress irrelevant background instead of relying on capacity learned from scratch to do so -- the mechanism the original paper reports helps most on small datasets. GroupNorm replaces BatchNorm throughout (stable statistics at batch size 2). Channel width follows 16 → 32 → 64 → 128 → 256 (base width 16, half of the standard UNet's 64) across 4 downsampling stages plus a bottleneck; each encoder/decoder stage is a double 3x3-conv block (GroupNorm + ReLU), downsampling via 2x2 max pooling and upsampling via 2x2 transposed convolutions. A final 1x1 convolution plus sigmoid produces the per-pixel membrane probability. As in the original UNet exercise setup, inputs are reflection-padded to 572x572 and outputs are center-cropped to 388x388, though internally the convolutions use padding=1, so the size reduction here comes purely from the explicit crop rather than from unpadded convolutions.\\
 
-Attention U-Net keeps UNet's symmetric, full-resolution encoder-decoder with skip connections (so fine membrane boundaries survive downsampling), but adds an attention gate on every skip connection: before concatenation, each encoder feature map is gated by a signal computed jointly from itself and the corresponding decoder (gating) feature map, letting the decoder suppress irrelevant background instead of relying on capacity learned from scratch to do so -- the mechanism the original paper reports helps most on small datasets. GroupNorm replaces BatchNorm throughout (stable statistics at batch size 2). Channel width follows 16 → 32 → 64 → 128 → 256 (base width 16, half of the standard UNet's 64) across 4 downsampling stages plus a bottleneck; each encoder/decoder stage is a double 3x3-conv block (GroupNorm + ReLU), downsampling via 2x2 max pooling and upsampling via 2x2 transposed convolutions. A final 1x1 convolution plus sigmoid produces the per-pixel membrane probability. As in the original UNet exercise setup, inputs are reflection-padded to 572x572 and outputs are center-cropped to 388x388, though internally the convolutions use padding=1 (not UNet's original valid convolutions), so the size reduction here comes purely from the explicit crop rather than from unpadded convolutions.
 
-Attention U-Net is well suited to the ISBI 2012 neuronal membrane dataset because the attention gates let the model focus its limited capacity on membrane boundaries without needing more labeled data (only 24 training slices) to learn that focus implicitly, and full-resolution skip connections preserve the fine spatial detail membrane segmentation depends on.
+Attention U-Net is well suited for our dataset because the attention gates let the model focus its limited capacity on membrane boundaries without needing more labeled data to learn that focus implicitly, and full-resolution skip connections preserve the fine spatial detail membrane segmentation depends on.
 
 \subsection{Data Preparation}
-The ISBI 2012 neuronal membrane dataset consists of 30 labeled training images (512 × 512 pixels) and 30 unlabeled test images. Binary labels: membrane pixels (foreground) and background. Ground truth convention: membrane pixels are dark (value < 128), converted to 1, background to 0.
+Our dataset consists of 30 labeled training images (512 × 512 pixels) and 30 unlabeled test images. Binary labels: membrane pixels (foreground) and background. Ground truth convention: membrane pixels are dark (value < 128), converted to 1, background to 0.
 
 Input images were padded to 572 × 572 using reflection padding, then center-cropped to 388 × 388 after the forward pass. Training split: 24 slices for training, 6 for validation (early stopping only). Augmentation included random horizontal and vertical flips. Per instructor feedback, the full 30-slice labeled set (not the 6-slice validation split) was used for final performance reporting, since the unlabeled test set has no ground truth to evaluate against; the 6-slice validation split is used only for early-stopping model selection during training.
 
 \subsection{Implementation Details}
-Loss function: DiceBCE Loss, combining Binary Cross-Entropy and Dice Loss:
-\[\mathcal{L}_{DiceBCE} = \mathcal{L}_{BCE} + \mathcal{L}_{Dice}\]
-where 
-\[\mathcal{L}_{Dice} = 1 - \frac{2 \cdot \sum (p_i g_i) + \epsilon}{\sum p_i + \sum g_i + \epsilon}\]
-with \(p_i\) the predicted probability, \(g_i\) the ground truth label, and \(\epsilon = 10^{-6}\) for numerical stability.
+Loss function: DiceBCE Loss, combining Binary Cross-Entropy and Dice Losswith \(p_i\) the predicted probability, \(g_i\) the ground truth label, and \(\epsilon = 10^{-6}\) for numerical stability.\\
 
-Optimizer: Adam with learning rate \(10^{-4}\). Early stopping with patience 5: training stopped after 55 epochs when validation loss stopped improving for 5 consecutive epochs (best checkpoint, from epoch 50, restored). Batch size: 2 (limited by GPU memory for 572 × 572 inputs). Number of epochs: 100 (upper bound, early stopped at 55).
+Optimizer: Adam with learning rate \(10^{-4}\). Early stopping with patience 5: training stopped after 55 epochs when validation loss stopped improving for 5 consecutive epochs (best checkpoint, from epoch 50, restored). Batch size: 2 (to use limited GPU memory for 572 × 572 inputs). Number of epochs: 100 (upper bound, early stopped at 55).
 
 \subsection{Results}
-Figure 6 shows training and validation loss, and validation IoU over epochs. The DiceBCE loss decreased smoothly and almost monotonically from $\approx$1.27 (train) / $\approx$1.21 (val) at epoch 1 to 0.5665 (train) / 0.6235 (val) at epoch 55, with train and validation loss tracking closely until roughly epoch 30-35, after which validation loss plateaus around 0.62-0.65 while training loss keeps falling -- a mild overfitting gap consistent with only 24 training slices. Validation IoU rose steeply over the first $\approx$10 epochs (0.39 to 0.62), then continued climbing more gradually with epoch-to-epoch noise, reaching its best value ($\approx$0.679, val loss 0.6163) at epoch 50; early stopping (patience 5) triggered at epoch 55, restoring the epoch-50 checkpoint.
+Figure~\ref{fig:unet_curves} shows training and validation loss, and validation IoU over epochs. The DiceBCE loss decreased smoothly and almost equally from $\approx$1.27 (train) / $\approx$1.21 (val) at epoch 1 to 0.5665 (train) / 0.6235 (val) at epoch 55, with train and validation loss tracking closely until roughly epoch 30-35, after which validation loss plateaus around 0.62-0.65 while training loss keeps falling -- a mild overfitting gap consistent with only 24 training slices. Validation IoU rose steeply over the first $\approx$10 epochs (0.39 to 0.62), then continued climbing more gradually with epoch-to-epoch noise, reaching its best value ($\approx$0.679, val loss 0.6163) at epoch 50; early stopping (patience 5) triggered at epoch 55, restoring the epoch-50 checkpoint.
 
 \begin{figure}[H]
 \centering
@@ -210,7 +215,7 @@ Figure 6 shows training and validation loss, and validation IoU over epochs. The
 \label{fig:unet_curves}
 \end{figure}
 
-Table 3 reports metrics computed on the full training set (30 labeled slices), as per exercise/instructor requirements.
+Table~\ref{tab:unet_perf} reports metrics computed on the full training set, as per exercise/instructor requirements.
 
 \begin{table}[H]
 \centering
@@ -229,7 +234,7 @@ Accuracy & 0.9209 \\
 \end{tabular}
 \end{table}
 
-Figure 7 shows the pixel-level confusion matrix, computed on 4,516,320 pixels from the training set. True Positives: 906,023, False Positives: 229,576, False Negatives: 127,589, True Negatives: 3,253,132. Recall clearly exceeds precision here (87.8\% vs 79.7\%), meaning the model over-predicts membrane pixels somewhat (more false positives than false negatives) rather than missing them.
+Figure~\ref{fig:unet_confusion} shows the pixel-level confusion matrix, computed on 4,516,320 pixels from the training set. True Positives: 906,023, False Positives: 229,576, False Negatives: 127,589, True Negatives: 3,253,132. Recall clearly exceeds precision here (87.8\% vs 79.7\%), meaning the model over-predicts membrane pixels somewhat (more false positives than false negatives) rather than missing them.
 
 \begin{figure}[H]
 \centering
@@ -238,7 +243,7 @@ Figure 7 shows the pixel-level confusion matrix, computed on 4,516,320 pixels fr
 \label{fig:unet_confusion}
 \end{figure}
 
-The pixel-level ROC curve (Figure 8) achieved an AUC of 0.970 (computed on a 300,000-pixel subsample for tractability; the confusion matrix and Table 3 use the full 4.5M pixels), demonstrating strong discrimination between membrane and background pixels, and a clear improvement over the earlier plain-UNet run's pixel-level AUC of 0.927.
+The ROC curve (Figure~\ref{fig:unet_roc}) achieved an AUC of 0.970 (computed on a 300,000-pixel subsample for tractability; the confusion matrix and Table~\ref{tab:unet_perf} use the full 4.5M pixels), demonstrating strong discrimination between membrane and background pixels, and a clear improvement over the earlier plain-UNet run's pixel-level AUC of 0.927.
 
 \begin{figure}[H]
 \centering
@@ -247,7 +252,7 @@ The pixel-level ROC curve (Figure 8) achieved an AUC of 0.970 (computed on a 300
 \label{fig:unet_roc}
 \end{figure}
 
-Table 4 compares our Attention U-Net (Dice+BCE loss) with a UNet (Dice+BCE loss) and a TransUNet (IoU+BCE loss) trained by group members on the same dataset.
+Table~\ref{tab:seg_comparison} compares our Attention U-Net (Dice+BCE loss) with a UNet (Dice+BCE loss) and a TransUNet (IoU+BCE loss) trained by group members on the same dataset.
 
 \begin{table}[H]
 \centering
@@ -266,11 +271,11 @@ TransUNet (IoU+BCE) & 0.8969 & 0.9456 & 0.9373 & 0.9541 & 0.9162 \\
 \end{tabular}
 \end{table}
 
-The comparison reveals a significant performance gap. Both the UNet and TransUNet models substantially outperform the Attention U-Net across all metrics, achieving Jaccard scores above 0.89 compared to our model's 0.7167. This suggests that the architectural complexity and larger capacity of these models are better suited for this segmentation task, potentially allowing them to learn more robust feature representations despite the limited dataset. Our Attention U-Net's lower precision (0.7969 vs. 0.9454 and 0.9541) is consistent with the pattern seen in Figure 7, indicating a tendency to over-predict membrane pixels. The other models achieve a significantly better balance, resulting in higher overall performance.
+The comparison reveals a significant performance gap. Both the UNet and TransUNet models substantially outperform the Attention U-Net across all metrics, achieving Jaccard scores above 0.89 compared to our model's 0.7167. This suggests that the architectural complexity and larger capacity of these models are better suited for this segmentation task, potentially allowing them to learn more robust feature representations despite the limited dataset. Our Attention U-Net's lower precision (0.7969 vs. 0.9454 and 0.9541) is consistent with the pattern seen in Figure~\ref{fig:unet_confusion}, indicating a tendency to over-predict membrane pixels. The other models achieve a significantly better balance, resulting in higher overall performance.
 
-Note: The Jaccard and F1 scores for the UNet and TransUNet models in this table are substantially higher than those reported for our Attention U-Net in Table 3, confirming that they are more effective for this task.
+Note: The Jaccard and F1 scores for the UNet and TransUNet models in this table are substantially higher than those reported for our Attention U-Net in Table~\ref{tab:unet_perf}, confirming that they are more effective for this task.
 
-Figures 9 and 10 show predictions on two slices of the genuinely unlabeled test volume (no ground truth exists for these images, so only input and prediction are shown). The predicted segmentations capture membrane structures effectively, with fine boundary details preserved and few isolated false-positive blobs compared to the earlier plain-UNet output. The overlay visualization (Figure 11) shows predicted membrane contours in green on the same test images.
+Figure~\ref{fig:unet_test_predictions} shows predictions on two slices of the genuinely unlabeled test volume. The predicted segmentations capture membrane structures effectively, with fine boundary details preserved and few isolated false-positive blobs compared to the earlier plain-UNet output. The overlay visualization (Figure~\ref{fig:unet_overlay}) shows predicted membrane contours in green on the same test images.
 
 \begin{figure}[H]
 \centering
@@ -286,16 +291,26 @@ Figures 9 and 10 show predictions on two slices of the genuinely unlabeled test 
 \label{fig:unet_overlay}
 \end{figure}
 
+\columnbreak
 \section{Conclusion}
-\textbf{Polyp Characterization:} DenseNet121 pretrained on ImageNet with transfer learning achieved strong performance (96.49\% accuracy, AUC 0.990) on the CCE polyp characterization task, with 20 of 569 test images misclassified (6 false positives, 14 false negatives) -- the PR curve's precision collapse at recall $>$0.9 reflects these hard positives. This demonstrates three key advantages: (1) transfer learning from natural images generalizes well to medical imaging, (2) DenseNet's parameter efficiency limits overfitting on a training set of under 2000 images, and (3) Grad-CAM visualizations confirm the model focuses on clinically relevant regions. The contrast with the scratch-trained ResNet18 (70.83\% accuracy, 93.75\% sensitivity, 25\% specificity) highlights the importance of pretraining for limited medical datasets. Sensitivity (94.19\%) trailing specificity (98.17\%) means missed neoplasia cases are the model's main error mode, which matters more clinically than false alarms.\\
+\textbf{Polyp Characterization:} DenseNet121 pretrained on ImageNet with transfer learning achieved strong performance (96.49\% accuracy, AUC 0.990) on the CCE polyp characterization task, with 20 of 569 test images misclassified (6 false positives, 14 false negatives) -- the PR curve's precision collapse at recall $>$0.9 reflects these hard positives. This demonstrates three key advantages: 
+\begin{itemize}
+	\item Transfer learning from natural images generalizes well to medical imaging.
+	\item DenseNet's parameter efficiency limits overfitting on a training set of under 2000 images.
+	\item Grad-CAM visualizations confirm the model focuses on clinically relevant regions.
+\end{itemize}
+The contrast with the scratch-trained ResNet18 (70.83\% accuracy, 93.75\% sensitivity, 25\% specificity) highlights the importance of pretraining for limited medical datasets. Sensitivity (94.19\%) trailing specificity (98.17\%) means missed neoplasia cases are the model's main error mode, which matters more clinically than false alarms.\\
 
-\textbf{Semantic Segmentation:} Attention U-Net with DiceBCE loss produced moderate segmentation quality (Jaccard 0.717, F1/Dice 0.835, pixel-level AUC 0.970) on the ISBI 2012 neuronal membrane dataset. This represents a clear improvement over an earlier plain-UNet baseline (Jaccard 0.567, F1 0.723, AUC 0.927) and over an intermediate DeepLabV3+ attempt that underperformed badly on this small dataset (Jaccard 0.13), demonstrating the value of its attention gates for focusing on membrane boundaries. However, a comparison with other models shows that a standard UNet and a TransUNet achieve significantly higher performance (Jaccard > 0.89), suggesting that the Attention U-Net's architecture, while better than a baseline, may still be under-utilizing the available data or may be more sensitive to hyperparameter choices. Recall (87.8\%) exceeding precision (79.7\%) shows the model's main error mode is over-predicting membrane rather than missing it, the opposite pattern from under-segmentation. Training with only 24 labeled slices (30 total) remained the binding constraint; the train/validation loss gap opening after $\approx$epoch 30 indicates some overfitting despite this improvement.\\
+\textbf{Semantic Segmentation:} Attention U-Net with DiceBCE loss produced moderate segmentation quality (Jaccard 0.717, F1/Dice 0.835, pixel-level AUC 0.970) on the ISBI 2012 neuronal membrane dataset. A comparison with other models shows that a standard UNet and a TransUNet achieve significantly higher performance (Jaccard > 0.89), suggesting that the Attention U-Net's architecture, while better than a baseline, may still be under-utilizing the available data or may be more sensitive to hyperparameter choices. Recall (87.8\%) exceeding precision (79.7\%) shows the model's main error mode is over-predicting membrane rather than missing it, the opposite pattern from under-segmentation. Training with only 24 labeled slices (30 total) remained the binding constraint; the train/validation loss gap opening after $\approx$epoch 30 indicates some overfitting despite this improvement.\\
 
 \textbf{Limitations and Future Work:}
-1. The CCE polyp characterization model achieved strong but imperfect performance (AUC 0.990); the 14 false negatives are the more clinically important error mode and warrant inspecting those specific cases directly. Cross-validation or evaluation on external datasets would provide more robust estimates.
-2. For segmentation, Attention U-Net used only 24 training slices (30 total); the widening train/validation loss gap after epoch 30 suggests more labeled data, stronger augmentation, or regularization could still help.
-3. A DeepLabV3+ (lite) baseline was tried and underperformed substantially on this small dataset (Jaccard 0.13 vs 0.72 for Attention U-Net); further architectures (UNet++, TransUNet) could still be compared.
-4. For both tasks, hyperparameter optimization (learning rate, batch size, loss function weights) could yield further improvements.\\
+\begin{itemize}
+	\item The CCE polyp characterization model achieved strong but imperfect performance (AUC 0.990); the 14 false negatives are the more clinically important error mode and warrant inspecting those specific cases directly. Cross-validation or evaluation on external datasets would provide more robust estimates.
+	\item For segmentation, Attention U-Net used only 24 training slices; the widening train/validation loss gap after epoch 30 suggests more labeled data, stronger augmentation, or regularization could still help.
+	\item For both tasks, hyperparameter optimization (learning rate, batch size, loss function weights) could yield further improvements.\\
+\end{itemize}
+
+\columnbreak
 
 \textbf{Final Remarks:} Both tasks demonstrate the effectiveness of deep learning for medical image analysis. DenseNet121's parameter efficiency makes it ideal for small medical imaging datasets, while Attention U-Net's attention-gated skip connections provide strong localization for segmentation tasks on very small labeled sets, outperforming both a plain UNet and a dilated-backbone DeepLabV3+ baseline here. The combination of transfer learning, appropriate loss functions, and early stopping proved essential for successful training on limited medical data.
 
