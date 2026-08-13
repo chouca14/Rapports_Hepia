@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1786615295.19412 "c:/Users/miste/Rapports_Hepia/AI_Healthcare1/AI_Healthcare2_Colorectal.tex" "out/AI_Healthcare2_Colorectal.pdf" "AI_Healthcare2_Colorectal" 1786615297.06356 0
-  "AI_Healthcare2_Colorectal.tex" 1786615292 23616 736e292b2f6213bcf267ad328ca8ef59 ""
+["pdflatex"] 1786615872.34196 "c:/Users/miste/Rapports_Hepia/AI_Healthcare1/AI_Healthcare2_Colorectal.tex" "out/AI_Healthcare2_Colorectal.pdf" "AI_Healthcare2_Colorectal" 1786615874.14741 0
+  "AI_Healthcare2_Colorectal.tex" 1786615871 23579 94cca5a4e585b27da4d0f2410d915b45 ""
   "C:/Users/miste/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1781273975 282564 8facb9d622fe95774f852801a0e11581 ""
   "C:/Users/miste/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1747935764 24225046 49f6b64a3a70d5131a43197269f4930e ""
   "C:/Users/miste/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -118,10 +118,10 @@
   "Images/unet_roc.png" 1786613109 49905 cbedb4e352dc7430dfb75ed9ba3a4575 ""
   "Images/unet_test_predictions.png" 1786613111 456834 6e444eb0871a7f749cefc284111be19a ""
   "Images/unet_training_curves.png" 1786613329 188521 0cf546e839f420ee86a2c72d145322f8 ""
-  "c:/Users/miste/Rapports_Hepia/AI_Healthcare1/AI_Healthcare2_Colorectal.tex" 1786615292 23616 736e292b2f6213bcf267ad328ca8ef59 ""
-  "out/AI_Healthcare2_Colorectal.aux" 1786615296 5519 95c8e2f6b4990e5a632b26abdc88a678 "pdflatex"
-  "out/AI_Healthcare2_Colorectal.out" 1786615296 1851 7120918cf4a8c2454c8cea62d429f8d1 "pdflatex"
-  "out/AI_Healthcare2_Colorectal.toc" 1786615296 987 c9bfea39a2072afa616981984cb847ac "pdflatex"
+  "c:/Users/miste/Rapports_Hepia/AI_Healthcare1/AI_Healthcare2_Colorectal.tex" 1786615871 23579 94cca5a4e585b27da4d0f2410d915b45 ""
+  "out/AI_Healthcare2_Colorectal.aux" 1786615873 5519 95c8e2f6b4990e5a632b26abdc88a678 "pdflatex"
+  "out/AI_Healthcare2_Colorectal.out" 1786615873 1851 7120918cf4a8c2454c8cea62d429f8d1 "pdflatex"
+  "out/AI_Healthcare2_Colorectal.toc" 1786615873 987 c9bfea39a2072afa616981984cb847ac "pdflatex"
   (generated)
   "out/AI_Healthcare2_Colorectal.aux"
   "out/AI_Healthcare2_Colorectal.log"
