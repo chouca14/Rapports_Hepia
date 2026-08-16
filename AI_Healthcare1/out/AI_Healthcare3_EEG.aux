@@ -1,0 +1,80 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Data}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Stationarity of Synthetic Processes}{2}{section.3}\protected@file@percent }
+\newlabel{sec:synth-stationarity}{{3}{2}{Stationarity of Synthetic Processes}{section.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Ensemble mean and variance (1{,}000 realisations, 5{,}000 steps), random walk: mean drifts, variance grows linearly -- contrast with white noise (flat).}}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:stationarity}{{1}{2}{Ensemble mean and variance (1{,}000 realisations, 5{,}000 steps), random walk: mean drifts, variance grows linearly -- contrast with white noise (flat)}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Fourier Basics, Reconstruction and Windowing}{2}{section.4}\protected@file@percent }
+\newlabel{sec:fourier-basics}{{4}{2}{Fourier Basics, Reconstruction and Windowing}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}EEG Loading, Filtering and Normalisation}{2}{section.5}\protected@file@percent }
+\newlabel{sec:eeg-filtering}{{5}{2}{EEG Loading, Filtering and Normalisation}{section.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces FIR band-pass filter response (0.5--70~Hz, 800 taps); near-unity passband gain, stopband roll-off above 70~Hz.}}{3}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:filter}{{2}{3}{FIR band-pass filter response (0.5--70~Hz, 800 taps); near-unity passband gain, stopband roll-off above 70~Hz}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Artefact identification and filter effect}{3}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:artefact}{{5.1}{3}{Artefact identification and filter effect}{subsection.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Raw vs.\ filtered Fp1 channel over the largest-amplitude 4~s window (4888.0--4892.0~s), a candidate blink/eye-movement artefact; the band-pass filter reduces but does not remove it.}}{4}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:artefact}{{3}{4}{Raw vs.\ filtered Fp1 channel over the largest-amplitude 4~s window (4888.0--4892.0~s), a candidate blink/eye-movement artefact; the band-pass filter reduces but does not remove it}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Windowing and Labelling}{4}{section.6}\protected@file@percent }
+\newlabel{sec:windowing}{{6}{4}{Windowing and Labelling}{section.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Downsampled single-channel EEG with clinician-annotated seizure interval (red), used to derive per-window labels.}}{4}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:eeg_annotated}{{4}{4}{Downsampled single-channel EEG with clinician-annotated seizure interval (red), used to derive per-window labels}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Feature Extraction}{4}{section.7}\protected@file@percent }
+\newlabel{sec:features}{{7}{4}{Feature Extraction}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Dimensionality Reduction and Classification}{5}{section.8}\protected@file@percent }
+\newlabel{sec:classification}{{8}{5}{Dimensionality Reduction and Classification}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}PCA-reduced logistic regression on basic features}{5}{subsection.8.1}\protected@file@percent }
+\newlabel{sec:logreg}{{8.1}{5}{PCA-reduced logistic regression on basic features}{subsection.8.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Test-set performance, basic-feature logistic regression (PCA-reduced, unbalanced), $n=721$.}}{5}{table.caption.5}\protected@file@percent }
+\newlabel{tab:cm_main}{{1}{5}{Test-set performance, basic-feature logistic regression (PCA-reduced, unbalanced), $n=721$}{table.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces PCA components with the ten largest absolute logistic-regression coefficients.}}{5}{table.caption.6}\protected@file@percent }
+\newlabel{tab:pcs}{{2}{5}{PCA components with the ten largest absolute logistic-regression coefficients}{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Confusion matrix, basic-feature logistic regression (PCA-reduced, unbalanced), $n=721$.}}{5}{table.caption.7}\protected@file@percent }
+\newlabel{tab:cm2x2_unbal}{{3}{5}{Confusion matrix, basic-feature logistic regression (PCA-reduced, unbalanced), $n=721$}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Extended features and the class-balanced trade-off}{5}{subsection.8.2}\protected@file@percent }
+\newlabel{sec:extended}{{8.2}{5}{Extended features and the class-balanced trade-off}{subsection.8.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Test-set performance, basic-feature logistic regression (PCA-reduced, class-balanced, whitening ON), $n=721$.}}{6}{table.caption.8}\protected@file@percent }
+\newlabel{tab:cm_balanced}{{4}{6}{Test-set performance, basic-feature logistic regression (PCA-reduced, class-balanced, whitening ON), $n=721$}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Scale/PCA-whitening/balancing ablation, basic-feature logistic regression, $n=721$ per row.}}{6}{table.caption.9}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{6}{Scale/PCA-whitening/balancing ablation, basic-feature logistic regression, $n=721$ per row}{table.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Test-set performance, basic-feature logistic regression (PCA-reduced, class-balanced, \texttt  {whiten=False}), $n=721$ -- row~9 of Table~\ref {tab:ablation}.}}{6}{table.caption.10}\protected@file@percent }
+\newlabel{tab:cm_balanced_corrected}{{6}{6}{Test-set performance, basic-feature logistic regression (PCA-reduced, class-balanced, \texttt {whiten=False}), $n=721$ -- row~9 of Table~\ref {tab:ablation}}{table.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Confusion matrices, unbalanced (Table~\ref {tab:cm_main} configuration) vs.\ balanced with \texttt  {whiten=False} (Table~\ref {tab:cm_balanced_corrected}), $n=721$ each.}}{6}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:cm_unbal_bal}{{5}{6}{Confusion matrices, unbalanced (Table~\ref {tab:cm_main} configuration) vs.\ balanced with \texttt {whiten=False} (Table~\ref {tab:cm_balanced_corrected}), $n=721$ each}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Feature selection and cross-validation}{7}{subsection.8.3}\protected@file@percent }
+\newlabel{sec:featsel-cv}{{8.3}{7}{Feature selection and cross-validation}{subsection.8.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Bonus: seizure prediction via label shift}{7}{subsection.8.4}\protected@file@percent }
+\newlabel{sec:predictor}{{8.4}{7}{Bonus: seizure prediction via label shift}{subsection.8.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Detector (0~s ahead) vs.\ predictor (10~s ahead), basic-feature logistic regression, $n=721$ per row.}}{7}{table.caption.12}\protected@file@percent }
+\newlabel{tab:predictor}{{7}{7}{Detector (0~s ahead) vs.\ predictor (10~s ahead), basic-feature logistic regression, $n=721$ per row}{table.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Confusion matrices for the 10~s-ahead label-shift predictor, unbalanced vs.\ balanced (\texttt  {whiten=False}), $n=721$ each.}}{7}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:cm_predictor}{{6}{7}{Confusion matrices for the 10~s-ahead label-shift predictor, unbalanced vs.\ balanced (\texttt {whiten=False}), $n=721$ each}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Fourier and Spectral-Band Analysis of the EEG}{7}{section.9}\protected@file@percent }
+\newlabel{sec:spectral}{{9}{7}{Fourier and Spectral-Band Analysis of the EEG}{section.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces EEG magnitude spectrum with the five classical band boundaries overlaid; the dominant peak sits at $\approx $10~Hz, inside the Alpha band.}}{8}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:bands}{{7}{8}{EEG magnitude spectrum with the five classical band boundaries overlaid; the dominant peak sits at $\approx $10~Hz, inside the Alpha band}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{8}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Annexe}{9}{section.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Autocorrelation of the filtered EEG channel: short-range oscillatory decay (Sec.~\ref {sec:eeg-filtering}), vs. slow decay for a random walk (Sec.~\ref {sec:synth-stationarity}).}}{9}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:autocorr}{{8}{9}{Autocorrelation of the filtered EEG channel: short-range oscillatory decay (Sec.~\ref {sec:eeg-filtering}), vs. slow decay for a random walk (Sec.~\ref {sec:synth-stationarity})}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Fourier basics (Sec.~\ref {sec:fourier-basics}): time-domain signal and magnitude spectrum for a rectangular pulse, periodic sine, non-periodic sine, and isolated sine burst.}}{10}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:synthspectra}{{9}{10}{Fourier basics (Sec.~\ref {sec:fourier-basics}): time-domain signal and magnitude spectrum for a rectangular pulse, periodic sine, non-periodic sine, and isolated sine burst}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Full-coefficient reconstruction of each synthetic signal; squared error at machine precision, confirming the FFT/iFFT pair is lossless.}}{11}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:reconstruction}{{10}{11}{Full-coefficient reconstruction of each synthetic signal; squared error at machine precision, confirming the FFT/iFFT pair is lossless}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Low-pass-truncated reconstructions of the rectangular pulse for increasing numbers of retained coefficients, and the reconstruction error.}}{12}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:partialrecon}{{11}{12}{Low-pass-truncated reconstructions of the rectangular pulse for increasing numbers of retained coefficients, and the reconstruction error}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Effect of a Hamming window on the non-periodic sine's spectrum: narrower main lobe, lower sidelobes -- reduced spectral leakage.}}{12}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:windowing}{{12}{12}{Effect of a Hamming window on the non-periodic sine's spectrum: narrower main lobe, lower sidelobes -- reduced spectral leakage}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Phase spectrum of the EEG channel: effectively noise-like across frequency, as expected for a broadband physiological signal.}}{13}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:phase}{{13}{13}{Phase spectrum of the EEG channel: effectively noise-like across frequency, as expected for a broadband physiological signal}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces First 1{,}000 samples and magnitude spectrum of white noise, a random walk, and the EEG channel (channel 8), computed identically for all three (Sec.~\ref {sec:spectral}).}}{13}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:realspectra}{{14}{13}{First 1{,}000 samples and magnitude spectrum of white noise, a random walk, and the EEG channel (channel 8), computed identically for all three (Sec.~\ref {sec:spectral})}{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Spectrograms of white noise, random walk and the EEG channel: a persistent narrow-band component sits at $\approx $10~Hz (Alpha) throughout the recording.}}{14}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:spectrograms}{{15}{14}{Spectrograms of white noise, random walk and the EEG channel: a persistent narrow-band component sits at $\approx $10~Hz (Alpha) throughout the recording}{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Power in the five classical EEG bands (log scale), channel 8, first 10{,}000 samples, unfiltered.}}{14}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:bandbar}{{16}{14}{Power in the five classical EEG bands (log scale), channel 8, first 10{,}000 samples, unfiltered}{figure.caption.23}{}}
+\gdef \@abspage@last{14}

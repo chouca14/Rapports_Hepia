@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Data}{2}{section.2}%
+\contentsline {section}{\numberline {3}Stationarity of Synthetic Processes}{2}{section.3}%
+\contentsline {section}{\numberline {4}Fourier Basics, Reconstruction and Windowing}{2}{section.4}%
+\contentsline {section}{\numberline {5}EEG Loading, Filtering and Normalisation}{2}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Artefact identification and filter effect}{3}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Windowing and Labelling}{4}{section.6}%
+\contentsline {section}{\numberline {7}Feature Extraction}{4}{section.7}%
+\contentsline {section}{\numberline {8}Dimensionality Reduction and Classification}{5}{section.8}%
+\contentsline {subsection}{\numberline {8.1}PCA-reduced logistic regression on basic features}{5}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Extended features and the class-balanced trade-off}{5}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Feature selection and cross-validation}{7}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Bonus: seizure prediction via label shift}{7}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Fourier and Spectral-Band Analysis of the EEG}{7}{section.9}%
+\contentsline {section}{\numberline {10}Conclusion}{8}{section.10}%
+\contentsline {section}{\numberline {11}Annexe}{9}{section.11}%
