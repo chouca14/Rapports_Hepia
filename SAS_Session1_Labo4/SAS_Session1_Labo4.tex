@@ -1,0 +1,465 @@
+﻿\documentclass[a4paper,5pt]{article}
+
+% ======================
+% Encoding and language
+% ======================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+% ======================
+% Layout and graphics
+% ======================
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+% ======================
+% Page geometry
+% ======================
+\geometry{
+    a4paper,
+    top=25mm,
+    bottom=20mm,
+    textwidth=185mm
+}
+
+\setlength{\parindent}{5pt}
+\setlength{\parskip}{0pt}
+
+% ======================
+% Section formatting
+% ======================
+\titleformat{\section}
+{\normalfont\bfseries}
+{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+{\normalfont\itshape}
+{\thesubsection.}{0.5em}{}
+
+% ======================
+% Header / footer
+% ======================
+\pagestyle{fancy}
+\fancyhf{}
+
+\rhead{\includegraphics[scale=0.4]{images/hepia_simple.png}}
+\rfoot{\textit{\today}}
+\cfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ======================
+% Caption style
+% ======================
+\captionsetup{
+    font=footnotesize,
+    labelsep=colon
+}
+
+% ======================
+% Document
+% ======================
+\begin{document}
+
+\begin{center}
+\rule{\linewidth}{0.4pt}
+{\large
+Rapport de laboratoire\\
+\vspace{2mm}
+Dimensionnement d'un régulateur pour un vérin hydraulique
+}
+
+\vspace{8mm}
+
+Guilhem Rozier Vilardell\footnote{\textit{\href{mailto:guilhem.roziervi@hes-so.ch}{MT2, guilhem.roziervi@hes-so.ch}}},
+Noah Michelot\footnote{\textit{\href{mailto:noah.michelot@hes-so.ch}{MT2, noah.michelot@hes-so.ch}}}
+
+\vspace{3mm}
+
+\footnotesize{
+\textit{Haute école de paysagerie, d'ingénierie et d'architecture, Genève, Suisse}
+}
+\rule{\linewidth}{0.4pt}
+\vspace{9mm}
+
+\end{center}
+
+\setlength{\parskip}{10pt}
+
+
+% =================================================
+\section{Introduction}
+
+Ce laboratoire a pour objet le dimensionnement et l'implémentation d'un
+régulateur PI pour la commande en position d'un plateau mobile entraîné par un
+vérin hydraulique, lui-même alimenté par une servovalve. Le régulateur est
+dimensionné par la méthode du \emph{approximation des asymptotes} (point~A), puis vérifié en simulation (point~C). Il est ensuite implanté sur l'installation réelle, pilotée par un microcontrôleur ESP32 programmé depuis un schéma \textit{Simulink}, avec une période d'échantillonnage $T_E = 1~\mathrm{ms}$ (point~D). Les observations faites sur l'installation,
+en particulier la saturation de la commande, permettent enfin de discuter
+l'emploi d'un régulateur PID ou P (point~E).
+
+% =================================================
+\section{Modèle du système}
+
+Le modèle de l'installation fourni dans l'énoncé est représenté à la
+figure~\ref{fig:boucle}. Il comprend la servovalve $G_{sva}$, le vérin
+$G_{vey}$, un gain de fuite $K_{per}$ qui modélise une perturbation de débit,
+ainsi que la mesure de position $G_{mes}$~:
+
+\begin{equation}
+G_{vey}(s) = \frac{8{,}162 \times 10^{3}}{s}\ [\mathrm{m/(m^3/s)}]
+\quad,\quad
+G_{sva}(s) = \frac{6{,}05 \times 10^{-6}}{1 + s\,T_2}\ [\mathrm{(m^3/s)/V}]
+\quad,\quad
+G_{mes}(s) = \frac{50}{1 + s\,T_1}\ [\mathrm{V/m}]
+\end{equation}
+
+avec $T_2 = 3~\mathrm{ms}$ et $T_1 = 5~\mathrm{ms}$. Dans l'installation réelle
+comme en simulation, la consigne de position (en mètres) est convertie en
+volts par le gain $K_{mes} = 50~\mathrm{V/m}$, puis traverse un filtre de
+consigne $G_{lc}(s)$ dont le rôle est expliqué au point~A.
+
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[>=Stealth, font=\small,
+  blk/.style={draw, minimum height=8mm, minimum width=12mm, inner sep=3pt},
+  sum/.style={draw, circle, inner sep=0pt, minimum size=5mm}]
+  \node (r)    at (0,0)    {$r$~[m]};
+  \node[blk] (kmes) at (1.9,0)  {$K_{mes}$};
+  \node[blk] (glc)  at (4.0,0)  {$G_{lc}$};
+  \node[sum] (s1)   at (6.8,0)  {};
+  \node[blk] (gr)   at (8.7,0)  {$G_R$};
+  \node[blk] (gsva) at (11.6,0) {$G_{sva}$};
+  \node[sum] (s2)   at (14.8,0) {};
+  \node[blk] (gvey) at (16.9,0) {$G_{vey}$};
+  \node (y)    at (19.3,0) {$y$~[m]};
+  \node[blk] (gmes) at (11.6,-2) {$G_{mes}$};
+  \node (v)    at (11.6,2)  {$v$~[V]};
+  \node[blk, dashed] (kper) at (14.8,2) {$K_{per}$};
+
+  \draw[->] (r)--(kmes);
+  \draw[->] (kmes)--(glc);
+  \draw[->] (glc)--node[above]{$w$~[V]}(s1);
+  \draw[->] (s1)--(gr);
+  \draw[->] (gr)--node[above]{$u_{cm}$~[V]}(gsva);
+  \draw[->] (gsva)--node[above]{$u$~[m$^3$/s]}(s2);
+  \draw[->] (s2)--(gvey);
+  \draw[->] (gvey)--(y);
+  \fill (18.0,0) circle (1.2pt);
+  \draw[->] (18.0,0) |- (gmes);
+  \draw[->] (gmes) -| node[pos=0.22, above]{$y_m$~[V]}(s1);
+  \draw[->, dashed] (v)--(kper);
+  \draw[->, dashed] (kper)-- node[left]{$v$~[m$^3$/s]}(s2);
+
+  \node[font=\scriptsize] at (6.25,0.32)  {$+$};
+  \node[font=\scriptsize] at (7.1,-0.6)   {$-$};
+  \node[font=\scriptsize] at (14.25,0.32) {$+$};
+  \node[font=\scriptsize] at (15.1,0.6)   {$-$};
+\end{tikzpicture}}
+\caption{Boucle de régulation. $G_R$ désigne le régulateur et $G_{lc}$ le filtre
+de consigne. La perturbation de débit $K_{per}$ (en pointillés) n'est pas
+simulée au point~C.}
+\label{fig:boucle}
+\end{figure}
+
+Le système à régler (de $w$ à $y_m$, sans le régulateur) s'écrit~:
+
+\begin{equation}
+G_s(s) = G_{sva}(s) \cdot G_{vey}(s) \cdot G_{mes}(s)
+= \frac{K_s}{s\,(1+s\,T_2)(1+s\,T_1)}
+= \frac{2{,}47}{s\,(1+s\,0{,}003)(1+s\,0{,}005)}
+\end{equation}
+
+avec $K_s = 6{,}05 \times 10^{-6} \times 8{,}162 \times 10^{3} \times 50 \approx 2{,}47$.
+Ce système comporte un \textbf{intégrateur} (provenant de $G_{vey}$) ainsi que
+deux petites constantes de temps parasites, $T_1$ et $T_2$. Il s'agit donc d'un
+système de \textbf{type~1}.
+
+% =================================================
+\section{Vérin hydraulique}
+
+% -------------------------------------------------
+\subsection{Question A: Régulateur PI dimensionné par le réglage en correspondance}
+
+\textbf{Structure du PI.} Le régulateur PI est mis sous la forme~:
+\begin{equation}
+G_R(s) = \frac{1 + s\,T_n}{s\,T_i} = \frac{1}{s\,T_i} + \frac{T_n}{T_i}
+\qquad\Rightarrow\qquad
+\text{partie intégrale:} \ \ K_i = \frac{1}{T_i}
+\qquad
+\text{partie proportionnelle:} \ \ K_p = \frac{T_n}{T_i}
+\end{equation}
+
+\textbf{Choix du modèle du système.} Le système à régler $G_s$ contient déjà un
+intégrateur et nous souhaitons utiliser un régulateur PI. D'après la méthode
+vue en cours, le système doit alors se mettre sous la forme
+$G_s(s) = K_s\,/\,\big[s\,(1+s\,T_p)\big]$. Il faut donc regrouper les deux
+petites constantes de temps en une constante équivalente $T_p$, en posant
+$(1+sT_1)(1+sT_2) \approx 1 + sT_p$~:
+\begin{equation}
+T_p = T_1 + T_2 = 8~\mathrm{ms}
+\qquad,\qquad
+T_n = 4\,T_p = 32~\mathrm{ms}
+\qquad,\qquad
+T_i = 8\,K_s\,T_p^{2} = 8 \times 2{,}47 \times (0{,}008)^2 \approx 1{,}26 \times 10^{-3}~\mathrm{s}
+\end{equation}
+
+On en déduit~:
+\begin{equation}
+K_p = \frac{T_n}{T_i} \approx \boxed{25{,}3}
+\qquad,\qquad
+K_i = \frac{1}{T_i} \approx \boxed{791~\mathrm{s^{-1}}}
+\end{equation}
+
+La fonction de transfert en boucle ouverte devient alors~:
+\begin{equation}
+G_0(s) = G_s(s)\,G_R(s) = \frac{K_s\,(1 + s\,T_n)}{s^{2}\,T_i\,(1 + s\,T_p)}
+= \frac{2{,}47\,(1 + 0{,}032\,s)}{s^{2}\cdot 1{,}26\times10^{-3}\,(1 + 0{,}008\,s)}
+= \frac{1+4T_p s}{8\,T_p^{2}\,s^{2}\,(1+T_p s)}
+\end{equation}
+et la fonction de transfert en boucle fermée s'écrit
+$G_{cf}(s) = G_0(s)/(1+G_0(s))$.
+
+\textbf{Filtre de consigne.} La fonction $G_{cf}$ contient le zéro du PI,
+$(1+sT_n)$, provenant de $G_{0}$. Ce zéro provoque un dépassement important sur
+la réponse à la consigne. Pour annuler cet effet, un filtre est placé en amont
+du comparateur~:
+\begin{equation}
+G_{lc}(s) = \frac{1}{1 + s\,T_{lc}}\ ,\qquad T_{lc} \simeq T_n = 32~\mathrm{ms}
+\end{equation}
+Le pôle de ce filtre annule le zéro de $G_{cf}$.
+
+\textbf{Temps de réponse.} Pour un comportement optimal, la relation de
+l'annexe~6.A donne $t_n\,\omega_c = 4{,}20$, avec $\omega_c = 1/T_p$. On en
+déduit~:
+\begin{equation}
+t_n = 4{,}2\;T_p = 4{,}2 \times 8~\mathrm{ms} \approx \boxed{33{,}6~\mathrm{ms}}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$T_p$ & $T_n$ & $T_i$ & $K_p$ & $K_i$ & $T_{lc}$ \\
+\midrule
+$8~\mathrm{ms}$ & $32~\mathrm{ms}$ & $1{,}26~\mathrm{ms}$ & $25{,}3$ & $791~\mathrm{s^{-1}}$ & $32~\mathrm{ms}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% -------------------------------------------------
+\subsection{Question B: Régulateur PI pour 5~\% de dépassement et 0,5~s}
+\label{sec:B}
+
+Ce point n'est pas traité. Les notions nécessaires pour dimensionner un
+régulateur imposant un comportement autre que le comportement « optimal » du
+point~A (méthode du lieu des pôles) n'ont pas encore été vues en cours~: il est
+donc normal de ne pas disposer, à ce stade, des outils pour y répondre.
+
+Un seul régulateur est donc disponible~; la comparaison de deux régulateurs
+demandée au point~C n'est par conséquent pas possible.
+
+% -------------------------------------------------
+\subsection{Question C: Vérification en simulation}
+
+Le schéma de simulation (figure~\ref{fig:simulation}), construit sous
+\textit{Simulink}, reprend la figure~\ref{fig:boucle} sans la perturbation
+$K_{per}$. Il comprend un bloc \textit{Step} de $0{,}01~\mathrm{m}$
+(à $t = 1~\mathrm{s}$), le gain $K_{mes}$, le filtre $G_{lc}$, un PI
+($P = 25$, $I = 790$), $G_{sva}$, $G_{vey}$ et la mesure $G_{mes}$ dans la
+boucle de retour. Deux scopes relèvent la position $y$ et la sortie du
+régulateur.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/schema_Simulation.png}
+\caption{Schéma de simulation.}
+\label{fig:simulation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/C.png}
+\caption{Réponse simulée de la position $y$ à un saut de consigne de
+$0{,}01$~m avec le PI du point~A, avec (orange) et sans (bleu) filtre de
+consigne.}
+\label{fig:C}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lc}
+\toprule
+Grandeur & Lecture du scope \\
+\midrule
+Valeur finale                          & $10{,}0~\mathrm{mm}$ \\
+Valeur maximale du pic                 & $\approx 10{,}85~\mathrm{mm}$ \\
+\textbf{Dépassement}                   & $\mathbf{\approx 8{,}5~\%}$ \\
+Temps de montée $10 \rightarrow 90~\%$ & $\approx 34~\mathrm{ms}$ \\
+Temps de montée $1 \rightarrow 99~\%$  & $46{,}4~\mathrm{ms}$ \\
+\textbf{Temps de réponse à $5~\%$}     & $\mathbf{\approx 86~\mathrm{ms}}$ \\
+\bottomrule
+\end{tabular}
+\caption{Grandeurs caractéristiques de la réponse simulée (avec filtre de consigne).}
+\label{tab:C}
+\end{table}
+Le premier constat est la différence de dépassement entre les deux réponses~: sans filtre de consigne, le dépassement atteint environ $50~\%$, alors qu'avec le filtre, il est réduit à environ $8~\%$. Le filtre de consigne est donc efficace pour réduire le dépassement.\\
+Avec le filtre de consigne, la réponse (figure~\ref{fig:C}) atteint un pic
+d'environ $10{,}85~\mathrm{mm}$ à environ $70~\mathrm{ms}$ après le saut, soit
+un dépassement d'environ $8~\%$, puis converge sans erreur statique vers
+$10~\mathrm{mm}$. Le scope indique un temps de montée de $46{,}4~\mathrm{ms}$,
+les seuils étant configurés à $1~\%$ et $99~\%$ comme demandé par l'assistant de
+laboratoire. Sur les seuils usuels de $10~\%$ et $90~\%$, la lecture graphique
+donne environ $34~\mathrm{ms}$. La position reste dans la bande $\pm 5~\%$ à
+partir d'environ $90~\mathrm{ms}$.
+
+\textbf{Tension nécessaire en sortie de régulateur.} Pour ce saut de
+$0{,}01~\mathrm{m}$, la sortie du PI atteint au maximum environ
+$\mathbf{5{,}7~V}$, environ $24~\mathrm{ms}$ après le saut
+(figure~\ref{fig:C2}). Cette valeur reste inférieure à la limite de
+$\pm 10~\mathrm{V}$ des canaux analogiques de l'ESP32~: le régulateur peut donc
+être utilisé sans saturation. Le filtre de consigne joue également un rôle vis-à-vis de la tension à l'actionneur~: sans lui, la sortie du PI vaut, dès l'instant du saut, 14V,
+soit au-delà de $\pm 10~\mathrm{V}$, et le dépassement passe d'environ $8~\%$ à
+environ $50~\%$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{images/C_filtre_tension.png}
+\caption{Tension en sortie du régulateur, avec (orange) et sans (bleu) filtre
+de consigne.}
+\label{fig:C2}
+\end{figure}
+
+% -------------------------------------------------
+\subsection{Question D: Implémentation sur l'installation réelle}
+
+Le régulateur A ($K_p = 25{,}31$, $K_i = 791~\mathrm{s^{-1}}$, filtre de
+consigne $T_{lc} = 32~\mathrm{ms}$) est implanté dans le schéma
+\textit{Simulink} de l'installation (figure~\ref{fig:D1}), avec
+$T_E = 1~\mathrm{ms}$, valeur faible devant $T_p = 8~\mathrm{ms}$. Le port COM
+de l'ESP32 est identifié via le gestionnaire de périphériques, puis renseigné
+dans les \textit{Hardware Settings}~; l'acquisition est réalisée en mode
+\textit{Monitor \& Tune}. Le schéma, fourni par l'enseignant, est organisé en
+zones~:
+
+\begin{itemize}
+\item \textbf{consigne} (jaune)~: profil de position obtenu en sommant des
+rampes et des sauts, converti en volts ($K_{mes}$) avec un décalage
+\texttt{pos\_offset}~;
+\item \textbf{régulation} (orange)~: filtre d'entrée $1/(0{,}032\,s+1)$
+(c'est $G_{lc}$), puis PI~; la « tension commandée » est relevée directement en
+sortie du PI, \emph{avant} la conversion analogique~;
+\item \textbf{installation} (cyan)~: sorties analogiques (DAC), limitées à
+$\pm 10~\mathrm{V}$~;
+\item \textbf{acquisition} (rose)~: entrées analogiques, puis filtre logiciel
+$1/(0{,}005\,s+1)$ sur le capteur, qui reproduit $G_{mes}$~;
+\item \textbf{affichage} (vert)~: retour en mètres par $1/K_{mes}$.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/D1.png}
+\caption{Schéma \textit{Simulink} implanté sur le microcontrôleur cible (ESP32)
+pour le pilotage du vérin hydraulique.}
+\label{fig:D1}
+\end{figure}
+
+Le profil de consigne comprend une rampe de $0$ à $0{,}05~\mathrm{m}$
+($0{,}1~\mathrm{m/s}$, de $0{,}5$ à $1~\mathrm{s}$), un saut de $+0{,}05~\mathrm{m}$
+à $3~\mathrm{s}$, un saut de $-0{,}05~\mathrm{m}$ à $6~\mathrm{s}$, puis une
+rampe descendante vers $0$ ($0{,}025~\mathrm{m/s}$, de $8{,}5$ à
+$10{,}5~\mathrm{s}$). Le résultat est présenté à la figure~\ref{fig:D2}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.74\textwidth]{images/D2.png}
+\caption{Réponse mesurée sur l'installation réelle avec le régulateur A
+($T_E = 1$~ms)~: position désirée et mesurée (haut), tension en sortie du
+régulateur avant le DAC (bas).}
+\label{fig:D2}
+\end{figure}
+
+Les valeurs suivantes sont relevées sur la figure~\ref{fig:D2} (précision
+d'environ $1~\mathrm{mm}$ et $2~\mathrm{V}$)~:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Phase de la consigne & Position mesurée & Sortie du régulateur \\
+\midrule
+Rampe $0 \rightarrow 0{,}05$~m, $0{,}1$~m/s & suivie sans écart notable & quelques volts, $< 10$~V \\
+Saut $+0{,}05$~m ($t = 3$~s) & pic $0{,}135$~m ($t \approx 3{,}4$~s), soit $\approx 70~\%$ du saut, & $+175$~V puis $-111$~V \\
+ & 5~\% atteint après $\approx 1{,}2$~s & \\
+Saut $-0{,}05$~m ($t = 6$~s) & creux $0{,}011$~m ($t \approx 6{,}4$~s), soit $\approx 78~\%$ du saut, & $-173$~V puis $+104$~V \\
+ & 5~\% atteint après $\approx 1{,}1$~s & \\
+Rampe $0{,}05 \rightarrow 0$~m, $0{,}025$~m/s & suivie sans écart notable & $\ll 10$~V \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Effet de la pente de consigne.} Lorsque la consigne présente une pente
+faible, la position suit correctement la consigne. Lorsqu'elle présente une
+pente raide (sauts de $0{,}05~\mathrm{m}$), la sortie du régulateur dépasse
+largement la limite de tension de l'actionneur ($\pm 10~\mathrm{V}$) et la commande sature. L'intégrateur s'emballe~: il continue de se charger tant que la position n'a pas atteint la consigne, puis doit se décharger. Il en résulte un dépassement de $70~\%$ et des oscillations sur environ une seconde, avant que le système ne se stabilise. La limite est donc celle de l'actionneur et non celle du régulateur.
+
+\textbf{Remarque.} Le régulateur est dimensionné avec un modèle linéaire qui
+suppose l'actionneur non saturé. Ce dimensionnement n'est donc valable que pour
+des consignes assez douces~: en pratique, on limitera la pente ou l'amplitude
+de la consigne.
+
+% -------------------------------------------------
+\subsection{Question E: Un régulateur PID ou P serait-il envisageable~?}
+
+\textbf{Régulateur PID.} Avec le PI, le système sature déjà. Ajouter une action
+dérivée ne ferait qu'augmenter la vitesse de la commande, et donc la
+saturation~: un régulateur plus rapide réclamerait des commandes encore plus
+grandes, on saturerait davantage et plus longtemps, et l'intégrateur
+s'emballerait encore plus. Le PID n'est donc pas une solution envisageable.
+
+\textbf{Régulateur P.} Le système à régler est de type~1~: un régulateur
+proportionnel suffit à annuler l'erreur statique de position pour un saut de
+consigne. En revanche, comme des perturbations
+de débit agissent sur le système, l'erreur statique ne serait pas nulle et le P
+ne peut pas la corriger~: il subsisterait toujours un écart entre la position
+désirée et la position mesurée. Le P n'est donc pas une solution envisageable.
+
+% =================================================
+\section{Conclusion}
+
+Le système du vérin hydraulique étant de type~1, le PI a été dimensionné par le
+réglage en correspondance~: $T_p = 8~\mathrm{ms}$,
+$T_n = 4T_p = 32~\mathrm{ms}$, $T_i = 8K_sT_p^2 \approx 1{,}26~\mathrm{ms}$, soit
+$K_p \approx 25{,}3$ et $K_i \approx 791~\mathrm{s^{-1}}$, avec un filtre de
+consigne $T_{lc} \simeq T_n$ qui annule l'effet du zéro du PI. Le temps
+caractéristique estimé, $t_n = 4{,}2\,T_p = 33{,}6~\mathrm{ms}$, est confirmé en
+simulation (temps de montée d'environ $34~\mathrm{ms}$, dépassement d'environ
+$8~\%$, tension maximale de $5{,}7~\mathrm{V}$ pour un saut de
+$0{,}01~\mathrm{m}$). Le dimensionnement pour un comportement imposé (point~B)
+n'a pas pu être traité, la matière n'ayant pas encore été vue en cours.
+
+Sur l'installation réelle, le régulateur suit correctement les rampes lentes,
+mais la commande sature dès que la consigne présente une pente raide (saut de
+$0{,}05~\mathrm{m}$)~: l'intégrateur s'emballe, ce qui donne un dépassement de
+$70~\%$ et des oscillations sur environ une seconde. La limite est celle de
+l'actionneur, ce qui exclut l'usage d'un PID, plus rapide, et incite plutôt à
+limiter la pente de la consigne ou à prévoir une protection anti-windup.
+
+\end{document}

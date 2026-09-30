@@ -1,0 +1,186 @@
+﻿\documentclass[a4paper,10pt]{article}
+
+%Packages
+% en haut du main.tex
+\usepackage{shellesc}
+\write18{mkdir -p build}
+\pdfoutput=1
+
+\usepackage{txfonts}
+\usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage[intoc]{nomencl}
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{booktabs}
+
+% MISE EN PAGE
+\geometry{a4paper, top=18mm, bottom=18mm, textwidth=185mm}
+\setlength{\columnsep}{6mm} % espace entre les colonnes
+\setlength{\parindent}{0pt} % espace indentation
+
+\titleformat{\section}
+{\normalfont\bfseries} % <== style du titre
+	{\thesection.}{0.5em}{} % numéro + espacement
+\titleformat{\subsection}
+	{\normalfont\itshape} % <== style du sous-titre
+	{\thesubsection.}{0.5em}{} % numéro + espacement
+
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0pt} %retire la ligne du bas
+\fancyhf{}
+\rhead{\includegraphics[scale=0.4]{Images/hepia_simple.png}} %ajoute le logo hepia
+\rfoot{\textit{\today}} % date en bas à droite
+\cfoot{\thepage} %numéro de page
+
+\captionsetup{
+  font=footnotesize,   % taille du texte de la légende
+  labelsep=colon       % met un ":" après le numéro
+}
+
+% NOMENCLATURE
+\makenomenclature
+\nomenclature{\omega}{la pulsation}
+\nomenclature{f}{la fréquence}
+\nomenclature{\lambda}{la longueur d'onde}
+\nomenclature{k}{le nombre d'onde}
+%\nomenclature{$$}{}
+% !!! 
+%pour enlever la mise en page avec deux colonnes il faut retirer le 
+%begin{multiclols}, end{multicols} et les accolades [] qui servent au résumé.
+% !!!
+
+\begin{document} %début du document
+
+\begin{multicols*}{2}
+[ % l'accolade sert à laisser la mise en page en une seule colonne
+% TITRES, AUTEURS, ORGANISATION
+%
+\begin{center}
+\vspace*{0mm}
+{\large
+% Corriger les fautes dans le titre :
+Rapport de laboratoire\\
+\vspace{3mm}
+Interférences d'ondes acoustiques et de surface   % "accoustiques" → "acoustiques"
+}\\
+\vspace{8mm}
+% Auteur(s) avec leur emails en bas de page
+Rozier Vilardell Guilhem\footnote{\textit{\href{guilhem.roziervi@hes-so.ch}{MT2, guilhem.roziervi@hes-so.ch}}},
+autre\footnote{\textit{\href{autre@hes-so.ch}{MT2, autre@hes-so.ch}}} 
+\\
+%
+\vspace{3mm}
+\footnotesize{
+\textit{Haute école de paysagerie, d'ingénierie et d'architecture , Genève, Suisse}
+}\\
+\vspace{9mm}
+\end{center}
+%
+\rule{\linewidth}{0.4pt} % ligne horizontale
+\onehalfspacing
+\textbf{Abstract}\\
+abstract\\
+\noindent\textit{Mots-clés :}mots clés\\
+\rule{\linewidth}{0.4pt} % ligne horizontale
+]
+\singlespacing
+
+% TABLE DES MATIERES
+\tableofcontents
+
+% NOMENCLATURE
+\printnomenclature
+
+\setlength{\parskip}{1pt} % espace entre deux paragraphes
+%Il est mis ici car sinon il change les sauts de la nomenclature et de la talbe des matières
+
+% INTRODUCTION
+\section{Introduction}
+
+intro
+% THEORIE
+\section{Théorie}
+
+théorie
+
+
+La célérité du son dans un gaz parfait s'écrit :
+
+\begin{equation}
+v_{\mathrm{théo}} = \sqrt{\frac{\gamma_{\mathrm{air}}\,R\,T}{M}}
+\label{eq:vson}
+\end{equation}
+
+avec $\gamma_{\mathrm{air}} = 1{,}4$, $R = 8{,}314$\,J\,mol$^{-1}$\,K$^{-1}$, $M = 0{,}029$\,kg\,mol$^{-1}$ et $T$ la température du milieu, ici $T = 296{,}0$\,K.
+
+
+% DESCRIPTION EXPERIMENTALE
+\section{Description expérimentale et dimensionnement}
+%##################GRAPHES##################
+\begin{figure}[H]
+\centering
+%\includegraphics[width=\linewidth]{Images/hepia_simple.png}
+\caption{description.}
+\label{fig:image}
+\end{figure}
+%###################EQUATIONS##################
+\begin{equation}
+    G \approx \frac{95}{55} \approx 1{,}73
+\end{equation}
+
+%###################TABLEAUX##################
+\begin{table}[H]
+\centering
+\caption{titre du tableau}
+\label{tab:cuve}
+\begin{tabular}{ccccc}
+\toprule
+colonne 1 & colonne 2 & colonne 3 & colonne 4 & colonne 5 \\
+\midrule
+16{,}76 & 110 & 5 & 12{,}7 & 0{,}213 \\
+20{,}29 &  90 & 5 & 10{,}4 & 0{,}211 \\
+30{,}00 &  67 & 5 & 7{,}8 & 0{,}232 \\
+39{,}80 &  66 & 6 & 6{,}4 & 0{,}253 \\
+50{,}30 &  52 & 6 &  5{,}0 & 0{,}251 \\
+59{,}90 &  57 & 7 &  4{,}7 & 0{,}281 \\
+70{,}30 &  50 & 7 &  4{,}1 & 0{,}290 \\
+81{,}10 &  46 & 7 &  4{,}0 & 0{,}308 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Résultats et analyse}
+résultats et analyse
+
+\section{Conclusion}
+CONCLUSION
+\end{multicols*}
+
+
+% ANNEXE
+\appendix
+\section{Incertitudes}
+La loi de propagation des l’incertitudes est donnée par l’équation qui suit :
+\begin{equation}
+\Delta G = \sqrt{\sum_{i=1}^{N} \left( \frac{\partial G}{\partial x_i}\,\Delta x_i \right)^2}
+\end{equation}
+
+
+
+\section{Figures et Tables}
+
+
+
+FIGURES ET TABLES
+
+\end{document}
